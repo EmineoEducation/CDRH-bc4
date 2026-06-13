@@ -1,0 +1,244 @@
+{
+  "meta": {
+    "titre_rncp": "Responsable Ressources Humaines",
+    "bloc": "4",
+    "intitule_bloc": "Mettre en œuvre la politique de développement des compétences",
+    "epreuve": "Épreuve écrite de groupe - Dossier professionnel et Épreuve individuelle écrite - Étude de cas",
+    "duree_reelle_min": 210,
+    "note_reflexive": false
+  },
+  "moment_narratif": {
+    "date_fictive": "14 mars 2025",
+    "titre_affaire": "Projet Pulse Forward — Lumio Health face au décrochage compétences",
+    "situation": "Lumio Health, medtech parisienne spécialisée dans les wearables de mesure du stress, vient de boucler une levée de fonds série B de 18 M€. Théo Marczak, le CEO, a annoncé en CODIR une feuille de route ambitieuse : lancer deux nouveaux produits d'ici 18 mois, intégrer l'IA prédictive dans l'algorithme de détection du stress, et ouvrir un canal B2B santé-entreprise porté par Camille Ott. Pour tenir ce cap, la RRH fraîchement recrutée découvre une cartographie des compétences quasi inexistante, des entretiens professionnels réalisés à 34 % seulement, un plan de formation vieillissant centré sur le seul pôle tech, et une masse salariale sous tension. Le partenaire commercial Northgate (Jakob Rein) conditionne sa recommandation à ses grands comptes à la preuve que les équipes Lumio sont formées aux normes RGPD santé et aux certifications ISO 13485. L'urgence est totale : le CSE doit être consulté dans 6 semaines.",
+    "enjeu_central": "Construire de toutes pièces, en situation de ressources contraintes, un plan de développement des compétences crédible, finançable et présentable au CSE, qui permette à Lumio Health de tenir sa trajectoire de croissance sans sacrifier l'employabilité ni l'inclusion de ses 47 collaborateurs."
+  },
+  "commanditaire": {
+    "nom": "Théo Marczak",
+    "role": "CEO — Lumio Health"
+  },
+  "competences": [
+    {
+      "code": "4.1",
+      "label": "Mettre en œuvre une démarche de GEPP",
+      "rncp": "Mettre en œuvre une démarche de GEPP, en analysant les objectifs stratégiques de l'entreprise, en réalisant une cartographie des métiers, et en anticipant les évolutions technologiques et organisationnelles liées notamment aux transitions écologique et numérique, afin de recenser les besoins en compétences dans une vision prospective",
+      "placeholder": "Réalisez l'analyse stratégique RH de Lumio Health (SWOT ou PESTEL appliqué aux RH), puis proposez une cartographie des métiers et compétences actuels et cibles à 18 mois en lien avec le lancement IA et le canal B2B santé. Identifiez les besoins prospectifs en vous appuyant sur les données fournies (pyramide des âges, référentiels, métiers en tension).",
+      "min_mots": 300,
+      "mots_cles": [
+        "SWOT",
+        "PESTEL",
+        "cartographie métiers",
+        "compétences cibles",
+        "transition numérique",
+        "IA prédictive",
+        "métiers en tension",
+        "vision prospective",
+        "référentiel compétences"
+      ],
+      "conseil": "Ancrez chaque menace ou opportunité dans les documents fournis (données RH Lumio, mail Northgate). La cartographie doit faire apparaître au moins trois familles de métiers : tech/data, commercial B2B, support/transverse. Montrez l'impact concret de la transition numérique (IA) sur les fiches de poste existantes."
+    },
+    {
+      "code": "4.2",
+      "label": "Conduire le processus des entretiens annuels et professionnels",
+      "rncp": "Conduire le processus des entretiens annuels et professionnels, en utilisant les outils adaptés et en respectant les obligations réglementaires, afin de déceler les écarts à combler et d'accompagner les collaborateurs dans le développement de leurs compétences et/ou de leur mobilité professionnelle",
+      "placeholder": "Face au taux de réalisation de 34 % des entretiens professionnels chez Lumio, proposez un plan de remédiation outillé : trame d'entretien professionnel, guide manager, plan de communication interne. Vérifiez la conformité réglementaire (loi du 5 septembre 2018, entretien bilan 6 ans) et montrez comment les données collectées alimenteront le plan de développement.",
+      "min_mots": 250,
+      "mots_cles": [
+        "entretien professionnel",
+        "entretien annuel",
+        "obligations réglementaires",
+        "trame",
+        "guide manager",
+        "écarts de compétences",
+        "mobilité professionnelle",
+        "loi 2018",
+        "bilan 6 ans"
+      ],
+      "conseil": "Ne confondez pas entretien annuel (performance) et entretien professionnel (perspectives). Précisez les sanctions encourues par Lumio pour non-respect de l'obligation sexennale. Proposez un outil numérique léger adapté à une structure de 47 personnes."
+    },
+    {
+      "code": "4.3",
+      "label": "Contribuer à la construction du plan de développement des compétences",
+      "rncp": "Contribuer à la construction du plan de développement des compétences, en tenant compte du budget de formation, des accords collectifs sur l'égalité professionnelle entre les hommes et les femmes, sur la qualité de vie et les conditions de travail, et en mobilisant les dispositifs réglementaires de la formation continue, pour répondre aux besoins en compétences présents et à venir des collaborateurs et de l'entreprise, et satisfaire aux obligations de formation de l'employeur",
+      "placeholder": "Construisez le plan de développement des compétences de Lumio Health pour les 12 prochains mois. Priorisez les actions (RGPD santé, ISO 13485, IA, management B2B, QVCT), indiquez les dispositifs de financement mobilisables (OPCO Atlas, CPF, Pro-A) et intégrez une dimension diversité-inclusion. Justifiez chaque arbitrage budgétaire.",
+      "min_mots": 350,
+      "mots_cles": [
+        "plan de développement des compétences",
+        "budget formation",
+        "OPCO",
+        "CPF",
+        "Pro-A",
+        "égalité professionnelle",
+        "QVCT",
+        "diversité inclusion",
+        "dispositifs formation continue",
+        "obligations employeur"
+      ],
+      "conseil": "Structurez le plan en trois catégories : actions réglementaires obligatoires (ISO 13485, RGPD), actions stratégiques (IA, B2B), actions liées à la QVCT et à l'inclusion. Chiffrez une enveloppe indicative et identifiez les abondements possibles. Mentionnez l'accord de branche applicable (Syntec ou Métallurgie selon positionnement)."
+    },
+    {
+      "code": "4.4",
+      "label": "Présenter le plan de développement des compétences au CSE",
+      "rncp": "Présenter le plan de développement des compétences au Comité Social et Économique (CSE), en structurant les actions de développement des compétences programmées en fonction des objectifs de professionnalisation individuels et collectifs, afin de susciter l'adhésion et de co-construire les départs en formation",
+      "placeholder": "Rédigez le plan de présentation du PDC au CSE de Lumio Health : structurez votre argumentaire (contexte stratégique, besoins identifiés, actions prioritaires, budget, indicateurs de suivi), anticipez les objections des élus (charge de travail, critères de sélection des bénéficiaires, handicap) et proposez des modalités de co-construction.",
+      "min_mots": 200,
+      "mots_cles": [
+        "CSE",
+        "consultation",
+        "co-construction",
+        "argumentaire",
+        "professionnalisation collective",
+        "professionnalisation individuelle",
+        "adhésion",
+        "objections",
+        "faisabilité organisationnelle"
+      ],
+      "conseil": "Rappelez le cadre légal de la consultation du CSE sur le plan de formation (délai, nombre de réunions, documents à remettre). Anticipez l'argument des élus sur la concentration des formations sur le pôle tech au détriment des autres services. Proposez un dispositif de suivi partagé avec le CSE."
+    },
+    {
+      "code": "4.5",
+      "label": "Mettre en œuvre le plan de développement des compétences",
+      "rncp": "Mettre en œuvre le plan de développement des compétences en planifiant les actions de formation, en sélectionnant les prestataires et en assurant la réalisation des démarches de financement des formations, pour développer l'employabilité des collaborateurs",
+      "placeholder": "Établissez un calendrier de déploiement des actions prioritaires (T2-T3 2025) en tenant compte des contraintes opérationnelles de Lumio. Définissez les critères de sélection des prestataires de formation (certification Qualiopi, spécialisation medtech, modalités hybrides) et décrivez le processus de demande de prise en charge auprès d'OPCO Atlas.",
+      "min_mots": 200,
+      "mots_cles": [
+        "calendrier formation",
+        "prestataires",
+        "Qualiopi",
+        "OPCO Atlas",
+        "financement",
+        "employabilité",
+        "critères sélection",
+        "présentiel distanciel hybride",
+        "demande de prise en charge"
+      ],
+      "conseil": "Montrez que le calendrier préserve la continuité d'activité (ne pas former toute l'équipe commerciale simultanément avant le lancement B2B). Justifiez le choix Qualiopi comme critère éliminatoire. Décrivez les étapes concrètes : dépôt dossier OPCO, délais de réponse, avance de trésorerie éventuelle."
+    },
+    {
+      "code": "4.6",
+      "label": "Superviser le planning de réalisation des actions de formation",
+      "rncp": "Superviser le planning de réalisation des actions de formation, en maîtrisant les incidences pour l'entreprise en matière de gestion des absences et de rémunération, et en veillant à ce que les parcours de formation soient adaptés aux éventuelles situations de handicap, afin de permettre aux collaborateurs de suivre leur formation dans les meilleures conditions",
+      "placeholder": "Lumio compte 3 collaborateurs en situation de handicap et 2 salariés en temps partiel thérapeutique. Proposez des solutions concrètes pour gérer les absences formation (remplacements, réorganisation), traitez l'impact sur la rémunération (maintien de salaire, allocations formation) et détaillez les aménagements handicap prévus.",
+      "min_mots": 200,
+      "mots_cles": [
+        "gestion absences",
+        "rémunération formation",
+        "maintien de salaire",
+        "situation de handicap",
+        "aménagement",
+        "AGEFIPH",
+        "accessibilité",
+        "temps partiel thérapeutique",
+        "RQTH"
+      ],
+      "conseil": "Distinguez clairement les régimes de rémunération selon le dispositif (formation sur temps de travail, hors temps de travail, CPF). Pour le handicap, citez au moins deux types d'aménagements concrets (sous-titrage, logiciel lecteur d'écran, interprète LSF). Mentionnez le rôle du référent handicap et de l'AGEFIPH."
+    },
+    {
+      "code": "4.7",
+      "label": "Évaluer l'efficacité des actions de formation",
+      "rncp": "Évaluer l'efficacité des actions de formation en mesurant leurs effets sur les performances individuelles et la satisfaction des collaborateurs pour améliorer le prochain plan de développement des compétences et rendre compte à la DRH",
+      "placeholder": "Construisez un tableau de bord de suivi du PDC Lumio intégrant au moins 6 indicateurs (satisfaction, transfert en situation de travail, taux de réalisation, ROI, mobilité interne post-formation, etc.). Rédigez une note de synthèse à destination de Théo Marczak avec vos préconisations hiérarchisées pour le cycle N+1.",
+      "min_mots": 200,
+      "mots_cles": [
+        "tableau de bord",
+        "indicateurs de performance",
+        "satisfaction collaborateurs",
+        "transfert compétences",
+        "taux de réalisation",
+        "ROI formation",
+        "préconisations",
+        "amélioration continue",
+        "rendre compte DRH"
+      ],
+      "conseil": "Utilisez les 4 niveaux de Kirkpatrick pour structurer vos indicateurs (réaction, apprentissage, comportement, résultats). Liez chaque indicateur à un objectif stratégique Lumio (ex : taux de certification ISO 13485 → nombre de contrats B2B signés). Hiérarchisez vos préconisations selon impact/effort."
+    }
+  ],
+  "livrable": {
+    "format": "Dossier professionnel structuré (compétences 4.1 et 4.2) + Étude de cas rédigée (compétences 4.3 à 4.7), avec introduction contextuelle, développements par compétence, tableau de bord et note de synthèse finale",
+    "total_mots_min": 520,
+    "note_reflexive_min": 100
+  },
+  "jury_criteres_eliminatoires": [
+    "Les rôles et responsabilités des acteurs impliqués dans le déploiement du PDC (RRH, managers, CSE, OPCO, prestataires) ne sont pas clairement identifiés et distingués dans la copie",
+    "Aucun indicateur d'impact mesurable n'est proposé pour évaluer l'efficacité des actions de formation (absence de tableau de bord ou d'indicateurs chiffrés)",
+    "Le plan de développement des compétences ne fait pas référence à au moins un dispositif de financement réglementaire (CPF, Pro-A, OPCO, plan de formation légal) avec sa modalité de mise en œuvre",
+    "La cartographie des métiers et compétences est absente ou non reliée aux objectifs stratégiques de Lumio Health (lancement IA, canal B2B, exigences Northgate)",
+    "Les obligations réglementaires relatives aux entretiens professionnels (loi du 5 septembre 2018, bilan sexennal, sanctions) ne sont pas mentionnées ou sont erronées",
+    "Aucune mesure concrète n'est proposée pour adapter les parcours de formation aux situations de handicap des collaborateurs concernés",
+    "La présentation au CSE ne respecte pas les exigences légales de consultation (délai de remise des documents, nombre de réunions obligatoires, droit d'information des élus)"
+  ],
+  "documents_fictifs": [
+    {
+      "id": "DOC-01",
+      "type": "note_interne",
+      "expediteur": "Théo Marczak — CEO",
+      "objet": "Feuille de route Lumio 2025-2026 : cap série B et obligations partenaires",
+      "role_narratif": "Pose le contexte stratégique global (levée de fonds, lancement IA, canal B2B Northgate) et actent l'urgence RH. Sert de base à l'analyse SWOT/PESTEL pour la compétence 4.1.",
+      "acte": 1
+    },
+    {
+      "id": "DOC-02",
+      "type": "tableau_rh",
+      "expediteur": "Service RH Lumio (données consolidées)",
+      "objet": "Données RH au 28 février 2025 : pyramide des âges, ancienneté, postes, taux de réalisation entretiens, RQTH",
+      "role_narratif": "Fournit les données objectives nécessaires à la cartographie des métiers (4.1), à l'état des lieux des entretiens professionnels (4.2) et à la prise en compte du handicap (4.6). Révèle le taux de 34 % d'entretiens réalisés et les 3 collaborateurs RQTH.",
+      "acte": 1
+    },
+    {
+      "id": "DOC-03",
+      "type": "email",
+      "expediteur": "Jakob Rein — Northgate",
+      "objet": "RE : Partenariat commercial Lumio x Northgate — conditions préalables",
+      "role_narratif": "Conditionne la recommandation Northgate aux grands comptes à la preuve de certifications RGPD santé et ISO 13485 des équipes Lumio. Crée l'urgence externe et justifie les actions prioritaires du PDC (4.3 et 4.5).",
+      "acte": 2
+    },
+    {
+      "id": "DOC-04",
+      "type": "compte_rendu_codir",
+      "expediteur": "Camille Ott — Responsable B2B",
+      "objet": "CODIR 5 mars 2025 — Point canal B2B santé-entreprise : besoins formation identifiés",
+      "role_narratif": "Camille Ott alerte sur le déficit de compétences de son équipe en négociation B2B et en réglementation des dispositifs médicaux. Fournit des besoins concrets pour la priorisation du PDC (4.3) et alimente la cartographie prospective (4.1).",
+      "acte": 2
+    },
+    {
+      "id": "DOC-05",
+      "type": "email",
+      "expediteur": "Yassine Morel — Content Manager",
+      "objet": "Objet : mon entretien professionnel — ça fait 4 ans qu'on m'attend",
+      "role_narratif": "Yassine interpelle la RRH sur l'absence d'entretien professionnel depuis son embauche et exprime une aspiration à la mobilité vers un poste de chef de projet digital. Illustre le dysfonctionnement documenté dans DOC-02 et nourrit la compétence 4.2 sur la remédiation des entretiens.",
+      "acte": 2
+    },
+    {
+      "id": "DOC-06",
+      "type": "devis_prestataire",
+      "expediteur": "FormaMed Solutions (organisme Qualiopi)",
+      "objet": "Proposition pédagogique et tarifaire — parcours ISO 13485 & RGPD santé — Lumio Health",
+      "role_narratif": "Fournit les éléments concrets pour l'évaluation des prestataires (4.5) : programme, modalités (hybride), durée, coût unitaire, éligibilité OPCO Atlas. Permet de travailler les critères de sélection et le montage financier.",
+      "acte": 3
+    },
+    {
+      "id": "DOC-07",
+      "type": "convocation_cse",
+      "expediteur": "Secrétaire du CSE Lumio Health",
+      "objet": "Convocation — Réunion extraordinaire CSE — Consultation plan de développement des compétences — 25 avril 2025",
+      "role_narratif": "Formalise l'échéance CSE à 6 semaines. Mentionne la composition du CSE (3 élus, dont un élu qui a déjà exprimé des réserves sur la concentration des formations au pôle tech) et rappelle l'obligation de remise des documents 3 jours ouvrables avant. Alimente la compétence 4.4.",
+      "acte": 4
+    },
+    {
+      "id": "DOC-08",
+      "type": "rapport_evaluation",
+      "expediteur": "Sonia Ferracci — Directrice Marketing",
+      "objet": "Retour à chaud et à froid — formation Data Storytelling pôle Mkt — janvier 2025",
+      "role_narratif": "Fournit un exemple réel d'évaluation de formation à Lumio (niveaux 1 et 3 de Kirkpatrick) avec des lacunes constatées (pas d'indicateurs de transfert, pas de ROI). Sert de cas pratique pour construire le tableau de bord d'évaluation (4.7) et formuler des préconisations d'amélioration.",
+      "acte": 5
+    }
+  ],
+  "easter_egg": {
+    "type": "whatsapp",
+    "personnages": [
+      "Sonia Ferracci",
+      "Camille Ott"
+    ],
+    "tension_revelee": "Sonia écrit à Camille : 'Entre nous, Théo a promis à Northgate qu'on était déjà certifiés ISO 13485… on est loin du compte. Si la RRH ne sort pas un plan béton avant le 25 avril, c'est le partenariat qui saute — et nos primes avec. Ne dis rien pour l'instant.' Camille répond : 'Je sais. C'est pour ça que j'ai gonflé les besoins formation dans mon CODIR, pour mettre la pression. On n'a pas le choix.' Cette conversation révèle que la pression sur le PDC est autant commerciale que réglementaire, et que certaines informations transmises à la RRH ont été volontairement orientées — ce qui interroge sur la fiabilité des données sources et la posture de la RRH face aux jeux d'acteurs internes."
+  }
+}
