@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Portrait · Yassine Morel · Maddyness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #111111;
+  --ink-2: #222222;
+  --ink-3: #555555;
+  --ink-4: #999999;
+  --rule: #e5e5e5;
+  --bg: #ffffff;
+  --bg-off: #f5f3ef;
+  --accent: #6437f0;
+  --accent-mid: #8560f5;
+  --accent-light: #f0ecff;
+  --vivid: #f0c417;
+  --vivid-dark: #b89210;
+  --ff-display: 'DM Serif Display', Georgia, serif;
+  --ff-body: 'DM Sans', sans-serif;
+  --ff-mono: 'JetBrains Mono', 'Courier New', monospace;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--ff-body);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* MASTHEAD */
+.masthead {
+  padding: 0;
+}
+.masthead-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 44px;
+  border-bottom: 1px solid var(--rule);
+}
+.masthead-logo {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+.masthead-logo-word {
+  font-family: var(--ff-display);
+  font-size: 30px;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+.masthead-logo-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: inline-block;
+  margin-bottom: 6px;
+  margin-left: 1px;
+}
+.masthead-tagline {
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-top: 2px;
+}
+.masthead-nav {
+  display: flex;
+  gap: 0;
+}
+.masthead-nav span {
+  font-family: var(--ff-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-3);
+  padding: 8px 16px;
+  border-left: 1px solid var(--rule);
+}
+.masthead-nav span.active {
+  color: var(--accent);
+  background: var(--accent-light);
+}
+.masthead-rubrique {
+  background: var(--accent);
+  padding: 7px 44px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+}
+.rubrique-pill {
+  background: var(--vivid);
+  color: var(--ink);
+  padding: 2px 8px;
+  font-weight: 700;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  border-radius: 2px;
+}
+
+/* ARTICLE WRAP */
+.article-wrap {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 44px;
+}
+
+/* HERO */
+.hero-split {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 0;
+  margin: 0 -44px;
+  border-bottom: 2px solid var(--ink);
+}
+.hero-photo {
+  position: relative;
+  overflow: hidden;
+}
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  min-height: 480px;
+}
+.hero-photo-tag {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: var(--vivid);
+  color: var(--ink);
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+}
+.hero-text {
+  padding: 44px 44px 44px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: var(--bg-off);
+}
+.hero-overline {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.hero-title {
+  font-family: var(--ff-display);
+  font-size: 36px;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+.hero-title em { font-style: italic; }
+.hero-standfirst {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--ink-3);
+  padding-top: 20px;
+  border-top: 2px solid var(--ink);
+}
+
+/* META */
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--ink-4);
+}
+.meta-author { color: var(--ink-2); font-weight: 500; }
+.meta-sep { color: var(--rule); }
+.meta-tag {
+  background: var(--accent-light);
+  color: var(--accent);
+  padding: 2px 8px;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* CORPS */
+.article-body {
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  gap: 48px;
+  padding: 36px 0 80px;
+}
+.article-main { min-width: 0; }
+
+.article-main p {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--ink-2);
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+.article-main p:first-child::first-letter {
+  font-family: var(--ff-display);
+  font-size: 56px;
+  float: left;
+  margin-right: 6px;
+  margin-top: 2px;
+  line-height: 0.85;
+  color: var(--accent);
+}
+.article-main strong { font-weight: 600; color: var(--ink); }
+.article-main em { font-style: italic; }
+
+.inter-titre {
+  font-family: var(--ff-display);
+  font-size: 21px;
+  font-style: italic;
+  color: var(--ink);
+  margin: 32px 0 16px;
+  position: relative;
+  padding-left: 16px;
+}
+.inter-titre::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  background: var(--vivid);
+}
+
+.pull-quote {
+  margin: 28px 0;
+  background: var(--ink);
+  color: white;
+  padding: 28px 32px;
+  position: relative;
+  overflow: hidden;
+}
+.pull-quote::after {
+  content: '\201D';
+  font-family: var(--ff-display);
+  font-size: 120px;
+  color: rgba(255,255,255,0.05);
+  position: absolute;
+  bottom: -20px;
+  right: 16px;
+  line-height: 1;
+}
+.pull-quote-text {
+  font-family: var(--ff-display);
+  font-size: 20px;
+  font-style: italic;
+  line-height: 1.45;
+  color: white;
+  margin-bottom: 14px;
+  position: relative;
+}
+.pull-quote-attr {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--vivid);
+}
+
+.article-footer {
+  margin-top: 44px;
+  padding-top: 16px;
+  border-top: 2px solid var(--ink);
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--ink-4);
+  display: flex;
+  gap: 14px;
+}
+.footer-author { color: var(--ink-2); font-weight: 500; }
+
+/* ASIDE */
+.aside-bio {
+  margin-bottom: 24px;
+  border: 1px solid var(--rule);
+}
+.aside-bio-head {
+  background: var(--ink);
+  padding: 10px 16px;
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+}
+.aside-bio-body { padding: 16px; }
+.bio-line {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.5;
+}
+.bio-year {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.bio-fact { color: var(--ink-3); }
+
+.aside-conviction {
+  background: var(--accent-light);
+  border: 1px solid var(--accent-mid);
+  padding: 20px;
+  margin-bottom: 24px;
+}
+.aside-conviction-title {
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.conviction-item {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--ink-2);
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(100,55,240,0.12);
+}
+.conviction-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.conviction-label {
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--accent-mid);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.aside-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.aside-tag {
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--rule);
+  padding: 4px 8px;
+  color: var(--ink-4);
+}
+
+/* FOOTER */
+.site-footer {
+  background: var(--ink);
+  padding: 16px 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+}
+.site-footer-logo {
+  font-family: var(--ff-display);
+  font-size: 20px;
+  color: white;
+  letter-spacing: -0.01em;
+}
+.site-footer-dot {
+  width: 6px; height: 6px;
+  background: var(--accent-mid);
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 2px;
+  vertical-align: middle;
+}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-top">
+    <div>
+      <div class="masthead-logo">
+        <span class="masthead-logo-word">Maddyness</span>
+        <span class="masthead-logo-dot"></span>
+      </div>
+      <div class="masthead-tagline">Le média de l'innovation et des startups françaises</div>
+    </div>
+    <div class="masthead-nav">
+      <span>Startups</span>
+      <span>Innovation</span>
+      <span>Tech</span>
+      <span class="active">Portraits</span>
+      <span>Emploi</span>
+    </div>
+  </div>
+  <div class="masthead-rubrique">
+    <span class="rubrique-pill">Portrait</span>
+    <span>Content & Marque · Healthtech</span>
+  </div>
+</div>
+
+<div class="article-wrap">
+
+  <div class="hero-split">
+    <div class="hero-photo">
+      <img src="Yassine_Morel.png" alt="Yassine Morel, Content Manager Lumio Health"/>
+      <div class="hero-photo-tag">Portrait</div>
+    </div>
+    <div class="hero-text">
+      <div class="hero-overline">Content Manager · Lumio Health</div>
+      <h1 class="hero-title">Yassine Morel : <em>« Dans la santé, le contenu qui rassure est souvent le contenu qui dit ce qu'il ne fait pas »</em></h1>
+      <p class="hero-standfirst">Content Manager chez Lumio Health depuis quatre ans, Yassine Morel produit des contenus sur un sujet où chaque mot engage une responsabilité. Entre la légitimité scientifique que la marque revendique et la certification réglementaire qui tarde, il navigue avec une prudence qui n'est pas de la timidité.</p>
+    </div>
+  </div>
+
+  <div class="article-meta">
+    <span class="meta-author">Léa Fontaine</span>
+    <span class="meta-sep">·</span>
+    <span>3 avril 2026</span>
+    <span class="meta-sep">·</span>
+    <span>Lecture : 5 min</span>
+    <span class="meta-sep">·</span>
+    <span class="meta-tag">Portrait</span>
+    <span class="meta-tag">Content santé</span>
+    <span class="meta-tag">Éthique digitale</span>
+  </div>
+
+  <div class="article-body">
+    <div class="article-main">
+
+      <p>La question qu'on pose à Yassine Morel en arrivant — <em>comment on fait du contenu de marque dans la santé sans tomber dans le medical washing ?</em> — le fait sourire. <em>« C'est la bonne question. C'est aussi la question que je me pose tous les matins avant d'écrire quoi que ce soit. »</em> À 29 ans, ce Parisien d'origine algérienne est content manager chez Lumio Health depuis 2022. Son quotidien : produire des articles, des newsletters, des posts LinkedIn et des études de cas pour une startup qui veut être perçue comme experte de la santé au travail — sans avoir encore obtenu la certification réglementaire qui légitimerait pleinement ce positionnement.</p>
+
+      <p>La tension est réelle, et il ne la minimise pas. <em>« On peut être crédible sans être certifié. Les données terrain de Lumio sont solides, les résultats clients sont documentés. Mais il y a des lignes que je ne franchis pas. Je ne dis jamais que le patch "soigne" ou "prévient" quelque chose. Je dis qu'il mesure. La nuance est énorme. »</em> Cette discipline du mot juste, il l'a développée à la fois par intuition et par nécessité — <strong>une phrase mal calibrée dans le secteur de la santé numérique peut valoir une mise en demeure de l'ARPP ou une question d'un journaliste en conférence de presse</strong>.</p>
+
+      <div class="inter-titre">Parcours : le contenu comme réponse à l'imprécision</div>
+
+      <p>Formé en journalisme et communication à Paris, Yassine Morel a débuté dans un pure player digital avant de passer par une agence de contenu spécialisée en B2B. C'est là qu'il rencontre les problématiques de la santé au travail — par hasard, lors d'une mission pour un client assurance. <em>« J'ai réalisé que c'était un secteur où les marques parlaient beaucoup mais disaient peu. Beaucoup de généralités sur le bien-être, très peu de données précises. Lumio m'a semblé différente parce qu'ils avaient des données. »</em></p>
+
+      <p>Quand il arrive en 2022, la stratégie de contenu de Lumio est encore artisanale — quelques articles de blog, une newsletter envoyée irrégulièrement, des posts LinkedIn sans ligne éditoriale claire. Il structure, planifie, crée des formats récurrents. Le trafic organique triple en dix-huit mois. <em>« Ce qui a changé, c'est qu'on a arrêté de parler de nous pour commencer à parler du problème qu'on résout. Les DRH ne cherchent pas "Lumio Health" sur Google. Ils cherchent "comment mesurer le stress au travail". »</em></p>
+
+      <div class="pull-quote">
+        <div class="pull-quote-text">Le contenu qui rassure est souvent celui qui dit clairement ce qu'il ne fait pas, ce qu'il ne garantit pas. La transparence est notre meilleur argument commercial.</div>
+        <div class="pull-quote-attr">Yassine Morel · Content Manager, Lumio Health</div>
+      </div>
+
+      <div class="inter-titre">L'IA générative : enthousiaste, mais pas aveugle</div>
+
+      <p>Sur l'intégration de l'IA dans les process de création de contenu — sujet sur lequel Lumio travaille activement — Yassine Morel est mesuré. Il ne rejette pas, il cadre. <em>« L'IA peut m'aider à produire des variations, à structurer un brief, à reformuler un texte trop technique. Ce qu'elle ne peut pas faire, c'est décider ce que Lumio ne dira pas. Or dans notre secteur, la ligne éditoriale se définit autant par les renoncements que par les prises de parole. »</em></p>
+
+      <p>Il s'inquiète moins de la qualité de ce que l'IA produit que de la <strong>pression à la productivité</strong> qu'elle génère. <em>« Si on produit trois fois plus de contenu avec l'IA, la question c'est : est-ce qu'on a trois fois plus de choses intéressantes à dire ? Parce que dans la santé, le contenu creux fait plus de dégâts que l'absence de contenu. »</em> Une position qu'il tient avec une tranquillité qui suggère qu'elle a déjà été débattue en interne — et qu'il n'a pas cédé.</p>
+
+      <div class="article-footer">
+        <span class="footer-author">Léa Fontaine</span>
+        <span>·</span>
+        <span>3 avril 2026</span>
+        <span>·</span>
+        <span>Maddyness</span>
+      </div>
+    </div>
+
+    <div class="article-aside">
+
+      <div class="aside-bio">
+        <div class="aside-bio-head">Repères</div>
+        <div class="aside-bio-body">
+          <div class="bio-line"><span class="bio-year">1997</span><span class="bio-fact">Naissance à Paris 19e</span></div>
+          <div class="bio-line"><span class="bio-year">2020</span><span class="bio-fact">Master Journalisme & Communication digitale, Paris</span></div>
+          <div class="bio-line"><span class="bio-year">2020–21</span><span class="bio-fact">Rédacteur, pure player digital tech</span></div>
+          <div class="bio-line"><span class="bio-year">2021–22</span><span class="bio-fact">Content strategist, agence B2B — clients santé et RH</span></div>
+          <div class="bio-line"><span class="bio-year">2022</span><span class="bio-fact">Content Manager, Lumio Health</span></div>
+          <div class="bio-line"><span class="bio-year">2024</span><span class="bio-fact">En charge du projet de stratégie IA générative pour la production de contenu</span></div>
+        </div>
+      </div>
+
+      <div class="aside-conviction">
+        <div class="aside-conviction-title">Ses lignes éditoriales</div>
+        <div class="conviction-item">
+          <div class="conviction-label">Ce qu'il fait</div>
+          Mesurer, documenter, contextualiser les données Lumio
+        </div>
+        <div class="conviction-item">
+          <div class="conviction-label">Ce qu'il ne fait pas</div>
+          Promettre, diagnostiquer, certifier par le contenu
+        </div>
+        <div class="conviction-item">
+          <div class="conviction-label">Sur l'IA</div>
+          Outil de production — jamais de décision éditoriale
+        </div>
+      </div>
+
+      <div class="aside-tags">
+        <span class="aside-tag">Content</span>
+        <span class="aside-tag">Santé numérique</span>
+        <span class="aside-tag">SEO B2B</span>
+        <span class="aside-tag">Éthique</span>
+        <span class="aside-tag">IA générative</span>
+        <span class="aside-tag">Medtech</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="site-footer">
+  <div class="site-footer-logo">Maddyness<span class="site-footer-dot"></span></div>
+  <span>© 2026 — Tous droits réservés</span>
+  <span>maddyness.com</span>
+</div>
+
+</body>
+</html>
