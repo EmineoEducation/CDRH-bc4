@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Portrait · Théo Marczak · L'Usine Digitale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #1a1a18;
+  --ink-2: #2e2e2b;
+  --ink-3: #5a5a55;
+  --ink-4: #8a8a84;
+  --rule: #d4d0c8;
+  --rule-light: #e8e4dc;
+  --cream: #f7f4ee;
+  --accent: #c4420f;
+  --accent-dark: #8f2e08;
+  --blue: #1b4a8a;
+  --tag-bg: #1a1a18;
+  --tag-fg: #f7f4ee;
+  --ff-display: 'Playfair Display', Georgia, serif;
+  --ff-body: 'Source Serif 4', Georgia, serif;
+  --ff-mono: 'DM Mono', 'Courier New', monospace;
+}
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--ff-body);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── MASTHEAD ── */
+.masthead {
+  background: var(--ink);
+  color: #f0ece4;
+  padding: 0;
+}
+.masthead-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 40px;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+.masthead-logo {
+  font-family: var(--ff-display);
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: #f0ece4;
+}
+.masthead-logo em {
+  color: var(--accent);
+  font-style: normal;
+}
+.masthead-nav {
+  display: flex;
+  gap: 24px;
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(240,236,228,0.5);
+}
+.masthead-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 40px;
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(240,236,228,0.45);
+}
+.masthead-bar-sep { color: rgba(255,255,255,0.2); }
+.masthead-bar-active { color: var(--accent); }
+
+/* ── RUBRIQUE ── */
+.rubrique {
+  background: var(--accent);
+  padding: 6px 40px;
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: white;
+  font-weight: 500;
+}
+
+/* ── ARTICLE WRAPPER ── */
+.article {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 40px 80px;
+}
+
+/* ── HEADER ARTICLE ── */
+.article-header {
+  padding: 40px 0 32px;
+  border-bottom: 2px solid var(--ink);
+}
+.article-overline {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.article-title {
+  font-family: var(--ff-display);
+  font-size: 42px;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 18px;
+  max-width: 720px;
+}
+.article-title em {
+  font-style: italic;
+  color: var(--ink-2);
+}
+.article-standfirst {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--ink-2);
+  max-width: 640px;
+  border-left: 3px solid var(--accent);
+  padding-left: 20px;
+  font-style: italic;
+}
+
+/* ── META ── */
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  color: var(--ink-4);
+  letter-spacing: 0.04em;
+}
+.meta-author { color: var(--ink-2); font-weight: 500; }
+.meta-sep { color: var(--rule); }
+.meta-tag {
+  background: var(--tag-bg);
+  color: var(--tag-fg);
+  padding: 3px 8px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── LAYOUT CORPS ── */
+.article-body {
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  gap: 48px;
+  padding-top: 36px;
+}
+.article-main { min-width: 0; }
+.article-aside { padding-top: 4px; }
+
+/* ── PHOTO PLACEHOLDER ── */
+.photo-block {
+  background: var(--ink);
+  aspect-ratio: 4/3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.photo-block img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+}
+.photo-grain {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+}
+.photo-initials {
+  font-family: var(--ff-display);
+  font-size: 64px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.08);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  letter-spacing: -0.04em;
+}
+.photo-caption {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  color: rgba(255,255,255,0.85);
+  text-align: center;
+  letter-spacing: 0.06em;
+  position: relative;
+  z-index: 1;
+  line-height: 1.5;
+  background: rgba(0,0,0,0.55);
+  width: 100%;
+  padding: 8px 12px;
+}
+
+/* ── ENCADRÉ BIOGRAPHIE ── */
+.aside-bio {
+  background: white;
+  border: 1px solid var(--rule);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.aside-bio-title {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule-light);
+}
+.bio-line {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.bio-year {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  color: var(--accent);
+  font-weight: 500;
+  flex-shrink: 0;
+  padding-top: 1px;
+}
+.bio-fact { color: var(--ink-2); }
+
+/* ── ENCADRÉ CHIFFRES ── */
+.aside-numbers {
+  background: var(--ink);
+  color: #f0ece4;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.aside-numbers-title {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(240,236,228,0.4);
+  margin-bottom: 16px;
+}
+.number-item {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.number-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.number-val {
+  font-family: var(--ff-display);
+  font-size: 28px;
+  font-weight: 900;
+  color: white;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.number-label {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  color: rgba(240,236,228,0.45);
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+}
+
+/* ── TAGS ASIDE ── */
+.aside-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.aside-tag {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--rule);
+  padding: 4px 8px;
+  color: var(--ink-3);
+}
+
+/* ── TEXTE ARTICLE ── */
+.article-main p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--ink-2);
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+.article-main p:first-child::first-letter {
+  font-family: var(--ff-display);
+  font-size: 62px;
+  font-weight: 900;
+  line-height: 0.8;
+  float: left;
+  margin-right: 8px;
+  margin-top: 8px;
+  color: var(--ink);
+}
+.article-main strong { font-weight: 600; color: var(--ink); }
+.article-main em { font-style: italic; }
+
+/* ── PULL QUOTE ── */
+.pull-quote {
+  margin: 32px 0;
+  padding: 24px 28px;
+  border-top: 3px solid var(--ink);
+  border-bottom: 1px solid var(--rule);
+}
+.pull-quote-text {
+  font-family: var(--ff-display);
+  font-size: 22px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.35;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.pull-quote-attr {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  color: var(--ink-4);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── INTER-TITRE ── */
+.inter-titre {
+  font-family: var(--ff-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 36px 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule-light);
+}
+
+/* ── NOTE DE BAS ── */
+.article-footer {
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 2px solid var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.footer-tag {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+.footer-sep { color: var(--rule); font-size: 12px; }
+
+/* ── PIED DE PAGE SITE ── */
+.site-footer {
+  background: var(--ink);
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  color: rgba(240,236,228,0.3);
+  letter-spacing: 0.08em;
+  margin-top: 40px;
+}
+.site-footer-logo {
+  font-family: var(--ff-display);
+  font-size: 14px;
+  font-weight: 900;
+  color: rgba(240,236,228,0.6);
+}
+.site-footer-logo em { color: var(--accent); font-style: normal; }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-top">
+    <div class="masthead-logo">L'<em>U</em>sine Digitale</div>
+    <div class="masthead-nav">
+      <span>Industrie 4.0</span>
+      <span>Numérique</span>
+      <span>Innovation</span>
+      <span>Portraits</span>
+      <span>Données</span>
+    </div>
+  </div>
+  <div class="masthead-bar">
+    <span>Accueil</span>
+    <span class="masthead-bar-sep">›</span>
+    <span>Portraits</span>
+    <span class="masthead-bar-sep">›</span>
+    <span class="masthead-bar-active">Théo Marczak — Lumio Health</span>
+  </div>
+</div>
+
+<!-- RUBRIQUE -->
+<div class="rubrique">Portrait · Healthtech française</div>
+
+<!-- ARTICLE -->
+<div class="article">
+
+  <!-- HEADER -->
+  <div class="article-header">
+    <div class="article-overline">Portrait · Fondateur & CEO · Lumio Health</div>
+    <h1 class="article-title">Théo Marczak, l'ingénieur qui a décidé que <em>le stress devait se mesurer</em></h1>
+    <p class="article-standfirst">Huit ans après avoir fondé Lumio Health dans un appartement du 11e arrondissement, le CEO de la startup medtech parisienne dispose d'un actif rare : 180 entreprises clientes et une base de données propriétaire sur le stress au travail que personne d'autre ne possède. Ce qu'il va en faire est une autre question.</p>
+  </div>
+
+  <!-- META -->
+  <div class="article-meta">
+    <span class="meta-author">Marie-Hélène Vasseur</span>
+    <span class="meta-sep">·</span>
+    <span>14 mars 2025</span>
+    <span class="meta-sep">·</span>
+    <span>Lecture : 7 min</span>
+    <span class="meta-sep">·</span>
+    <span class="meta-tag">Portrait</span>
+    <span class="meta-tag">Medtech</span>
+    <span class="meta-tag">Wearable santé</span>
+  </div>
+
+  <!-- BODY -->
+  <div class="article-body">
+
+    <!-- COLONNE PRINCIPALE -->
+    <div class="article-main">
+
+      <p>Il y a une photographie, quelque part dans les bureaux de Lumio Health rue de la Roquette, qui montre cinq personnes autour d'une planche de cuisine reconvertie en bureau. C'était l'hiver 2018. Théo Marczak avait 32 ans, un prototype de patch biosensoriel cousu à la main, et une conviction que les médecins du travail allaient finir par avoir besoin de lui. Deux des personnes sur la photo travaillent encore chez Lumio. Les trois autres sont passées à autre chose — ou presque. <em>« On ne s'est jamais vraiment perdus de vue »</em>, dit-il avec une discrétion qui n'invite pas à approfondir.</p>
+
+      <p>Sept ans plus tard, Lumio Health compte une quarantaine de salariés, 180 entreprises clientes — du groupe hôtelier aux PME industrielles — et un chiffre d'affaires de 3,2 millions d'euros sur l'exercice 2024. Des chiffres corrects pour une medtech B2B à ce stade. Pas spectaculaires. Marczak le sait et ne s'en défend pas : <strong>« Ce secteur ne récompense pas la vitesse. Il récompense la crédibilité. »</strong></p>
+
+      <div class="inter-titre">L'ingénieur qui ne voulait pas faire de la médecine</div>
+
+      <p>Diplômé de l'École Centrale de Nantes en 2008, Marczak n'a jamais envisagé la santé comme terrain d'atterrissage naturel. Son premier poste est dans l'instrumentation industrielle — capteurs de pression, systèmes embarqués. <em>« Je mesurais des machines. Et un jour j'ai réalisé que le corps humain était aussi une machine, et qu'on la mesurait très mal. »</em> La formule est rodée, il l'a probablement dite cent fois. Elle n'en est pas moins vraie.</p>
+
+      <p>L'idée du patch germe en 2015, lors d'un passage dans un programme d'intrapreneuriat chez un équipementier industriel. Marczak lit alors beaucoup sur la variabilité de la fréquence cardiaque comme marqueur du stress autonome — un domaine de recherche sérieux mais encore peu exploité en médecine du travail. <em>« Les chercheurs avaient les données. Les entreprises avaient le problème. Personne n'avait construit le pont. »</em></p>
+
+      <p>Il quitte son employeur en 2017, passe plusieurs mois à valider des hypothèses avec <strong>l'aide de quelques proches</strong> dont il parle peu — des personnes qui ont cru au projet très tôt, à une époque où il n'y avait strictement rien à montrer à part des tableaux Excel et un enthousiasme difficile à quantifier. Lumio est créée officiellement en janvier 2018.</p>
+
+      <div class="pull-quote">
+        <div class="pull-quote-text">« Nos clients ne nous achètent pas un patch. Ils nous achètent huit ans de données que personne d'autre ne possède. Le patch, n'importe qui peut le fabriquer. »</div>
+        <div class="pull-quote-attr">Théo Marczak · CEO, Lumio Health</div>
+      </div>
+
+      <div class="inter-titre">2020, l'accélérateur inattendu</div>
+
+      <p>Lumio Health compte une vingtaine de clients en mars 2020. Le confinement change tout — pas de façon linéaire, pas immédiatement, mais de façon durable. <em>« Le premier mois, on a failli ne pas survivre. Nos déploiements terrains étaient suspendus, les entreprises ne pensaient qu'à leur continuité opérationnelle. »</em> Puis quelque chose bascule. Les DRH, confrontés à une vague d'anxiété et d'épuisement sans précédent dans leurs effectifs, cherchent des outils. N'importe quoi de crédible, de mesurable, qui ne ressemble pas à un programme de yoga d'entreprise.</p>
+
+      <p>Lumio se retrouve avec un produit qui répond exactement à ce moment. La croissance est forte entre 2020 et 2022 — <strong>les 100 premiers clients sont signés en dix-huit mois</strong>. Marczak est le premier à reconnaître que cette période a aussi créé des fragilités : <em>« On a grandi vite sans toujours choisir nos clients. On a dit oui à des déploiements qu'on n'était pas sûrs de bien servir. C'est un apprentissage. »</em></p>
+
+      <p>Ce que la vague post-COVID laisse derrière elle, en revanche, est précieux : un historique de données de stress sur plusieurs années, cross-sectoriel, que Lumio est la seule à posséder à cette échelle en France. <em>« C'est notre vrai actif »</em>, répète Marczak. <em>« Pas le patch. Le patch, n'importe qui peut le fabriquer. »</em></p>
+
+      <div class="inter-titre">Le mur de la certification</div>
+
+      <p>Fin 2023, deux concurrents directs — Biostream et Neuroflow — obtiennent leur certification MDR classe IIa auprès des autorités européennes. Le changement de statut est symbolique autant que réglementaire : un dispositif médical certifié peut être prescrit, remboursé, référencé dans les marchés publics de santé au travail. Pour les DRH des grands comptes, c'est une ligne de démarcation qui commence à compter.</p>
+
+      <p>Marczak est entré dans la procédure MDR. Il n'indique pas de calendrier. <em>« Ces procédures sont ce qu'elles sont. Je préfère ne pas annoncer de date et la tenir, plutôt qu'annoncer une date et la rater. »</em> La formulation est prudente. Elle dit aussi autre chose : qu'il y a une pression sur ce calendrier qu'il ne contrôle pas entièrement.</p>
+
+      <p>En attendant, Lumio vient d'accueillir au capital <strong>Northgate Capital</strong>, un fonds spécialisé dans la healthtech européenne, et une directrice marketing recrutée spécifiquement pour préparer l'entreprise à une phase nouvelle. Laquelle, exactement ? Marczak sourit. <em>« Une phase où on arrête de chuchoter et où on commence à parler. »</em> Ce que ça signifie concrètement pour la direction de la marque — B2B renforcé, B2C, les deux à la fois — il ne le dit pas. Pas encore.</p>
+
+      <!-- FOOTER ARTICLE -->
+      <div class="article-footer">
+        <span class="footer-tag">Marie-Hélène Vasseur</span>
+        <span class="footer-sep">·</span>
+        <span class="footer-tag">14 mars 2025</span>
+        <span class="footer-sep">·</span>
+        <span class="footer-tag">L'Usine Digitale</span>
+        <span class="footer-sep">·</span>
+        <span class="footer-tag">Tous droits réservés</span>
+      </div>
+
+    </div><!-- /article-main -->
+
+    <!-- COLONNE ASIDE -->
+    <div class="article-aside">
+
+      <!-- PHOTO -->
+      <div class="photo-block">
+        <img src="Theo_Marczak.png" alt="Théo Marczak, CEO Lumio Health"/>
+        <div class="photo-caption">
+          Théo Marczak<br>
+          Bureaux Lumio Health, Paris 11e<br>
+          <span style="opacity:.5">© L'Usine Digitale / D. Kauffmann</span>
+        </div>
+      </div>
+      <p style="font-family:'DM Mono',monospace;font-size:10px;color:#8a8a84;margin-bottom:24px;line-height:1.5">Théo Marczak dans les locaux de Lumio Health, rue de la Roquette. La startup occupe le 2e étage depuis 2021.</p>
+
+      <!-- BIO -->
+      <div class="aside-bio">
+        <div class="aside-bio-title">Repères</div>
+        <div class="bio-line"><span class="bio-year">1986</span><span class="bio-fact">Naissance à Metz</span></div>
+        <div class="bio-line"><span class="bio-year">2008</span><span class="bio-fact">Diplômé École Centrale Nantes, spécialisation systèmes embarqués</span></div>
+        <div class="bio-line"><span class="bio-year">2008–16</span><span class="bio-fact">Ingénieur capteurs & instrumentation, secteur industriel</span></div>
+        <div class="bio-line"><span class="bio-year">2017</span><span class="bio-fact">Année de R&D indépendante — premiers prototypes biosensoriels</span></div>
+        <div class="bio-line"><span class="bio-year">2018</span><span class="bio-fact">Fondation de Lumio Health, Paris</span></div>
+        <div class="bio-line"><span class="bio-year">2020</span><span class="bio-fact">Pivot accéléré B2B RPS — 100 clients en 18 mois</span></div>
+        <div class="bio-line"><span class="bio-year">2024</span><span class="bio-fact">Entrée de Northgate Capital au capital</span></div>
+      </div>
+
+      <!-- CHIFFRES -->
+      <div class="aside-numbers">
+        <div class="aside-numbers-title">Lumio Health en chiffres</div>
+        <div class="number-item">
+          <div class="number-val">180</div>
+          <div class="number-label">entreprises clientes actives · B2B uniquement</div>
+        </div>
+        <div class="number-item">
+          <div class="number-val">3,2 M€</div>
+          <div class="number-label">chiffre d'affaires · exercice 2024</div>
+        </div>
+        <div class="number-item">
+          <div class="number-val">8 ans</div>
+          <div class="number-label">de données propriétaires stress au travail</div>
+        </div>
+        <div class="number-item">
+          <div class="number-val">~40</div>
+          <div class="number-label">salariés · Paris 11e</div>
+        </div>
+      </div>
+
+      <!-- TAGS -->
+      <div class="aside-tags">
+        <span class="aside-tag">Medtech</span>
+        <span class="aside-tag">Wearable</span>
+        <span class="aside-tag">Prévention RPS</span>
+        <span class="aside-tag">B2B Santé</span>
+        <span class="aside-tag">MDR</span>
+        <span class="aside-tag">Données santé</span>
+      </div>
+
+    </div><!-- /aside -->
+
+  </div><!-- /article-body -->
+
+</div><!-- /article -->
+
+<!-- PIED DE PAGE SITE -->
+<div class="site-footer">
+  <div class="site-footer-logo">L'<em>U</em>sine Digitale</div>
+  <span>© 2025 — Tous droits réservés · Groupe Infopro Digital</span>
+  <span>Paris · Bruxelles · Francfort</span>
+</div>
+
+</body>
+</html>

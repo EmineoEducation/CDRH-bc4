@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Portrait · Camille Ott · Action Commerciale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #1a1a1a;
+  --ink-2: #2d2d2d;
+  --ink-3: #5c5c5c;
+  --ink-4: #9a9a9a;
+  --rule: #dedede;
+  --bg: #ffffff;
+  --bg-warm: #f8f6f2;
+  --accent: #1a6b3c;
+  --accent-mid: #2d8f54;
+  --accent-light: #edf5f0;
+  --accent-2: #e07b2a;
+  --ff-display: 'Lora', Georgia, serif;
+  --ff-body: 'Inter', sans-serif;
+  --ff-mono: 'Space Mono', monospace;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--ff-body);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* MASTHEAD */
+.masthead {
+  border-bottom: 4px double var(--ink);
+  padding: 0;
+}
+.masthead-band {
+  background: var(--accent);
+  padding: 5px 44px;
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+}
+.masthead-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 44px;
+}
+.masthead-logo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.masthead-logo-main {
+  font-family: var(--ff-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.masthead-logo-main em {
+  font-style: italic;
+  color: var(--accent);
+}
+.masthead-logo-sub {
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+.masthead-nav {
+  display: flex;
+  gap: 24px;
+  font-family: var(--ff-body);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-3);
+}
+.masthead-nav span.active {
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 2px;
+}
+
+/* ARTICLE WRAP */
+.article-wrap {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 44px;
+}
+
+/* HEADER */
+.article-header {
+  padding: 44px 0 32px;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 48px;
+  align-items: end;
+  border-bottom: 2px solid var(--ink);
+}
+.header-text {}
+.header-overline {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.header-overline::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--accent);
+}
+.header-title {
+  font-family: var(--ff-display);
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+.header-title em { font-style: italic; color: var(--accent); }
+.header-standfirst {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--ink-3);
+  border-left: 3px solid var(--accent);
+  padding-left: 16px;
+}
+.header-photo {
+  position: relative;
+}
+.header-photo img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.header-photo-caption {
+  background: var(--bg-warm);
+  padding: 8px 12px;
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  color: var(--ink-4);
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+}
+
+/* META */
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--ink-4);
+}
+.meta-author { color: var(--ink-2); font-weight: 700; }
+.meta-sep { color: var(--rule); }
+.meta-tag {
+  background: var(--accent-light);
+  color: var(--accent);
+  padding: 2px 8px;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  border: 1px solid var(--accent-mid);
+}
+
+/* CORPS */
+.article-body {
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  gap: 48px;
+  padding: 36px 0 80px;
+}
+.article-main { min-width: 0; }
+
+.article-main p {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--ink-2);
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+.article-main p:first-child::first-letter {
+  font-family: var(--ff-display);
+  font-size: 54px;
+  font-weight: 700;
+  float: left;
+  margin-right: 6px;
+  margin-top: 4px;
+  line-height: 0.85;
+  color: var(--accent);
+}
+.article-main strong { font-weight: 600; color: var(--ink); }
+.article-main em { font-style: italic; }
+
+.inter-titre {
+  font-family: var(--ff-display);
+  font-size: 19px;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--ink);
+  margin: 32px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.pull-quote {
+  background: var(--bg-warm);
+  padding: 24px 28px;
+  margin: 28px 0;
+  border-left: 4px solid var(--accent-2);
+  position: relative;
+}
+.pull-quote::before {
+  content: '\201C';
+  font-family: var(--ff-display);
+  font-size: 80px;
+  color: var(--accent-2);
+  opacity: 0.2;
+  position: absolute;
+  top: -10px;
+  left: 16px;
+  line-height: 1;
+}
+.pull-quote-text {
+  font-family: var(--ff-display);
+  font-size: 18px;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--ink);
+  margin-bottom: 10px;
+  position: relative;
+}
+.pull-quote-attr {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+}
+
+.article-footer {
+  margin-top: 44px;
+  padding-top: 16px;
+  border-top: 2px solid var(--ink);
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--ink-4);
+  display: flex;
+  gap: 14px;
+}
+.footer-author { color: var(--ink-2); font-weight: 700; }
+
+/* ASIDE */
+.aside-bio {
+  margin-bottom: 24px;
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+}
+.aside-bio-head {
+  padding: 12px 16px;
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border-bottom: 1px solid var(--rule);
+  background: var(--accent-light);
+}
+.aside-bio-body { padding: 16px; }
+.bio-line {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.bio-year {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.bio-fact { color: var(--ink-3); }
+
+.aside-terrain {
+  background: var(--bg-warm);
+  border: 1px solid var(--rule);
+  padding: 20px;
+  margin-bottom: 24px;
+}
+.aside-terrain-title {
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-bottom: 16px;
+}
+.terrain-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: 300;
+  color: var(--ink-2);
+}
+.terrain-item:last-child { margin-bottom: 0; }
+.terrain-ico {
+  width: 24px;
+  height: 24px;
+  background: var(--accent);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.aside-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.aside-tag {
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--rule);
+  padding: 4px 8px;
+  color: var(--ink-4);
+}
+
+/* FOOTER */
+.site-footer {
+  background: var(--ink);
+  padding: 16px 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+}
+.site-footer-logo {
+  font-family: var(--ff-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+}
+.site-footer-logo em { font-style: italic; color: var(--accent-mid); }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-band">Le magazine des professionnels de la vente et du management commercial</div>
+  <div class="masthead-inner">
+    <div class="masthead-logo">
+      <div class="masthead-logo-main"><em>Action</em> Commerciale</div>
+      <div class="masthead-logo-sub">Vente · Management · Performance · Stratégie</div>
+    </div>
+    <div class="masthead-nav">
+      <span>Vente</span>
+      <span>Management</span>
+      <span>Outils</span>
+      <span class="active">Portraits</span>
+      <span>Formation</span>
+    </div>
+  </div>
+</div>
+
+<div class="article-wrap">
+
+  <div class="article-header">
+    <div class="header-text">
+      <div class="header-overline">Portrait · Responsable partenariats B2B</div>
+      <h1 class="header-title">Camille Ott : <em>« Un client DRH ne vous fait pas confiance parce que votre produit est bon. Il vous fait confiance parce que vous l'êtes. »</em></h1>
+      <p class="header-standfirst">Sept ans sur le terrain B2B dans la medtech. Camille Ott, responsable partenariats chez Lumio Health, a construit un portefeuille de grands comptes à la force de la relation humaine. Dans un secteur où la réglementation redistribue les cartes, elle continue de parier sur ce que les certifications ne peuvent pas remplacer.</p>
+    </div>
+    <div class="header-photo">
+      <img src="Camille_Ott.png" alt="Camille Ott, Responsable partenariats B2B Lumio Health"/>
+      <div class="header-photo-caption">Camille Ott · Paris · septembre 2024<br>© Action Commerciale / B. Renault</div>
+    </div>
+  </div>
+
+  <div class="article-meta">
+    <span class="meta-author">Isabelle Chevalier</span>
+    <span class="meta-sep">·</span>
+    <span>11 septembre 2024</span>
+    <span class="meta-sep">·</span>
+    <span>Lecture : 5 min</span>
+    <span class="meta-sep">·</span>
+    <span class="meta-tag">Portrait</span>
+    <span class="meta-tag">B2B Santé</span>
+    <span class="meta-tag">Grands comptes</span>
+  </div>
+
+  <div class="article-body">
+    <div class="article-main">
+
+      <p>Camille Ott arrive à nos locaux avec vingt minutes d'avance et une réservation de taxi pour le rendez-vous d'après. Entre les deux, elle a répondu à trois messages de clients sur son téléphone sans s'en excuser — <em>« C'est Sanofi, ils attendent une mise à jour »</em> — et commandé un café qu'elle n'a pas eu le temps de finir. Ce portrait de l'efficacité tranquille dit quelque chose sur la femme que Lumio Health a embauchée en 2019 pour développer ses partenariats B2B : quelqu'un qui considère que son premier devoir envers un client est d'être disponible.</p>
+
+      <p>À 34 ans, elle gère un portefeuille de grands comptes qui représente l'essentiel du chiffre d'affaires de Lumio — des DRH d'ETI et de groupes industriels auxquels elle vend depuis cinq ans des programmes de prévention des risques psychosociaux appuyés sur les données biosensorielles du patch Lumio. <strong>La relation dure en moyenne trois ans.</strong> Le taux de renouvellement est élevé. Elle n'en tire pas de vanité particulière : <em>« Si les clients renouvellent, c'est que le produit fonctionne. Mon rôle c'est de ne pas les perdre pendant l'intervalle. »</em></p>
+
+      <div class="inter-titre">Ce que la vente en santé apprend qu'on ne trouve pas dans les formations</div>
+
+      <p>Diplômée d'une école de commerce bordelaise, Camille Ott a commencé sa carrière dans les dispositifs médicaux — un secteur qui lui a appris très tôt que <strong>le cycle de vente en santé est un cycle de confiance, pas d'achat</strong>. <em>« Dans la pharma ou le dispositif médical, vous ne vendez pas à quelqu'un qui a décidé d'acheter. Vous vendez à quelqu'un qui doit justifier sa décision d'achat devant un comité, un service juridique et parfois son médecin du travail. Ce n'est pas la même chose. »</em></p>
+
+      <p>Quand elle arrive chez Lumio en 2019, l'entreprise sortait d'une phase de démarrage artisanale : une quarantaine de clients, des process commerciaux encore empiriques, pas de playbook. <em>« Théo est ingénieur. Il comprend la valeur des données mieux que personne. Mais la valeur d'un suivi commercial régulier, de l'appel qu'on passe même quand il n'y a rien à vendre — ça, c'était moins évident au début. »</em></p>
+
+      <div class="pull-quote">
+        <div class="pull-quote-text">La certification est une horloge. Nos clients nous font encore confiance. Mais cette confiance a une durée de vie si on ne leur donne pas de visibilité sur le calendrier.</div>
+        <div class="pull-quote-attr">Camille Ott · Responsable partenariats B2B, Lumio Health</div>
+      </div>
+
+      <div class="inter-titre">Le sujet qui change les conversations</div>
+
+      <p>Depuis début 2024, Camille Ott observe un changement dans ses rendez-vous clients. Pas brutal — graduel. Les DRH arrivent avec des questions sur la certification MDR que deux concurrents de Lumio viennent d'obtenir. <em>« Avant, on ne me posait jamais la question. Maintenant, sur cinq réunions, trois la posent. Pas de façon agressive — plutôt gênés, comme si c'était indiscret de demander. Mais ils demandent quand même. »</em></p>
+
+      <p>Sa réponse est rodée : la certification est en cours, le produit est conforme aux normes en vigueur, les résultats terrain sont là pour le prouver. <em>« Ce que je ne peux pas leur dire, c'est quand. Et c'est exactement ce qu'ils veulent savoir. »</em> Elle ne dit pas que c'est un problème. Elle dit que c'est une <strong>horloge</strong>. <em>« Les clients actuels nous font encore confiance. Mais cette confiance a une durée de vie si on ne leur donne pas de visibilité sur le calendrier. »</em></p>
+
+      <p>Pour l'heure, elle continue de faire ce qu'elle sait faire : appeler régulièrement, rendre visite même sans raison formelle, construire la relation indépendamment du contrat. <em>« Le jour où la certification arrive, je veux que mes clients l'apprennent de moi avant de le lire dans un communiqué de presse. C'est ça, la fidélisation. »</em></p>
+
+      <div class="article-footer">
+        <span class="footer-author">Isabelle Chevalier</span>
+        <span>·</span>
+        <span>11 septembre 2024</span>
+        <span>·</span>
+        <span>Action Commerciale</span>
+      </div>
+    </div>
+
+    <div class="article-aside">
+
+      <div class="aside-bio">
+        <div class="aside-bio-head">Repères</div>
+        <div class="aside-bio-body">
+          <div class="bio-line"><span class="bio-year">1990</span><span class="bio-fact">Naissance à Bordeaux</span></div>
+          <div class="bio-line"><span class="bio-year">2013</span><span class="bio-fact">Diplômée KEDGE Business School, spécialisation commerciale</span></div>
+          <div class="bio-line"><span class="bio-year">2013–19</span><span class="bio-fact">Commerciale dispositifs médicaux, deux groupes successifs</span></div>
+          <div class="bio-line"><span class="bio-year">2019</span><span class="bio-fact">Rejoint Lumio Health comme première commerciale B2B</span></div>
+          <div class="bio-line"><span class="bio-year">2021</span><span class="bio-fact">Promue Responsable partenariats B2B</span></div>
+          <div class="bio-line"><span class="bio-year">2024</span><span class="bio-fact">Manage un portefeuille de 180 références actives</span></div>
+        </div>
+      </div>
+
+      <div class="aside-terrain">
+        <div class="aside-terrain-title">Ce qu'elle défend sur le terrain</div>
+        <div class="terrain-item">
+          <div class="terrain-ico">1</div>
+          <div>La relation longue durée comme rempart face aux concurrents certifiés</div>
+        </div>
+        <div class="terrain-item">
+          <div class="terrain-ico">2</div>
+          <div>La qualité des données Lumio comme argument différenciant face à MDR</div>
+        </div>
+        <div class="terrain-item">
+          <div class="terrain-ico">3</div>
+          <div>La transparence sur le calendrier de certification comme gage de confiance</div>
+        </div>
+      </div>
+
+      <div class="aside-tags">
+        <span class="aside-tag">Grands comptes</span>
+        <span class="aside-tag">B2B santé</span>
+        <span class="aside-tag">DRH</span>
+        <span class="aside-tag">RPS</span>
+        <span class="aside-tag">Fidélisation</span>
+        <span class="aside-tag">Medtech</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="site-footer">
+  <div class="site-footer-logo"><em>Action</em> Commerciale</div>
+  <span>© 2024 — Tous droits réservés</span>
+  <span>actionco.fr</span>
+</div>
+
+</body>
+</html>

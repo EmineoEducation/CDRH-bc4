@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Portrait · Jakob Rein · Forbes France</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #0a0a0a;
+  --ink-2: #1e1e1e;
+  --ink-3: #4a4a4a;
+  --ink-4: #888888;
+  --rule: #e8e8e8;
+  --bg: #ffffff;
+  --forbes-red: #c8102e;
+  --forbes-gold: #b8882a;
+  --forbes-dark: #0a0a0a;
+  --ff-display: 'Merriweather', Georgia, serif;
+  --ff-sans: 'Montserrat', sans-serif;
+  --ff-mono: 'Roboto Mono', monospace;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--ff-display);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* MASTHEAD */
+.masthead {
+  background: var(--forbes-dark);
+  padding: 0;
+}
+.masthead-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 48px;
+}
+.masthead-logo {
+  font-family: var(--ff-sans);
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: white;
+}
+.masthead-logo em {
+  font-style: italic;
+  color: var(--forbes-gold);
+}
+.masthead-edition {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+.masthead-nav {
+  display: flex;
+  gap: 28px;
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+.masthead-nav span.active { color: var(--forbes-gold); }
+
+/* RUBRIQUE BANDE */
+.rubrique-band {
+  background: var(--forbes-red);
+  padding: 8px 48px;
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: white;
+  max-width: 100%;
+}
+
+/* LAYOUT ARTICLE */
+.article-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* HERO 2 COLONNES */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 0;
+  border-bottom: 2px solid var(--ink);
+  margin-bottom: 0;
+}
+.hero-text {
+  padding: 48px 48px 48px 0;
+  border-right: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.hero-overline {
+  font-family: var(--ff-sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--forbes-red);
+  margin-bottom: 20px;
+}
+.hero-title {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+.hero-title em { font-style: italic; color: var(--ink-3); }
+.hero-standfirst {
+  font-size: 16px;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--ink-3);
+  border-top: 2px solid var(--ink);
+  padding-top: 20px;
+}
+.hero-photo {
+  position: relative;
+  overflow: hidden;
+}
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.hero-photo-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.65);
+  padding: 10px 16px;
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.04em;
+}
+
+/* META */
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+.meta-author { color: var(--ink-2); font-weight: 700; }
+.meta-sep { color: var(--rule); }
+.meta-tag {
+  font-size: 10px;
+  border: 1px solid var(--forbes-red);
+  color: var(--forbes-red);
+  padding: 2px 8px;
+}
+
+/* CORPS */
+.article-body {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 52px;
+  padding: 40px 0 80px;
+}
+.article-main { min-width: 0; }
+
+.article-main p {
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--ink-2);
+  margin-bottom: 22px;
+  font-weight: 300;
+}
+.article-main p:first-child::first-letter {
+  font-size: 60px;
+  font-weight: 700;
+  float: left;
+  margin-right: 8px;
+  margin-top: 4px;
+  line-height: 0.8;
+  color: var(--forbes-red);
+}
+.article-main strong { font-weight: 700; color: var(--ink); }
+.article-main em { font-style: italic; }
+
+.inter-titre {
+  font-family: var(--ff-sans);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 36px 0 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.inter-titre::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: var(--forbes-red);
+  flex-shrink: 0;
+}
+
+.pull-quote {
+  margin: 36px 0;
+  padding: 0;
+  border-top: 3px solid var(--forbes-gold);
+  border-bottom: 1px solid var(--rule);
+  padding: 24px 0;
+}
+.pull-quote-text {
+  font-size: 22px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.pull-quote-attr {
+  font-family: var(--ff-sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--forbes-gold);
+}
+
+.article-footer {
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 2px solid var(--ink);
+  font-family: var(--ff-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  display: flex;
+  gap: 16px;
+}
+.footer-author { color: var(--ink-2); }
+
+/* ASIDE */
+.aside-bio {
+  border: 1px solid var(--ink);
+  margin-bottom: 24px;
+}
+.aside-bio-head {
+  background: var(--ink);
+  padding: 10px 16px;
+  font-family: var(--ff-sans);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: white;
+}
+.aside-bio-body { padding: 16px; }
+.bio-line {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  font-family: var(--ff-sans);
+  font-weight: 400;
+}
+.bio-year {
+  font-weight: 700;
+  color: var(--forbes-red);
+  flex-shrink: 0;
+  font-size: 11px;
+  padding-top: 1px;
+}
+.bio-fact { color: var(--ink-3); }
+
+.aside-stat {
+  background: var(--forbes-dark);
+  color: white;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+.aside-stat-title {
+  font-family: var(--ff-sans);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--forbes-gold);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.stat-item { margin-bottom: 16px; }
+.stat-item:last-child { margin-bottom: 0; }
+.stat-val {
+  font-family: var(--ff-sans);
+  font-size: 28px;
+  font-weight: 800;
+  color: white;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-val em {
+  font-style: normal;
+  font-size: 14px;
+  color: var(--forbes-gold);
+  margin-left: 4px;
+}
+.stat-label {
+  font-family: var(--ff-sans);
+  font-size: 10px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+
+.aside-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.aside-tag {
+  font-family: var(--ff-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--rule);
+  padding: 4px 8px;
+  color: var(--ink-4);
+}
+
+/* FOOTER SITE */
+.site-footer {
+  background: var(--forbes-dark);
+  padding: 18px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--ff-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+}
+.site-footer-logo {
+  font-size: 20px;
+  font-weight: 800;
+  color: white;
+}
+.site-footer-logo em { font-style: italic; color: var(--forbes-gold); }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-inner">
+    <div>
+      <div class="masthead-logo">FORBES <em>France</em></div>
+      <div class="masthead-edition">Édition française · Forbes Media LLC</div>
+    </div>
+    <div class="masthead-nav">
+      <span>Business</span>
+      <span>Finance</span>
+      <span>Tech</span>
+      <span class="active">Investisseurs</span>
+      <span>Lifestyle</span>
+    </div>
+  </div>
+</div>
+
+<div class="rubrique-band">Investisseurs · Healthtech Europe</div>
+
+<div class="article-wrap">
+
+  <div class="hero-grid">
+    <div class="hero-text">
+      <div class="hero-overline">Portrait · Partner · Northgate Capital</div>
+      <h1 class="hero-title">Jakob Rein : l'homme qui parie que la santé au travail <em>n'est pas un marché de niche</em></h1>
+      <p class="hero-standfirst">Partner chez Northgate Capital, ce financier allemand installé à Paris a fait de la healthtech B2B sa spécialité. Son dernier investissement en date — Lumio Health — résume sa thèse : les données de santé propriétaires valent plus que les produits qui les collectent.</p>
+    </div>
+    <div class="hero-photo">
+      <img src="Jakob_Rein.png" alt="Jakob Rein, Partner Northgate Capital"/>
+      <div class="hero-photo-caption">© Forbes France / studio Leconte · Paris, janvier 2025</div>
+    </div>
+  </div>
+
+  <div class="article-meta">
+    <span class="meta-author">Frédéric Alaux</span>
+    <span class="meta-sep">·</span>
+    <span>22 janvier 2025</span>
+    <span class="meta-sep">·</span>
+    <span>Lecture : 6 min</span>
+    <span class="meta-sep">·</span>
+    <span class="meta-tag">Investisseur</span>
+    <span class="meta-tag">Healthtech</span>
+    <span class="meta-tag">Capital-risque</span>
+  </div>
+
+  <div class="article-body">
+    <div class="article-main">
+
+      <p>Jakob Rein n'aime pas qu'on le présente comme un visionnaire. <em>« Un visionnaire se trompe régulièrement et s'en félicite. Moi, je préfère avoir raison. »</em> Ce Munichois de 51 ans, installé à Paris depuis 2009, dirige depuis son bureau du 8e arrondissement les investissements européens de Northgate Capital — un fonds américain spécialisé dans la healthtech, dont il supervise le portefeuille depuis le bureau parisien. Sa méthode : chercher des entreprises qui possèdent des données que personne d'autre ne peut reproduire. Et attendre.</p>
+
+      <div class="inter-titre">La thèse Northgate</div>
+
+      <p>Northgate Capital n'investit pas dans des produits. Il investit dans des <strong>barrières à l'entrée</strong>. Rein l'explique avec la clarté d'un homme qui a répété cette phrase devant suffisamment de LP pour l'avoir parfaitement rodée : <em>« Un produit medtech peut être copié. Des données collectées sur huit ans auprès de cent quatre-vingts entreprises dans des conditions écologiques réelles — ça, ça ne se copie pas. »</em> C'est précisément ce raisonnement qui l'a conduit à entrer au capital de Lumio Health fin 2023, à l'issue d'un processus de due diligence de neuf mois.</p>
+
+      <p>Ce qu'il a vu chez Lumio n'était pas une croissance spectaculaire — le chiffre d'affaires de la startup stagnait autour des trois millions d'euros depuis deux exercices. Ce qu'il a vu, c'est <strong>un historique de données de variabilité cardiaque au travail</strong> que nul concurrent ne possède, adossé à une relation client longue durée dans les grands comptes. <em>« Le problème de Lumio, c'est qu'ils ne savent pas encore ce qu'ils ont. Ou plutôt, ils le savent, mais ils ne savent pas quoi en faire. C'est précisément là qu'on peut apporter quelque chose. »</em></p>
+
+      <div class="pull-quote">
+        <div class="pull-quote-text">« Lumio a construit quelque chose de rare sans le réaliser pleinement. Mon travail n'est pas de le leur expliquer — c'est de les aider à ne pas le gâcher. »</div>
+        <div class="pull-quote-attr">Jakob Rein · Partner, Northgate Capital</div>
+      </div>
+
+      <div class="inter-titre">La pression comme outil</div>
+
+      <p>Rein est connu dans l'écosystème pour ne pas pratiquer la langue de bois avec ses participations. Plusieurs fondateurs qu'il a accompagnés décrivent la même expérience : des réunions trimestrielles précises, des tableaux de bord exigeants, et une capacité à poser la question qu'on évite depuis six mois avec une placidité désarmante. <em>« Je ne pense pas que la bienveillance diffuse soit un service que l'on rend à un fondateur. Il a besoin de savoir exactement où il en est. »</em></p>
+
+      <p>Chez Lumio, l'enjeu central est la bascule vers le B2C — un virage que Rein juge non seulement possible mais <strong>nécessaire à court terme</strong>, indépendamment du calendrier de certification MDR qui conditionne une partie de la stratégie. <em>« La certification viendra. Elle prend du temps, c'est connu. Mais pendant ce temps, le marché n'attend pas. Apple et Samsung habituent le grand public à porter des capteurs de santé. Si Lumio n'existe pas dans ce paysage dans vingt-quatre mois, la fenêtre se sera fermée. »</em></p>
+
+      <p>Quand on lui demande si cette pression est bien reçue en interne, il sourit légèrement. <em>« Ce n'est pas mon problème d'être bien reçu. Mon problème est que les engagements pris au moment de l'investissement soient tenus. Les deux ne sont pas incompatibles — mais ils ne sont pas non plus toujours simultanés. »</em></p>
+
+      <div class="article-footer">
+        <span class="footer-author">Frédéric Alaux</span>
+        <span>·</span>
+        <span>22 janvier 2025</span>
+        <span>·</span>
+        <span>Forbes France</span>
+      </div>
+    </div>
+
+    <div class="article-aside">
+
+      <div class="aside-bio">
+        <div class="aside-bio-head">Repères</div>
+        <div class="aside-bio-body">
+          <div class="bio-line"><span class="bio-year">1974</span><span class="bio-fact">Naissance à Munich, Allemagne</span></div>
+          <div class="bio-line"><span class="bio-year">1998</span><span class="bio-fact">MBA, London Business School</span></div>
+          <div class="bio-line"><span class="bio-year">1998–08</span><span class="bio-fact">Banque d'investissement, Deutsche Bank puis Goldman Sachs — secteur santé</span></div>
+          <div class="bio-line"><span class="bio-year">2009</span><span class="bio-fact">Rejoint Northgate Capital, bureau de Paris</span></div>
+          <div class="bio-line"><span class="bio-year">2015</span><span class="bio-fact">Nommé Partner, responsable portefeuille Europe</span></div>
+          <div class="bio-line"><span class="bio-year">2023</span><span class="bio-fact">Entrée au capital de Lumio Health</span></div>
+        </div>
+      </div>
+
+      <div class="aside-stat">
+        <div class="aside-stat-title">Northgate Capital · portefeuille Europe</div>
+        <div class="stat-item">
+          <div class="stat-val">12 <em>participations</em></div>
+          <div class="stat-label">dans la healthtech européenne sous supervision de Rein</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val">340 M€</div>
+          <div class="stat-label">encours sous gestion · fonds Europe III</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val">36 mois</div>
+          <div class="stat-label">horizon d'objectifs contractualisés avec Lumio Health</div>
+        </div>
+      </div>
+
+      <div class="aside-tags">
+        <span class="aside-tag">Capital-risque</span>
+        <span class="aside-tag">Healthtech</span>
+        <span class="aside-tag">B2C pivot</span>
+        <span class="aside-tag">Données santé</span>
+        <span class="aside-tag">Growth</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="site-footer">
+  <div class="site-footer-logo">FORBES <em>France</em></div>
+  <span>© 2025 Forbes Media LLC — Tous droits réservés</span>
+  <span>forbes.fr</span>
+</div>
+
+</body>
+</html>

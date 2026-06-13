@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Portrait · Sonia Ferracci · CB News</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #111111;
+  --ink-2: #2a2a2a;
+  --ink-3: #555555;
+  --ink-4: #999999;
+  --rule: #e0e0e0;
+  --bg: #ffffff;
+  --accent: #e8173a;
+  --accent-dark: #a50f28;
+  --accent-light: #fdf0f2;
+  --gold: #c9922a;
+  --ff-display: 'Libre Baskerville', Georgia, serif;
+  --ff-body: 'Barlow', sans-serif;
+  --ff-cond: 'Barlow Condensed', sans-serif;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--ff-body);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* MASTHEAD */
+.masthead {
+  border-bottom: 3px solid var(--accent);
+  padding: 0;
+}
+.masthead-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 40px;
+  border-bottom: 1px solid var(--rule);
+}
+.masthead-logo {
+  font-family: var(--ff-cond);
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.masthead-logo span { color: var(--accent); }
+.masthead-tagline {
+  font-family: var(--ff-cond);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+.masthead-nav {
+  display: flex;
+  gap: 0;
+  font-family: var(--ff-cond);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.masthead-nav span {
+  padding: 10px 18px;
+  color: var(--ink-3);
+  border-right: 1px solid var(--rule);
+}
+.masthead-nav span:last-child { border-right: none; }
+.masthead-nav span.active {
+  color: var(--accent);
+  background: var(--accent-light);
+}
+
+/* HERO PHOTO */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  opacity: 0.85;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.75) 100%);
+}
+.hero-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 32px 48px;
+  color: white;
+}
+.hero-rubrique {
+  font-family: var(--ff-cond);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: white;
+  display: inline-block;
+  padding: 4px 10px;
+  margin-bottom: 14px;
+}
+.hero-title {
+  font-family: var(--ff-display);
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: white;
+  max-width: 720px;
+  margin-bottom: 12px;
+}
+.hero-title em { font-style: italic; color: rgba(255,255,255,0.8); }
+.hero-standfirst {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.82);
+  max-width: 600px;
+}
+
+/* META */
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 48px;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--ff-cond);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  background: #fafafa;
+}
+.meta-author { color: var(--ink-2); font-weight: 600; }
+.meta-sep { color: var(--rule); }
+.meta-tag {
+  background: var(--accent);
+  color: white;
+  padding: 3px 8px;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+
+/* ARTICLE */
+.article {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 48px 80px;
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 52px;
+}
+.article-main { min-width: 0; }
+.article-aside {}
+
+/* TEXTE */
+.article-main p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--ink-2);
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+.article-main p:first-child::first-letter {
+  font-family: var(--ff-display);
+  font-size: 58px;
+  font-weight: 700;
+  float: left;
+  margin-right: 8px;
+  margin-top: 6px;
+  line-height: 0.8;
+  color: var(--accent);
+}
+.article-main strong { font-weight: 600; color: var(--ink); }
+.article-main em { font-style: italic; }
+
+.inter-titre {
+  font-family: var(--ff-cond);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 36px 0 16px;
+  padding-left: 14px;
+  border-left: 4px solid var(--accent);
+}
+
+.pull-quote {
+  background: var(--accent-light);
+  border-left: 4px solid var(--accent);
+  padding: 24px 28px;
+  margin: 32px 0;
+}
+.pull-quote-text {
+  font-family: var(--ff-display);
+  font-size: 20px;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.pull-quote-attr {
+  font-family: var(--ff-cond);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-dark);
+}
+
+.article-footer {
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 3px solid var(--ink);
+  font-family: var(--ff-cond);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.footer-author { color: var(--ink-2); font-weight: 600; }
+
+/* ASIDE */
+.aside-bio {
+  border: 1px solid var(--rule);
+  margin-bottom: 24px;
+}
+.aside-bio-head {
+  background: var(--ink);
+  padding: 12px 16px;
+  font-family: var(--ff-cond);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: white;
+}
+.aside-bio-body { padding: 16px; }
+.bio-line {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.5;
+}
+.bio-year {
+  font-family: var(--ff-cond);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  flex-shrink: 0;
+  padding-top: 1px;
+}
+.bio-fact { color: var(--ink-2); }
+
+.aside-numbers {
+  background: var(--accent);
+  padding: 20px;
+  margin-bottom: 24px;
+  color: white;
+}
+.aside-numbers-title {
+  font-family: var(--ff-cond);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 16px;
+}
+.number-item {
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+.number-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.number-val {
+  font-family: var(--ff-cond);
+  font-size: 30px;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.number-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.4;
+  font-weight: 300;
+}
+
+.aside-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.aside-tag {
+  font-family: var(--ff-cond);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid var(--rule);
+  padding: 4px 8px;
+  color: var(--ink-3);
+}
+
+/* FOOTER SITE */
+.site-footer {
+  background: var(--ink);
+  padding: 18px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--ff-cond);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+.site-footer-logo {
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 0.06em;
+}
+.site-footer-logo span { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-top">
+    <div>
+      <div class="masthead-logo">CB <span>News</span></div>
+      <div class="masthead-tagline">Communication · Médias · Marketing</div>
+    </div>
+    <div class="masthead-nav">
+      <span>Stratégie</span>
+      <span>Marques</span>
+      <span>Médias</span>
+      <span class="active">Portraits</span>
+      <span>Data</span>
+      <span>Événements</span>
+    </div>
+  </div>
+</div>
+
+<div class="hero">
+  <img src="Sonia_Ferracci.png" alt="Sonia Ferracci, Directrice Marketing Lumio Health"/>
+  <div class="hero-overlay"></div>
+  <div class="hero-caption">
+    <div class="hero-rubrique">Portrait · Directrice Marketing</div>
+    <h1 class="hero-title">Sonia Ferracci : <em>« J'ai quitté la certitude pour aller là où quelque chose pouvait basculer »</em></h1>
+    <p class="hero-standfirst">À 41 ans, cette ancienne directrice de marque chez un laboratoire pharmaceutique a tout laissé pour rejoindre Lumio Health, une medtech parisienne de quarante personnes. Ce choix n'était pas irrationnel. Il était calculé — et risqué.</p>
+  </div>
+</div>
+
+<div class="article-meta">
+  <span class="meta-author">Pauline Renard</span>
+  <span class="meta-sep">·</span>
+  <span>18 juin 2026</span>
+  <span class="meta-sep">·</span>
+  <span>Lecture : 6 min</span>
+  <span class="meta-sep">·</span>
+  <span class="meta-tag">Portrait</span>
+  <span class="meta-tag">Marque santé</span>
+  <span class="meta-tag">Medtech</span>
+</div>
+
+<div class="article">
+  <div class="article-main">
+
+    <p>Il y a des postes que l'on accepte parce qu'ils sont logiques. Et il y en a d'autres que l'on accepte parce qu'on sent, au fond, qu'ils sont nécessaires — pour soi, pour ce qu'on veut faire de son parcours. Sonia Ferracci appartient à la deuxième catégorie. En janvier 2026, après douze ans dans l'industrie pharmaceutique et un dernier poste de directrice de marque Europe chez un groupe coté, elle a rejoint Lumio Health. Quarante salariés. Trois millions d'euros de chiffre d'affaires. Pas de présence grand public. <em>« Tout le monde m'a dit que c'était une erreur »</em>, dit-elle sans chercher à dramatiser. <em>« J'avais envie de voir si c'en était vraiment une. »</em></p>
+
+    <div class="inter-titre">Ce que la pharma lui a appris — et ce qu'elle lui a refusé</div>
+
+    <p>Diplômée de l'ESSEC en 2007, Sonia Ferracci entre en communication chez un groupe de cosmétique avant de basculer vers la santé en 2012. C'est dans ce secteur qu'elle construit l'essentiel de sa formation réelle : <strong>comment construire une marque dans un univers où la preuve précède la promesse</strong>, où le mot "efficace" engage une responsabilité légale, où chaque visuel publicitaire passe par un service réglementaire avant d'atteindre le public. <em>« La pharma t'oblige à une rigueur que les autres secteurs n'ont pas. Tu ne peux pas bluffer. Le produit soit tient ses promesses, soit il ne les tient pas. »</em></p>
+
+    <p>Ce qu'elle a moins aimé, en revanche, c'est la lenteur. Non pas la lenteur réglementaire, qu'elle comprend et respecte, mais <strong>la lenteur organisationnelle</strong> des grandes structures — les comités, les validations en cascade, les décisions qui traversent six niveaux hiérarchiques avant d'aboutir à un visuel de campagne. <em>« À un moment, tu réalises que tu passes plus de temps à gérer l'organisation qu'à construire la marque. Ce n'est pas ce pour quoi tu es faite. »</em></p>
+
+    <div class="pull-quote">
+      <div class="pull-quote-text">« Dans la santé, la marque ne peut pas précéder la preuve. Mais elle peut rendre la preuve audible. C'est exactement ce que Lumio n'a pas encore fait — et c'est pour ça que j'y suis. »</div>
+      <div class="pull-quote-attr">Sonia Ferracci · Directrice Marketing, Lumio Health</div>
+    </div>
+
+    <div class="inter-titre">Lumio, ou le pari d'un moment</div>
+
+    <p>Ce qui l'a attirée chez Lumio Health n'est pas, dit-elle, le produit en lui-même. C'est la combinaison rare d'un actif de données solide, d'une crédibilité B2B construite sur huit ans, et d'une fenêtre de repositionnement qui ne resterait pas ouverte indéfiniment. <em>« Il y a des moments, dans la vie d'une marque, où tout peut basculer dans un sens ou dans l'autre. Ce sont ces moments qui m'intéressent. Pas les marques installées où le travail consiste à maintenir. »</em></p>
+
+    <p>Elle est arrivée en janvier avec un mandat qui n'était pas entièrement formulé — et elle le sait. <strong>Préparer Lumio à parler au grand public sans perdre la confiance des institutionnels</strong> : c'est à la fois une direction et une contradiction. La certification MDR, attendue mais sans calendrier confirmé, est le nœud du problème. Sans elle, le territoire "expertise santé" que Lumio revendique reste fragile face aux acheteurs qui exigent désormais une validation réglementaire. Avec elle, les possibilités s'élargissent considérablement.</p>
+
+    <p><em>« Je ne suis pas venue pour faire de la communication. Je suis venue pour résoudre un problème de positionnement. La communication viendra après. »</em> Six mois après sa prise de poste, elle prépare une recommandation stratégique pour le board de septembre. Elle n'a pas tranché entre deux orientations qui s'affrontent en interne depuis plusieurs mois. Elle dit chercher <em>« le regard extérieur juste »</em>. Ce qui signifie, probablement, qu'elle a déjà son avis — et qu'elle veut qu'il soit confirmé par quelqu'un d'autre.</p>
+
+    <div class="article-footer">
+      <span class="footer-author">Pauline Renard</span>
+      <span>·</span>
+      <span>18 juin 2026</span>
+      <span>·</span>
+      <span>CB News</span>
+    </div>
+
+  </div>
+
+  <div class="article-aside">
+
+    <div class="aside-bio">
+      <div class="aside-bio-head">Repères</div>
+      <div class="aside-bio-body">
+        <div class="bio-line"><span class="bio-year">1985</span><span class="bio-fact">Naissance à Marseille</span></div>
+        <div class="bio-line"><span class="bio-year">2007</span><span class="bio-fact">Diplômée ESSEC, spécialisation marketing</span></div>
+        <div class="bio-line"><span class="bio-year">2007–11</span><span class="bio-fact">Communication, groupe cosmétique — Paris</span></div>
+        <div class="bio-line"><span class="bio-year">2012–19</span><span class="bio-fact">Brand Manager puis Directrice marque, industrie pharmaceutique</span></div>
+        <div class="bio-line"><span class="bio-year">2019–25</span><span class="bio-fact">Directrice marque Europe, groupe pharmaceutique coté</span></div>
+        <div class="bio-line"><span class="bio-year">Jan. 2026</span><span class="bio-fact">Directrice Marketing, Lumio Health</span></div>
+      </div>
+    </div>
+
+    <div class="aside-numbers">
+      <div class="aside-numbers-title">Le défi en chiffres</div>
+      <div class="number-item">
+        <div class="number-val">0 %</div>
+        <div class="number-label">part B2C dans le CA actuel de Lumio</div>
+      </div>
+      <div class="number-item">
+        <div class="number-val">180</div>
+        <div class="number-label">entreprises clientes B2B à défendre</div>
+      </div>
+      <div class="number-item">
+        <div class="number-val">200 k€</div>
+        <div class="number-label">budget marque alloué pour 2026</div>
+      </div>
+      <div class="number-item">
+        <div class="number-val">7 mois</div>
+        <div class="number-label">en poste au moment de cet entretien</div>
+      </div>
+    </div>
+
+    <div class="aside-tags">
+      <span class="aside-tag">Marque santé</span>
+      <span class="aside-tag">B2B→B2C</span>
+      <span class="aside-tag">Réglementation</span>
+      <span class="aside-tag">Medtech</span>
+      <span class="aside-tag">Positionnement</span>
+    </div>
+
+  </div>
+</div>
+
+<div class="site-footer">
+  <div class="site-footer-logo">CB <span>News</span></div>
+  <span>© 2026 — Tous droits réservés</span>
+  <span>Un média du groupe Infopro Digital</span>
+</div>
+
+</body>
+</html>
