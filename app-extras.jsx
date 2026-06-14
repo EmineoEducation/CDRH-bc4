@@ -127,7 +127,7 @@ function CalendarApp() {
             {C.legend.map((l, i) => (
               <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <div style={{ width: 8, height: 8, borderRadius: '50%', background: l.color }} />
-                <span style={{ color: 'var(--ink-soft)' }} dangerouslySetInnerHTML={{ __html: l.text }} />
+                <span style={{ color: 'var(--ink-soft)' }} dangerouslySetInnerHTML={{ __html: l.text || l.label || '' }} />
               </div>
             ))}
           </div>
@@ -167,11 +167,121 @@ window.LUMIO_APPS.calendar = CalendarApp;
 function TrashApp() {
   const D = window.LUMIO_DATA || {};
   const t = D.trash || {};
+  const items = t.items || [];
+  const wa = t.whatsapp || null;
+  const [showWA, setShowWA] = React.useState(false);
+
+  const iconFor = (item) => {
+    if (item.icon === 'docx') return '📄';
+    if (item.icon === 'img')  return '🖼️';
+    if (item.icon === 'vcf')  return '👤';
+    return '📄';
+  };
+
+  if (items.length === 0) {
+    return (
+      <div style={{ padding: 40, height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'white', color: 'var(--ink-mute)', textAlign: 'center' }}>
+        <div style={{ opacity: 0.4, marginBottom: 20 }}><window.TrashIcon size={80} /></div>
+        <div style={{ fontFamily: 'var(--font-display)', fontSize: 18, color: 'var(--ink)' }}>{t.title || 'La corbeille est vide.'}</div>
+        <div style={{ fontSize: 12, marginTop: 6 }}>{t.body || ''}</div>
+      </div>
+    );
+  }
+
   return (
-    <div style={{ padding: 40, height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'white', color: 'var(--ink-mute)', textAlign: 'center' }}>
-      <div style={{ opacity: 0.4, marginBottom: 20 }}><window.TrashIcon size={80} /></div>
-      <div style={{ fontFamily: 'var(--font-display)', fontSize: 18, color: 'var(--ink)' }}>{t.title || 'La corbeille est vide.'}</div>
-      <div style={{ fontSize: 12, marginTop: 6 }}>{t.body || "Mais l'idée est bonne. La plupart des consultants commencent par jeter quelque chose."}</div>
+    <div style={{ display: 'flex', height: '100%', background: 'white', position: 'relative', overflow: 'hidden' }}>
+      {/* Sidebar */}
+      <div style={{ width: 180, flexShrink: 0, background: '#e8eaee', padding: '16px 0', borderRight: '1px solid var(--rule)' }}>
+        <div style={{ padding: '0 16px', fontSize: 11, color: 'var(--ink-faint)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 8 }}>Favoris</div>
+        {[['💻','MacBook'],['📁','Documents'],['⬇️','Téléchargements']].map(([icon, label]) => (
+          <div key={label} style={{ padding: '4px 16px', fontSize: 13, color: 'var(--ink-soft)', display: 'flex', alignItems: 'center', gap: 8, cursor: 'default' }}>
+            <span>{icon}</span><span>{label}</span>
+          </div>
+        ))}
+        <div style={{ padding: '4px 16px', fontSize: 13, color: 'white', background: '#3a7bd5', display: 'flex', alignItems: 'center', gap: 8 }}>
+          <span>🗑️</span><span style={{ fontWeight: 600 }}>Corbeille</span>
+        </div>
+      </div>
+
+      {/* Main area */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+        {/* Header */}
+        <div style={{ padding: '12px 20px', borderBottom: '1px solid var(--rule)', display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <window.TrashIcon size={26} />
+            <div>
+              <div style={{ fontSize: 14, fontWeight: 600 }}>Corbeille</div>
+              <div style={{ fontSize: 11, color: 'var(--ink-mute)' }}>{items.length} éléments</div>
+            </div>
+          </div>
+          <div style={{ flex: 1 }} />
+          <button style={{ padding: '5px 14px', background: '#f0f0f0', border: '1px solid #ccc', borderRadius: 5, fontSize: 12, cursor: 'default', color: 'var(--ink-soft)' }}>
+            Vider la corbeille
+          </button>
+        </div>
+
+        {/* Column headers */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 90px 110px', padding: '6px 20px', borderBottom: '1px solid var(--rule)', background: '#f8f8f8' }}>
+          {['NOM', 'TAILLE', 'SUPPRIMÉ'].map(h => (
+            <div key={h} style={{ fontSize: 11, fontWeight: 700, color: 'var(--ink-mute)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{h}</div>
+          ))}
+        </div>
+
+        {/* File rows */}
+        <div style={{ flex: 1, overflow: 'auto' }}>
+          {items.map((item, i) => (
+            <div key={i}
+              onClick={() => { if (item.trigger === 'whatsapp' && wa) setShowWA(true); }}
+              style={{ display: 'grid', gridTemplateColumns: '1fr 90px 110px', padding: '8px 20px', borderBottom: '1px solid rgba(0,0,0,0.05)', cursor: item.trigger ? 'pointer' : 'default', alignItems: 'center', transition: 'background 0.1s' }}
+              onMouseEnter={e => e.currentTarget.style.background = '#f2f4f8'}
+              onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, minWidth: 0 }}>
+                <span style={{ fontSize: 20, flexShrink: 0 }}>{iconFor(item)}</span>
+                <span style={{ fontSize: 13, color: 'var(--ink)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.name}</span>
+              </div>
+              <div style={{ fontSize: 12, color: 'var(--ink-soft)' }}>{item.size}</div>
+              <div style={{ fontSize: 12, color: 'var(--ink-soft)' }}>{item.date}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* WhatsApp overlay */}
+      {showWA && wa && (
+        <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.58)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 200 }}
+          onClick={() => setShowWA(false)}>
+          <div style={{ width: 340, background: '#e5ddd5', borderRadius: 14, overflow: 'hidden', boxShadow: '0 24px 64px rgba(0,0,0,0.45)' }}
+            onClick={e => e.stopPropagation()}>
+            {/* Header WhatsApp */}
+            <div style={{ background: '#075e54', padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 12 }}>
+              <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#128c7e', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 15, fontWeight: 700, color: 'white', flexShrink: 0 }}>
+                {(wa.contact || '?')[0]}
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ color: 'white', fontWeight: 600, fontSize: 14 }}>{wa.contact}</div>
+                <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: 11 }}>{wa.subtitle || ''}</div>
+              </div>
+              <button onClick={() => setShowWA(false)} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.75)', fontSize: 18, cursor: 'pointer', padding: '2px 6px', lineHeight: 1 }}>✕</button>
+            </div>
+            {/* Messages */}
+            <div style={{ maxHeight: 370, overflowY: 'auto', padding: '10px 10px 14px', display: 'flex', flexDirection: 'column', gap: 5 }}>
+              {(wa.messages || []).map((msg, i) => {
+                const isMe = msg.side === 'right';
+                return (
+                  <div key={i} style={{ display: 'flex', justifyContent: isMe ? 'flex-end' : 'flex-start' }}>
+                    <div style={{ maxWidth: '80%', background: isMe ? '#dcf8c6' : 'white', borderRadius: isMe ? '12px 2px 12px 12px' : '2px 12px 12px 12px', padding: '7px 10px 4px', boxShadow: '0 1px 2px rgba(0,0,0,0.1)' }}>
+                      {!isMe && <div style={{ fontSize: 11, fontWeight: 700, color: '#075e54', marginBottom: 2 }}>{msg.from}</div>}
+                      <div style={{ fontSize: 13, color: '#303030', lineHeight: 1.45 }}>{msg.text}</div>
+                      <div style={{ fontSize: 10, color: '#8c8c8c', textAlign: 'right', marginTop: 3 }}>{msg.time}{isMe ? ' ✓✓' : ''}</div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
