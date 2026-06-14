@@ -94,7 +94,7 @@ function VoiceApp() {
               ▶ Appuie sur lecture pour entendre l'entretien.<br /><span style={{ fontSize: 11 }}>(la transcription apparaîtra au fil de l'écoute)</span>
             </div>
           ) : (
-            <div style={voiceStyles.transcriptText}>«&nbsp;{displayTranscript}{playing && '▌'}{position >= selected.durationSec && '&nbsp;»'}</div>
+            <div style={voiceStyles.transcriptText}>«&nbsp;{displayTranscript}{playing && '▌'}{position >= selected.durationSec && '\u00A0»'}</div>
           )}
         </div>
       </div>
