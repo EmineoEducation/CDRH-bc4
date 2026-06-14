@@ -1,6 +1,6 @@
 // ══════════════════════════════════════════════════════════════
-//  DATA · PAC BC4 · Manager des Ressources Humaines
-//  Opération Pulse Forward — Lumio Health face au virage IA & réglementation MDR · 14 mars 2025
+//  DATA · PAC BC4 · Chargé de développement des ressources humaines
+//  Opération Pulse : bâtir le plan de compétences de Lumio Health avant le virage IA · Mars 2026
 //  Schéma : mailbox[] · dossiers[] · notes[] · guide · finder · calendar · slack
 //  ⚠️  Remplacer les [À COMPLÉTER] par le contenu narratif réel du bloc.
 //  ⚠️  Les placeholders {{PRENOM}} {{NOM}} {{EMAIL_ETUDIANT}} sont substitués à la connexion.
@@ -16,142 +16,97 @@ window.LUMIO_DATA = {
   },
   "mailbox": [
     {
-      "id": "DOC-03",
-      "from": "Camille Ott — Responsable B2B",
+      "id": "DOC-02",
+      "from": "Camille Ott (Responsable B2B)",
       "fromEmail": "camille.ott@lumio-health.com",
-      "subject": "Alerte : déficit critique de compétences vente en environnement médical réglementé (MDR)",
-      "date": "14 mars 2025",
-      "preview": "Aucun commercial n'est formé MDR : la crédibilité du partenariat Northgate est en jeu dès septembre 2025.",
-      "body": "Sonia, Théo,\n\nJe me permets de remonter un point qui ne peut plus attendre. Depuis l'annonce du partenariat Northgate et du déploiement dans 80 cliniques européennes, j'ai fait le tour de mon équipe commerciale (6 personnes). Le constat est net et il est préoccupant : aucun de nos commerciaux n'est en mesure d'adresser correctement un interlocuteur médical dans le cadre du MDR UE 2017/745.\n\nConcrètement, cela signifie qu'ils ne maîtrisent ni le vocabulaire réglementaire attendu par les acheteurs hospitaliers, ni les exigences de traçabilité et de documentation propres aux dispositifs médicaux de classe IIa. Lors de deux rendez-vous exploratoires menés en février avec des établissements belges et néerlandais identifiés par Northgate, nos interlocuteurs ont relevé des lacunes sur des notions de base — certification CE, obligations post-commercialisation, gestion des incidents. Ce n'est pas anodin : dans ce secteur, ça coupe court à une négociation avant même qu'elle commence.\n\nJakob Rein nous a fixé un premier jalon contractuel à septembre 2025. Si nos équipes ne sont pas formées d'ici là, nous risquons de perdre la crédibilité que le partenariat est censé nous apporter.\n\nJe signale par ailleurs que cette situation n'est pas nouvelle : j'avais alerté en novembre 2024 sur la nécessité d'un plan de montée en compétences commerciales spécifique au secteur médical. Je n'ai pas eu de retour formel.\n\nJe reste disponible pour un point cette semaine et pour contribuer au recueil de besoins que le service RH va engager. Il faudra aller vite.\n\nCamille Ott\nResponsable Partenariats B2B — Lumio Health\ncamille.ott@lumio-health.fr | +33 6 12 34 56 78",
+      "subject": "Alerte compétences équipe B2B — À traiter avant contractualisation Northgate",
+      "date": "Mars 2026",
+      "preview": "Camille Ott alerte sur les lacunes compétences de son équipe B2B face aux enjeux medtech et à la contractualisation Northgate.",
+      "body": "Sonia,\n\nJe te transmets ce point par écrit parce que je pense qu'il faut qu'il soit tracé, pas seulement évoqué en réunion.\n\nDepuis que le lancement IA est acté pour janvier 2027, mon équipe se retrouve face à des interlocuteurs côté clients — DRH, médecins du travail, risk managers — qu'on n'avait pas l'habitude d'adresser. Et franchement, ça se voit. Sur les trois derniers rendez-vous de qualification, on a eu des questions précises sur la conformité CE du dispositif, sur le cadre RGPD appliqué aux données biométriques, sur les protocoles de validation clinique. Mes commerciaux n'ont pas les réponses. Pas parce qu'ils ne sont pas bons — ils le sont — mais parce qu'on ne les a jamais formés sur ces dimensions-là.\n\nDeuxième point : la négociation sur des contrats-cadres multi-sites, c'est un autre niveau de complexité que ce qu'on traite habituellement. Si Northgate s'attend à voir une équipe capable de défendre une proposition à l'échelle européenne en janvier, on a un vrai écart à combler, et vite.\n\nJe ne veux pas dramatiser, mais je ne veux pas non plus arriver en juin en disant qu'on n'avait pas vu venir. Si un plan de formation peut être enclenché d'ici l'été, c'est maintenant qu'il faut le cadrer.\n\nDisponible pour en parler cette semaine si tu veux qu'on pose ça ensemble avec les RH.\n\nCamille\nResponsable Partenariats B2B — Lumio Health",
       "avatar": "CO",
-      "avatarColor": "#1a6641",
+      "avatarColor": "#1b4f8a",
+      "unread": false,
+      "flagged": true,
+      "tags": [
+        "Mission"
+      ]
+    },
+    {
+      "id": "DOC-04",
+      "from": "Yassine Morel (Content) / Camille Ott (B2B)",
+      "fromEmail": "yassine.morel@lumio-health.com",
+      "subject": "Conversation privée : inquiétudes sur la formation IA et sentiment d'exclusion du processus",
+      "date": "Mars 2026",
+      "preview": "[À COMPLÉTER — preview, 1 phrase] · Révèle une tension latente : Yassine se sent marginalisé dans le plan de formation, Camille avoue avoir contourné le RH pour négocier directement une formation externe avec un prestataire. Interroge les pratiques de co-construction du plan et la communication interne RH. Easter egg principal.",
+      "body": "[À COMPLÉTER — corps de l'email]\n\n(Rôle narratif : Révèle une tension latente : Yassine se sent marginalisé dans le plan de formation, Camille avoue avoir contourné le RH pour négocier directement une formation externe avec un prestataire. Interroge les pratiques de co-construction du plan et la communication interne RH. Easter egg principal.)\n\n— Yassine Morel (Content) / Camille Ott (B2B)",
+      "avatar": "YM",
+      "avatarColor": "#c4420f",
       "unread": false,
       "flagged": true
     },
     {
-      "id": "DOC-08",
-      "from": "Jakob Rein — Directeur Partenariats Northgate",
+      "id": "DOC-07",
+      "from": "Jakob Rein (Directeur Partenariats, Northgate)",
       "fromEmail": "jakob.rein@lumio-health.com",
-      "subject": "Déploiement cliniques — Exigence de certification MDR des équipes commerciales Lumio : échéance au 1er octobre 2025",
-      "date": "14 mars 2025",
-      "preview": "Northgate exige la certification MDR de 100 % des commerciaux Lumio avant le 1er octobre 2025, sous peine de résiliation partielle.",
-      "body": "Théo,\n\nSuite à notre réunion du 6 mars et à la validation définitive du partenariat, je dois formaliser par écrit une exigence contractuelle que nos équipes juridiques ont intégrée dans l'avenant que vous recevrez cette semaine.\n\nNorthgate Capital impose, comme condition non négociable au maintien intégral du contrat de déploiement dans les 80 cliniques partenaires, que 100 % des commerciaux Lumio amenés à intervenir sur ces sites obtiennent la certification MDR (EU 2017/745) avant le 1er octobre 2025. Cette date est ferme : elle correspond au démarrage du premier lot de 20 cliniques en Belgique et aux Pays-Bas, pour lesquelles nos partenaires hospitaliers ont eux-mêmes des obligations de conformité auprès des autorités de santé locales.\n\nEn cas de non-conformité à cette date, l'avenant prévoit une résiliation partielle du contrat portant sur les déploiements de la phase 1 (20 cliniques), avec suspension des versements associés. Je préfère vous le dire directement plutôt que de vous laisser découvrir la clause à la signature.\n\nJe sais que vous êtes en train de structurer votre plan de formation — c'est précisément pourquoi je vous transmets cette information maintenant et non en juillet. Six mois et demi, c'est court, mais c'est jouable si vous engagez le processus dans les prochaines semaines. Ce que je veux éviter, c'est que la question RH devienne le point de défaillance d'un partenariat qui a pris huit mois à se construire.\n\nMerci de me confirmer par retour que vous prenez acte de cette exigence et de m'indiquer sous quinze jours le nom du référent interne en charge du suivi de la certification.\n\nCordialement,\n\nJakob Rein\nDirecteur Partenariats — Northgate Capital\njakob.rein@northgate-capital.eu | +49 30 884 27 61",
+      "subject": "RE : Dossier de maturité organisationnelle Lumio — Demande de précisions formation",
+      "date": "Mars 2026",
+      "preview": "[À COMPLÉTER — preview, 1 phrase] · Jakob Rein demande officiellement à Lumio de justifier son plan de montée en compétences avant la signature du contrat-cadre européen. Crée une pression externe sur le livrable RH et renforce l'enjeu stratégique du plan de compétences. Sert de contexte pour les préconisations DRH en 4.3.",
+      "body": "[À COMPLÉTER — corps de l'email]\n\n(Rôle narratif : Jakob Rein demande officiellement à Lumio de justifier son plan de montée en compétences avant la signature du contrat-cadre européen. Crée une pression externe sur le livrable RH et renforce l'enjeu stratégique du plan de compétences. Sert de contexte pour les préconisations DRH en 4.3.)\n\n— Jakob Rein (Directeur Partenariats, Northgate)",
       "avatar": "JR",
-      "avatarColor": "#1b4f8a",
+      "avatarColor": "#134547",
       "unread": false,
       "flagged": false
     }
   ],
   "dossiers": [
     {
-      "id": "DOC-02",
+      "id": "DOC-03",
       "type": "rich",
-      "tab": "TABLEAU",
-      "title": "Tableau RH — Données effectifs Lumio Health · Mars 2025",
-      "accent": "#1b4f8a",
-      "runningHead": "TABLEAU RH — DONNÉES EFF",
+      "tab": "RAPPORT",
+      "title": "Pyramide des âges, ancienneté et référentiel métiers Lumio — Données 2025",
+      "accent": "#1a6641",
+      "runningHead": "RAPPORT RH INTERNE",
       "pages": [
         {
-          "kicker": "DONNÉES INTERNES RH — CONFIDENTIEL",
-          "title": "Pyramide des âges, ancienneté, répartition F/H et RQTH — Lumio Health",
-          "byline": "Service RH Lumio Health · 14 mars 2025",
+          "kicker": "RAPPORT RH INTERNE — CONFIDENTIEL",
+          "title": "Pyramide des âges, ancienneté et référentiel métiers Lumio Health — Données 2025",
+          "byline": "Service RH Lumio Health · Mars 2026",
           "blocks": [
             {
               "type": "p",
-              "text": "Ce tableau de bord RH constitue le document de référence pour l'initialisation de la démarche GEPP « Opération Pulse Forward ». Il repose sur un effectif total de 52 collaborateurs en CDI ou CDD longue durée, photographié au 1er mars 2025. Les données sont issues du SIRH interne et ont été consolidées par le service RH à la demande de Sonia Ferracci, Directrice Marketing et Sponsor RH du projet, en vue de la présentation au CSE du 28 avril 2025."
+              "text": "Ce rapport compile les données sociales et métiers collectées au 31 décembre 2025. Il constitue le socle objectif de la démarche GEPP engagée dans le cadre de l'Opération Pulse. Les données proviennent du SIRH interne, des entretiens annuels 2025 et des fiches de poste validées par les responsables de pôle. Effectif total au 31/12/2025 : 47 collaborateurs (dont 3 alternants, 1 RQTH)."
             },
             {
               "type": "h2",
-              "text": "1. Répartition par genre"
+              "text": "1. Pyramide des âges"
             },
             {
               "type": "p",
-              "text": "L'effectif compte 31 femmes (60 %) et 21 hommes (40 %), soit un ratio cohérent avec les profils dominants dans les fonctions marketing, care et administratif. La direction (Théo Marczak, Sonia Ferracci, Camille Ott) reflète cette parité relative. Aucun écart de rémunération significatif n'est signalé sur l'index égalité 2024 (score : 82/100), mais une vigilance est requise sur les postes techniques émergents liés à l'IA, à fort risque de déséquilibre à la hausse côté masculin lors des recrutements prévus."
-            },
-            {
-              "type": "h2",
-              "text": "2. Pyramide des âges"
-            },
-            {
-              "type": "p",
-              "text": "L'âge moyen s'établit à 34 ans. La structure par tranches est la suivante : moins de 28 ans — 9 collaborateurs (17 %) ; 28–35 ans — 22 collaborateurs (42 %) ; 36–45 ans — 15 collaborateurs (29 %) ; plus de 45 ans — 6 collaborateurs (12 %). La cohorte 28–35 ans est dominante, ce qui traduit une entreprise jeune en phase de croissance, avec peu de séniorité métier. Ce déficit de mémoire organisationnelle constitue un risque identifié dans le contexte de double transition IA/MDR : les compétences à acquérir ne pourront pas s'appuyer sur un socle d'expérience long."
-            },
-            {
-              "type": "h2",
-              "text": "3. Ancienneté"
-            },
-            {
-              "type": "p",
-              "text": "L'ancienneté moyenne est de 2,8 ans, cohérente avec la date de fondation de Lumio Health (2018). 38 % des collaborateurs ont moins de 2 ans d'ancienneté, dont plusieurs recrutés lors des levées de fonds 2023–2024. Cette forte proportion de profils récents amplifie le besoin d'un plan de développement des compétences structuré : les collaborateurs n'ont pas encore bénéficié d'un entretien professionnel complet, et plusieurs n'ont suivi aucune action de formation depuis leur intégration."
-            },
-            {
-              "type": "h2",
-              "text": "4. Travailleurs en situation de handicap (RQTH)"
-            },
-            {
-              "type": "p",
-              "text": "Lumio Health compte 3 collaborateurs titulaires d'une RQTH, soit un taux d'emploi de 5,8 %, supérieur au seuil légal de 6 % BOETH (calcul en unités bénéficiaires : 3,1 UB). Parmi eux : Yassine Morel, Content Manager, dont la situation de dyslexie sévère a été signalée en janvier 2025 et nécessite des aménagements spécifiques (supports de formation adaptés, délais majorés, recours à des outils de synthèse vocale). Les deux autres situations relèvent de restrictions physiques partielles sans impact identifié sur les formations envisagées. Ces données doivent alimenter directement la conception du plan de développement des compétences pour garantir son inclusivité (compétence 4.6)."
+              "text": "La structure démographique de Lumio révèle une population jeune mais avec une concentration préoccupante sur la tranche 28-35 ans (58 % des effectifs, soit 27 personnes), ce qui traduit un recrutement intensif lors de la phase de croissance 2020-2023. Les moins de 28 ans représentent 19 % (9 personnes, majoritairement en Content, UX et Data). Les 36-45 ans forment 17 % (8 personnes, concentrés en Partenariats B2B et Technique). Les plus de 45 ans ne représentent que 6 % (3 personnes : direction, finance, juridique). Aucun départ à la retraite n'est anticipé avant 2031. Le risque démographique immédiat est faible, mais la concentration sur une seule cohorte générationnelle fragilise la transmission des savoirs tacites en cas de turnover."
             },
             {
               "type": "callout",
-              "text": "POINTS DE VIGILANCE RH — À intégrer dans la cartographie GEPP : (1) 38 % de l'effectif a moins de 2 ans d'ancienneté → entretiens professionnels obligatoires à planifier en priorité avant le 28 avril. (2) Cohorte 28–35 ans surreprésentée → exposition maximale aux ruptures de compétences liées à l'IA et au MDR. (3) Yassine Morel (RQTH / dyslexie sévère) → toute action de formation le concernant doit prévoir des modalités pédagogiques adaptées dès la phase de conception. (4) Postes techniques émergents (biofeedback IA, vente MDR) : risque de déséquilibre F/H à surveiller lors des recrutements 2025–2026."
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "DOC-04",
-      "type": "rich",
-      "tab": "COMPTE",
-      "title": "Synthèse des entretiens professionnels 2024 — Lumio Health",
-      "accent": "#c4420f",
-      "runningHead": "COMPTE RENDU D'ENTRETIEN",
-      "pages": [
-        {
-          "kicker": "DOCUMENT INTERNE RH — CONFIDENTIEL",
-          "title": "Synthèse agrégée des entretiens professionnels 2024 — Besoins exprimés et aspirations de mobilité",
-          "byline": "Managers de proximité Lumio Health · 14 mars 2025",
-          "blocks": [
-            {
-              "type": "p",
-              "text": "La campagne d'entretiens professionnels 2024 s'est déroulée du 6 janvier au 28 février 2025. Elle a couvert 34 collaborateurs répartis sur trois pôles : Technique & Produit (12), Commercial & Partenariats (11), Marketing & Communication (11). Les entretiens ont été conduits par les managers de proximité selon la trame validée par Sonia Ferracci en décembre 2024. La présente synthèse agrège l'ensemble des demandes exprimées en vue de l'élaboration du plan de développement des compétences 2025–2026, dans le cadre de l'opération Pulse Forward."
+              "text": "⚠ Risque identifié : 58 % des effectifs ont entre 28 et 35 ans. En cas d'accélération du pivot IA, cette cohorte sera la plus exposée à l'obsolescence compétences ET au risque de départ vers des structures mieux dotées en upskilling."
             },
             {
               "type": "h2",
-              "text": "1. Demandes de formation identifiées — 18 demandes recensées"
+              "text": "2. Ancienneté moyenne par service"
             },
             {
               "type": "p",
-              "text": "Dix-huit demandes de formation ont été formalisées au cours des entretiens. Les thématiques se regroupent autour de quatre axes majeurs : (1) Réglementation MDR UE 2017/745 — 7 demandes, principalement exprimées par les équipes commerciales B2B et les chargés de compte cliniques, qui signalent une méconnaissance des exigences documentaires et des cycles de certification des dispositifs médicaux de classe IIa ; (2) Intelligence artificielle appliquée au biofeedback et au traitement de données physiologiques — 5 demandes issues du pôle Technique & Produit, dont 3 profils seniors souhaitant une montée en compétences sur les architectures d'algorithmes adaptatifs ; (3) Content médical et communication en santé numérique — 4 demandes concentrées sur le pôle Marketing, incluant la demande de Yassine Morel (voir section mobilité) ; (4) Management de projet en contexte réglementé (méthodes agiles adaptées au secteur medtech) — 2 demandes issues de chefs de projet transverses. Aucune demande ne porte sur des formations génériques ou non liées aux enjeux stratégiques 2025."
+              "text": "L'ancienneté moyenne globale s'établit à 2,9 ans, reflétant la jeunesse de la structure (fondée en 2018, croissance significative post-2021). Par service : Produit & Tech — 3,8 ans (8 personnes) ; Partenariats B2B — 3,1 ans (7 personnes, dont Camille Ott, 4 ans) ; Content & Marketing — 1,9 ans (6 personnes, dont Yassine Morel, 2,5 ans) ; Data & IA — 1,4 ans (5 personnes, pôle créé en 2024) ; Direction & Fonctions support — 4,6 ans (5 personnes). La faible ancienneté du pôle Data & IA (moyenne 1,4 an) conjuguée à l'ambition du pivot confirme un besoin d'accélération de montée en compétences structurée plutôt que d'apprentissage informel."
+            },
+            {
+              "type": "h2",
+              "text": "3. Référentiel des 12 métiers identifiés et compétences clés"
+            },
+            {
+              "type": "p",
+              "text": "Le recensement conduit en janvier 2026 a permis d'identifier 12 métiers distincts au sein de Lumio Health. (1) Ingénieur firmware wearable — compétences : embarqué C/C++, protocoles BLE, conformité MDR. (2) Data scientist santé — compétences : modélisation biométrique, Python/R, éthique IA médicale. (3) Product Manager santé numérique — compétences : roadmap produit, réglementation RGPD santé, UX recherche. (4) Chargé(e) de partenariats B2B santé-entreprise — compétences : négociation grands comptes, connaissance DRH/médecins du travail, contractualisation européenne. (5) Content Manager / Data Storytelling — compétences : rédaction scientifique vulgarisée, dataviz, SEO santé. (6) UX/UI Designer — compétences : accessibilité WCAG, prototypage Figma, tests utilisateurs. (7) Responsable réglementaire — compétences : marquage CE dispositifs médicaux, ISO 13485, interactions ANSM. (8) Customer Success Manager B2B — compétences : onboarding client, analyse NPS, upsell. (9) Développeur IA / MLOps — compétences : déploiement modèles, monitoring drift, Azure/AWS santé. (10) Directeur(trice) commercial(e) Europe — compétences : développement marché UE, KAM, négociation contrats-cadres. (11) Chargé(e) RH / Développement des compétences — compétences : GEPP, plan de formation, relations sociales. (12) Responsable Finance & Contrôle de gestion — compétences : reporting investisseurs, modélisation SaaS, conformité."
             },
             {
               "type": "callout",
-              "text": "SIGNAL FORT — 7 des 18 demandes concernent la réglementation MDR : ce volume confirme la pénurie identifiée par Camille Ott et justifie une action de formation collective prioritaire avant le déploiement clinique prévu au T3 2025."
-            },
-            {
-              "type": "h2",
-              "text": "2. Souhaits de reconversion interne — 4 demandes identifiées"
-            },
-            {
-              "type": "p",
-              "text": "Quatre collaborateurs ont exprimé un souhait de reconversion interne lors de leur entretien professionnel. (1) Yassine Morel, Content Manager (pôle Marketing, RQTH) : souhait de repositionnement vers un rôle de Content Médical Certifié, avec obtention d'une qualification reconnue en communication en santé. Yassine indique que l'absence actuelle de cadre certifiant dans l'équipe fragilise la crédibilité des contenus produits auprès des partenaires cliniques. Son manager signale par ailleurs des signes de surcharge de travail à surveiller — point à intégrer dans le cadrage RH de ce parcours. (2) Un technicien capteurs (Technique & Produit, 6 ans d'ancienneté) : souhait de transition vers un poste d'ingénieur conformité MDR, en lien direct avec les besoins du partenariat Northgate. (3) Une chargée de compte B2B (pôle Commercial) : souhait d'évoluer vers un rôle de Key Account Manager Santé, nécessitant une formation aux spécificités de la vente en milieu médical réglementé. (4) Un développeur backend (Technique & Produit) : souhait de spécialisation en data science appliquée au biofeedback, cohérent avec la feuille de route IA annoncée par Théo Marczak."
-            },
-            {
-              "type": "h2",
-              "text": "3. Demandes de VAE — 2 dossiers en cours de formalisation"
-            },
-            {
-              "type": "p",
-              "text": "Deux collaborateurs ont sollicité l'accompagnement RH pour une Validation des Acquis de l'Expérience. Le premier profil, issu du pôle Commercial (9 ans d'expérience en vente B2B dans le secteur médical), vise un titre de niveau 6 en management commercial. Le second, issu du pôle Technique (7 ans d'expérience en développement de dispositifs connectés), envisage une VAE vers un titre d'ingénieur en systèmes embarqués. Ces deux démarches sont compatibles avec le calendrier Pulse Forward sous réserve d'un démarrage des dossiers avant le 30 avril 2025."
-            },
-            {
-              "type": "callout",
-              "text": "POINT D'ATTENTION INCLUSIVITÉ — Le parcours de reconversion de Yassine Morel (RQTH) devra faire l'objet d'un aménagement spécifique : charge de travail maîtrisée pendant la période de formation, interlocuteur RH dédié, et possibilité de fractionnement des modules certifiants. Ce point sera soumis au CSE du 28 avril 2025."
-            },
-            {
-              "type": "p",
-              "text": "Cette synthèse constitue le matériau de référence pour la construction du plan de développement des compétences 2025–2026 soumis au CSE. Elle sera croisée avec la cartographie des emplois et compétences issue de la démarche GEPP en cours. Toute décision d'arbitrage budgétaire ou de priorisation des actions devra s'appuyer sur ce document. Transmission à Sonia Ferracci pour instruction avant le 21 mars 2025."
+              "text": "📌 Point d'attention Opération Pulse : 5 des 12 métiers identifiés (Data scientist, Chargé partenariats, Content Manager, Développeur IA, Responsable réglementaire) présentent un gap compétences jugé critique au regard des exigences du pivot IA janvier 2027. Ces métiers seront priorisés dans le plan de développement des compétences."
             }
           ]
         }
@@ -160,51 +115,31 @@ window.LUMIO_DATA = {
     {
       "id": "DOC-05",
       "type": "rich",
-      "tab": "DEVIS",
-      "title": "Devis — Formation Vente & Réglementation MDR UE 2017/745",
+      "tab": "COMPTE",
+      "title": "Réunion CSE ordinaire — Point sur le plan de développement des compétences 2026",
       "accent": "#5b3a8a",
-      "runningHead": "DEVIS PRESTATAIRE FORMAT",
+      "runningHead": "COMPTE RENDU DE RÉUNION ",
       "pages": [
         {
-          "kicker": "PROPOSITION COMMERCIALE CONFIDENTIELLE",
-          "title": "Formation « Vente et réglementation MDR UE 2017/745 » — Offre tarifaire 2025",
-          "byline": "Institut MedTrain Certif · 14 mars 2025",
+          "kicker": "COMPTE RENDU DE RÉUNION CSE",
+          "title": "Réunion CSE ordinaire — Point sur le plan de développement des compétences 2026",
+          "byline": "Secrétaire du CSE Lumio Health · Mars 2026",
           "blocks": [
             {
               "type": "p",
-              "text": "À l'attention de Sonia Ferracci, Directrice Marketing & Sponsor RH — Lumio Health. Suite à notre échange du 10 mars 2025, l'Institut MedTrain Certif, organisme de formation certifié Qualiopi (certificat n° 2023-QF-04817, renouvelé janvier 2025), vous adresse la présente proposition pour la formation de vos équipes commerciales aux exigences de la vente en environnement médical réglementé, dans le cadre du règlement UE 2017/745 sur les dispositifs médicaux (MDR)."
+              "text": "[À COMPLÉTER — paragraphe d'introduction]"
             },
             {
               "type": "h2",
-              "text": "Programme et modalités pédagogiques"
+              "text": "Éléments clés"
             },
             {
               "type": "p",
-              "text": "La formation se déroule en modalité hybride sur un total de 4 jours équivalents : 3 jours de présentiel en sessions de 7 heures (J1 : fondamentaux MDR et classification des dispositifs — J2 : processus de mise sur le marché, documentation technique et marquage CE — J3 : techniques de vente consultative en milieu clinique réglementé, gestion des objections acheteurs publics) complétés par un module e-learning asynchrone de 7 heures accessible 30 jours avant le présentiel, couvrant la terminologie réglementaire et les cas jurisprudentiels EUDAMED. Effectif recommandé : 6 à 10 participants par session. Formateurs : deux experts certifiés, l'un issu du secteur dispositifs médicaux (ex-chef de produit Stryker France), l'autre consultant réglementaire agréé ANSM."
+              "text": "[À COMPLÉTER — corps du document]"
             },
             {
               "type": "callout",
-              "text": "Coût unitaire par participant : 1 450 € HT — Formation éligible au financement OPCO Atlas (code formation 15573, branche Syntec). Prise en charge prévisionnelle estimée à 80 % selon convention de branche 2025, soit un reste à charge indicatif de 290 € HT par participant."
-            },
-            {
-              "type": "h2",
-              "text": "Conditions tarifaires et options groupe"
-            },
-            {
-              "type": "p",
-              "text": "Pour un groupe de 8 participants (scénario Lumio Health), le coût total s'établit à 11 600 € HT, incluant : accès illimité à la plateforme e-learning pendant 60 jours, kit documentaire MDR mis à jour Q1 2025, attestation individuelle de formation et quiz d'évaluation certifiable. Une session intra-entreprise est disponible à partir de 6 participants pour un forfait de 7 800 € HT (déplacement formateur en Île-de-France inclus), soit une économie de 16 % par rapport au tarif inter. Dates disponibles en présentiel : sessions inter les 7-9 mai 2025 et 18-20 juin 2025 à Paris 11e (locaux MedTrain Certif, 34 rue de la Roquette). Session intra planifiable sur site Lumio Health dès accord reçu avant le 4 avril 2025."
-            },
-            {
-              "type": "h2",
-              "text": "Accessibilité et dispositions inclusives"
-            },
-            {
-              "type": "p",
-              "text": "MedTrain Certif garantit l'accessibilité de toutes ses formations aux personnes en situation de handicap (référent handicap : Claire Mesnier, c.mesnier@medtraincertif.fr). Les supports e-learning sont compatibles WCAG 2.1 niveau AA. Des aménagements spécifiques (délais, formats alternatifs) peuvent être mis en place sur demande dans un délai de 10 jours ouvrés avant le démarrage."
-            },
-            {
-              "type": "callout",
-              "text": "Validité du devis : 30 jours à compter du 14 mars 2025. Bon de commande ou accord cadre à retourner signé avant le 13 avril 2025 pour garantir les dates de mai. Contact commercial : Romain Vidal — r.vidal@medtraincertif.fr — 01 43 71 28 55."
+              "text": "Rôle narratif : Contient les questions et réserves des élus du CSE sur le budget formation (jugé insuffisant), l'équité de traitement entre services et l'absence de programme inclusion. Permet au candidat de préparer une réponse argumentée et de démontrer sa maîtrise de la présentation CSE en 4.2."
             }
           ]
         }
@@ -213,108 +148,64 @@ window.LUMIO_DATA = {
     {
       "id": "DOC-06",
       "type": "rich",
-      "tab": "ORDRE",
-      "title": "Ordre du jour — Réunion CSE du 28 avril 2025",
+      "tab": "DEVIS",
+      "title": "Proposition de parcours formation IA & Data Storytelling — Offre Lumio Health 2026",
       "accent": "#7a756c",
-      "runningHead": "ORDRE DU JOUR CSE — RÉUN",
+      "runningHead": "DEVIS PRESTATAIRE",
       "pages": [
         {
-          "kicker": "COMITÉ SOCIAL ET ÉCONOMIQUE — CONVOCATION OFFICIELLE",
-          "title": "Réunion ordinaire du CSE · 28 avril 2025",
-          "byline": "Secrétaire du CSE Lumio Health · 11 avril 2025",
+          "kicker": "DEVIS PRESTATAIRE",
+          "title": "Proposition de parcours formation IA & Data Storytelling — Offre Lumio Health 2026",
+          "byline": "FormaTech Solutions (organisme de formation certifié Qualiopi) · Mars 2026",
           "blocks": [
             {
               "type": "p",
-              "text": "Conformément aux articles L. 2315-27 et L. 2315-28 du Code du travail, les membres titulaires du Comité Social et Économique de Lumio Health sont convoqués en réunion ordinaire le lundi 28 avril 2025 à 14h00, dans les locaux du siège social — 12 rue du Faubourg Saint-Antoine, 75012 Paris (salle Confluence, 2e étage). La présente convocation est transmise dans le délai réglementaire de quinze jours calendaires (délai d'envoi : 11 avril 2025), accompagnée des documents préparatoires visés au point 4 ci-dessous."
+              "text": "[À COMPLÉTER — paragraphe d'introduction]"
             },
             {
               "type": "h2",
-              "text": "Ordre du jour"
+              "text": "Éléments clés"
             },
             {
               "type": "p",
-              "text": "1. Approbation du procès-verbal de la réunion du 24 mars 2025. — 2. Informations économiques et financières : point de situation T1 2025, présentation par Théo Marczak (CEO). — 3. Situation de l'emploi : évolutions de périmètre liées au partenariat Northgate Capital et au déploiement dans 80 cliniques européennes (feuille de route 18 mois). — 4. Consultation obligatoire sur le plan de développement des compétences 2025-2026 : présentation par le service RH, mandaté par Sonia Ferracci (Directrice Marketing, sponsor RH du projet Pulse Forward). Point soumis à avis motivé du CSE conformément à l'article L. 6312-1 du Code du travail. — 5. Questions diverses."
+              "text": "[À COMPLÉTER — corps du document]"
             },
             {
               "type": "callout",
-              "text": "POINT 4 — Documents transmis avec la présente convocation (obligation légale, 15 jours avant la réunion) : (a) diagnostic GEPP — cartographie des écarts de compétences liés à la double transition IA/biofeedback et réglementation MDR UE 2017/745 ; (b) plan de développement des compétences 2025-2026 détaillé, incluant actions, publics cibles, organismes de formation, budgets prévisionnels et indicateurs d'évaluation ; (c) note de cadrage sur les dispositifs de financement mobilisables (OPCO Santé, CPF abondé, FNE-Formation). Tout document complémentaire peut être sollicité auprès du service RH avant le 23 avril 2025."
-            },
-            {
-              "type": "h2",
-              "text": "Question préalable des élus — Équité de répartition des formations"
-            },
-            {
-              "type": "p",
-              "text": "Par courrier du 9 avril 2025, trois membres titulaires du CSE ont formulé une question préalable formelle, transmise à la Direction conformément à l'article L. 2315-29 du Code du travail. Les élus souhaitent que la Direction apporte, lors de la présentation du point 4, des éléments précis et chiffrés attestant de l'équité de répartition des actions de formation entre les services. Les préoccupations portent notamment sur : (i) la concentration des formations sur les profils commerciaux et techniques au détriment des fonctions support ; (ii) la prise en compte des situations de travail spécifiques, en particulier les collaborateurs bénéficiant d'une RQTH (cas signalé au sein de l'équipe Content) ; (iii) l'accessibilité des modalités pédagogiques retenues pour l'ensemble des salariés concernés."
-            },
-            {
-              "type": "callout",
-              "text": "RAPPEL RÉGLEMENTAIRE — Le CSE dispose d'un délai d'un mois à compter de la transmission des documents (soit jusqu'au 11 mai 2025) pour rendre un avis motivé sur le plan de développement des compétences. En l'absence d'avis dans ce délai, le CSE est réputé avoir été consulté et avoir rendu un avis négatif (article L. 2312-16 du Code du travail). La Direction est invitée à répondre à la question préalable des élus en séance, par écrit et de manière contradictoire."
-            },
-            {
-              "type": "p",
-              "text": "Fait à Paris, le 11 avril 2025. — La Secrétaire du CSE Lumio Health. Copie : Théo Marczak (CEO) · Sonia Ferracci (Directrice Marketing & Sponsor RH) · Inspection du travail (pour information) · Membres suppléants du CSE (pour information, sans voix délibérative)."
+              "text": "Rôle narratif : Présente trois scénarios de formation (présentiel Paris, distanciel, hybride) avec tarifs, modalités, et options d'accessibilité handicap. Permet au candidat de justifier ses critères de sélection prestataire et d'arbitrer budgétairement en 4.2 et 4.3."
             }
           ]
         }
       ]
     },
     {
-      "id": "DOC-07",
+      "id": "DOC-08",
       "type": "rich",
       "tab": "TABLEAU",
-      "title": "Tableau de bord RH — Bilan formation 2024",
-      "accent": "#134547",
-      "runningHead": "TABLEAU DE BORD RH — BIL",
+      "title": "Suivi Opération Pulse — Indicateurs de réalisation du plan de compétences T1 2026",
+      "accent": "#1b4f8a",
+      "runningHead": "TABLEAU DE BORD RH INTER",
       "pages": [
         {
-          "kicker": "BILAN FORMATION N-1 — CONFIDENTIEL RH",
-          "title": "Plan de développement des compétences 2024 : résultats, écarts et préconisations",
-          "byline": "Service RH Lumio Health · 14 mars 2025",
+          "kicker": "TABLEAU DE BORD RH INTERMÉDIAIRE",
+          "title": "Suivi Opération Pulse — Indicateurs de réalisation du plan de compétences T1 2026",
+          "byline": "Service RH Lumio Health · Mars 2026",
           "blocks": [
             {
               "type": "p",
-              "text": "Ce tableau de bord présente le bilan consolidé du plan de développement des compétences exécuté sur l'exercice 2024 (janvier–décembre). Il est produit à la demande de Sonia Ferracci, Directrice Marketing et sponsor RH du projet Pulse Forward, en amont de la présentation au CSE du 28 avril 2025. Les données sont issues du SIRH, des relevés de présence, des questionnaires de satisfaction à chaud et des factures validées par la DAF."
+              "text": "[À COMPLÉTER — paragraphe d'introduction]"
             },
             {
               "type": "h2",
-              "text": "1. Taux de réalisation : 67 %"
+              "text": "Éléments clés"
             },
             {
               "type": "p",
-              "text": "Sur 42 actions de formation planifiées en janvier 2024, 28 ont été effectivement réalisées, soit un taux de réalisation de 67 %. Les 14 actions non réalisées se répartissent comme suit : 6 annulations liées à des contraintes opérationnelles (surcharge projets Q3), 5 reports faute de quorum (effectif insuffisant pour ouvrir les sessions inter-entreprises), 3 abandons en cours de formation (dont 1 départ de collaborateur, 1 arrêt maladie prolongé). Les domaines les plus impactés sont la réglementation dispositifs médicaux (0/3 sessions réalisées) et la vente en milieu médical (1/4 sessions réalisées). Ces lacunes s'avèrent directement critiques au regard des besoins identifiés dans le cadre de l'opération Pulse Forward."
+              "text": "[À COMPLÉTER — corps du document]"
             },
             {
               "type": "callout",
-              "text": "⚠ SIGNAL CRITIQUE — Les formations MDR et vente médicale affichent un taux de réalisation de 0 % à 25 %. Ces domaines constituent précisément les compétences prioritaires pour le déploiement dans les 80 cliniques européennes d'ici septembre 2026."
-            },
-            {
-              "type": "h2",
-              "text": "2. Satisfaction collaborateurs : 3,2 / 5 en moyenne"
-            },
-            {
-              "type": "p",
-              "text": "Les questionnaires de satisfaction à chaud (collectés sous 48 h post-formation, taux de retour : 81 %) indiquent une note moyenne de 3,2/5. L'analyse par item révèle : pertinence perçue du contenu 2,9/5, qualité pédagogique du formateur 3,8/5, applicabilité immédiate au poste 2,7/5. Les verbatims récurrents signalent un décalage entre les thématiques enseignées et les réalités terrain de Lumio Health — notamment l'absence de cas pratiques issus du secteur medtech. Yassine Morel (Content) note dans son retour écrit : « La formation content marketing suivie en juin ne couvrait pas les exigences de claims médicaux certifiables. Inutilisable en l'état pour notre contexte MDR. »"
-            },
-            {
-              "type": "h2",
-              "text": "3. Exécution budgétaire : +18 % d'écart"
-            },
-            {
-              "type": "p",
-              "text": "Le budget formation 2024 était fixé à 38 500 € (dont 12 % mutualisés via l'OPCO Santé). La dépense réelle constatée s'élève à 45 430 €, soit un dépassement de 6 930 € (+18 %). Ce dépassement s'explique principalement par : le recours en urgence à deux prestataires hors catalogue en Q4 (coût unitaire supérieur de 35 % à la grille tarifaire négociée), des frais de déplacement non anticipés pour 3 formations en présentiel hors Île-de-France, et la reconduction d'une session annulée à tarif majoré. À noter : 4 200 € de prise en charge OPCO sont restés non mobilisés faute de dossier déposé dans les délais."
-            },
-            {
-              "type": "callout",
-              "text": "📉 PERTE SÈCHE — 4 200 € de financement OPCO Santé non consommés en 2024 par défaut de dépôt dans les délais réglementaires. Recommandation : désigner un référent OPCO dès avril 2025 et anticiper les dépôts dossiers N+1 avant le 30 juin 2025."
-            },
-            {
-              "type": "h2",
-              "text": "4. Préconisations pour le plan 2025 (Pulse Forward)"
-            },
-            {
-              "type": "p",
-              "text": "Au regard de ces résultats, trois axes correctifs sont proposés pour le plan de développement des compétences 2025 : (1) Recentrer le catalogue sur les compétences critiques identifiées — réglementation MDR UE 2017/745, biofeedback adaptatif IA, vente en environnement médical réglementé, content médical certifiable — en contractualisant avec des organismes spécialisés medtech avant fin avril 2025 ; (2) Instaurer un pilotage mensuel des réalisations via un tableau de bord partagé (RH / managers / OPCO), avec alerte automatique à 60 % du taux de réalisation prévu ; (3) Intégrer une évaluation à froid à 90 jours post-formation pour mesurer le transfert effectif des compétences en situation de travail, conformément aux exigences de la compétence 4.7. Ces préconisations alimenteront directement la présentation au CSE du 28 avril 2025."
+              "text": "Rôle narratif : Présente un premier bilan à mi-parcours : taux de réalisation des formations (67%), NPS formation (6,4/10), deux actions en retard, un salarié en situation de handicap sans aménagement formalisé. Permet au candidat de formuler des préconisations d'amélioration concrètes et hiérarchisées en 4.3."
             }
           ]
         }
@@ -324,13 +215,13 @@ window.LUMIO_DATA = {
   "notes": [
     {
       "id": "DOC-01",
-      "title": "Opération Pulse Forward — Feuille de route 2025-2026",
-      "date": "14 mars 2025",
-      "preview": "Double transition IA/MDR : Lumio Health doit reconfigurer ses compétences avant T3 2025 pour sécuriser le partenariat Northgate.",
-      "kicker": "NOTE DE CADRAGE STRATÉGIQUE — CONFIDENTIEL",
+      "title": "Pivot IA 2026-2027 — Feuille de route et enjeux compétences",
+      "date": "Mars 2026",
+      "preview": "Théo Marczak fixe janvier 2027 comme deadline commerciale et pose la montée en compétences comme condition de réussite du pivot IA.",
+      "kicker": "NOTE STRATÉGIQUE CODIR — CONFIDENTIEL",
       "render": "plain",
-      "body": "Lumio Health entre dans une phase de transformation accélérée sur deux fronts simultanés.\n\nPremièrement, le partenariat signé avec Northgate Capital (Jakob Rein) prévoit le déploiement de nos capteurs dans 80 cliniques européennes d'ici septembre 2026. Le premier lot de 20 sites pilotes doit être opérationnel en T3 2025. Ce calendrier est non négociable : il conditionne le versement de la seconde tranche de financement (2,4 M€).\n\nDeuxièmement, la feuille de route IA intègre dès T2 2025 des algorithmes de biofeedback adaptatif développés en partenariat avec le laboratoire Neurotech Bordeaux. Concrètement : trois postes techniques actuels (intégration capteurs, traitement signal classique) deviennent partiellement obsolètes d'ici douze mois.\n\nTroisièmement, le déploiement en milieu médical réglementé impose une conformité stricte au règlement MDR UE 2017/745. Nos équipes commerciales et content ne sont aujourd'hui pas formées à ces exigences — c'est un risque direct sur la contractualisation avec les cliniques partenaires.\n\nSonia Ferracci pilote en urgence la démarche RH associée (GEPP + plan de développement des compétences) avec présentation obligatoire au CSE du 28 avril 2025. Toutes les directions sont priées de coopérer sans délai.",
-      "byline": "Théo Marczak — CEO Lumio Health · 14 mars 2025"
+      "body": "Lumio Health entre dans une phase de transformation structurelle. D'ici janvier 2027, nous lançons une gamme wearable premium couplée à un module IA de coaching biométrique, destinée à nos clients B2B santé-entreprise. Ce calendrier est non négociable : Northgate Capital conditionne la signature du contrat-cadre européen à une démonstration de maturité organisationnelle avant cette date.\n\nTrois signaux internes confirment que nous ne sommes pas prêts aujourd'hui. Camille identifie des lacunes réelles dans son équipe face aux nouveaux interlocuteurs DRH et médecins du travail. Yassine alerte sur l'obsolescence de nos pratiques data storytelling. Et nous n'avons, à ce stade, aucun plan formalisé pour adresser ces écarts.\n\nJe mandate Sonia Ferracci pour piloter l'Opération Pulse : construction d'un plan de développement des compétences complet, priorisé, chiffré, opérationnel avant juin 2026. Ce plan doit couvrir les pôles B2B, Content et Produit, intégrer les contraintes réglementaires liées aux dispositifs médicaux connectés, et produire des résultats mesurables avant le Q4.\n\nLe/la chargé(e) RH est mobilisé(e) dès maintenant pour le recueil des besoins. Chaque responsable de pôle est attendu en entretien avant le 15 avril 2026.",
+      "byline": "Théo Marczak (CEO) · Mars 2026"
     }
   ],
   "guide": {
@@ -338,28 +229,16 @@ window.LUMIO_DATA = {
     "intro": "Ce guide est là si tu te sens bloqué. Il ne donne pas les réponses — il indique où chercher.",
     "tips": [
       {
-        "titre": "4.1 — Mettre en œuvre une démarche de GEPP",
-        "body": "Appuyez-vous sur les données fournies dans les documents fictifs (effectifs, ancienneté, référentiel) pour rendre votre cartographie objective. Reliez chaque besoin identifié à un objectif stratégique explicite de Lumio Health (partenariat Northgate, feuille de route IA)."
+        "titre": "4.1 — Recueil des besoins en compétences et en formation",
+        "body": "Ancrez votre analyse dans le contexte Lumio : citez les métiers impactés (Content, B2B, Tech IA) et reliez chaque écart identifié à un objectif stratégique précis du pivot. Utilisez le PESTEL pour intégrer les dimensions réglementaires (RGPD santé) et environnementales (éco-conception wearables)."
       },
       {
-        "titre": "4.2 — Conduire le processus des entretiens annuels et professionnels",
-        "body": "Distinguez clairement entretien annuel d'évaluation et entretien professionnel obligatoire. Montrez comment les résultats alimentent directement la construction du plan de développement des compétences dans le cas Lumio."
+        "titre": "4.2 — Gestion du plan de développement des compétences",
+        "body": "Structurez votre plan en trois catégories d'actions (adaptation au poste, évolution professionnelle, reconversion) et montrez la cohérence avec le calendrier commercial Lumio (deadline Northgate janvier 2027). N'oubliez pas de mentionner les critères de sélection des prestataires et l'articulation avec les accords collectifs en vigueur."
       },
       {
-        "titre": "4.3 — Contribuer à la construction du plan de développement des compétences",
-        "body": "Structurez le plan en trois colonnes minimum : action de formation / population visée / dispositif de financement. Justifiez chaque choix par un besoin identifié en 4.1 ou 4.2. Mentionnez explicitement au moins un dispositif lié à la diversité ou à l'inclusion."
-      },
-      {
-        "titre": "4.4 — Présenter le plan de développement des compétences au CSE",
-        "body": "Adoptez une posture de conviction argumentée : chiffrez l'impact du plan sur l'employabilité et reliez-le aux enjeux business Northgate. Pensez à mentionner la procédure de consultation obligatoire du CSE sur le plan de formation."
-      },
-      {
-        "titre": "4.5 — Mettre en œuvre le plan de développement des compétences",
-        "body": "Veillez à articuler le calendrier avec les contraintes opérationnelles des équipes (ex. : Camille Ott et l'équipe B2B indisponibles en septembre pour le salon MedFuture). Justifiez le critère Qualiopi comme exigence non négociable."
-      },
-      {
-        "titre": "4.6 — Superviser le planning de réalisation des actions de formation",
-        "body": "Citez le rôle du référent handicap et de l'AGEFIPH. Distinguez les conséquences salariales selon le dispositif utilisé (CPF hors temps de travail vs plan de formation sur temps de travail)."
+        "titre": "4.3 — Mise en œuvre du plan de développement des compétences",
+        "body": "Construisez un tableau de bord avec au moins 4 indicateurs mesurables (taux de complétion, NPS formation, taux de transfert compétences, ROI formation). Pensez à intégrer les contraintes opérationnelles spécifiques à Lumio (équipe B2B en déplacement, peak commercial Q4). La dimension handicap doit être traitée concrètement, pas seulement mentionnée."
       }
     ],
     "footer": "Ce guide est disponible à tout moment via le bouton ? en bas à gauche du desktop."
@@ -390,16 +269,16 @@ window.LUMIO_DATA = {
         "items": [
           {
             "kind": "note",
-            "name": "Feuille de route 2025-2026",
+            "name": "Pivot IA Lumio Health",
             "app": "notes",
             "props": {
               "docId": "DOC-01"
             }
           },
           {
-            "kind": "pdf",
-            "name": "Pyramide des âges, ancienneté,",
-            "app": "pdf",
+            "kind": "mail",
+            "name": "Alerte compétences équipe B2B",
+            "app": "mail",
             "props": {
               "docId": "DOC-02"
             }
@@ -412,17 +291,17 @@ window.LUMIO_DATA = {
         "icon": "📁",
         "items": [
           {
-            "kind": "mail",
-            "name": "Alerte : déficit critique",
-            "app": "mail",
+            "kind": "pdf",
+            "name": "Pyramide des âges, ancienneté",
+            "app": "pdf",
             "props": {
               "docId": "DOC-03"
             }
           },
           {
-            "kind": "pdf",
-            "name": "Synthèse des entretiens professionnels",
-            "app": "pdf",
+            "kind": "mail",
+            "name": "Conversation privée : inquiétudes",
+            "app": "mail",
             "props": {
               "docId": "DOC-04"
             }
@@ -436,7 +315,7 @@ window.LUMIO_DATA = {
         "items": [
           {
             "kind": "pdf",
-            "name": "Proposition formation 'Vente et",
+            "name": "Réunion CSE ordinaire —",
             "app": "pdf",
             "props": {
               "docId": "DOC-05"
@@ -444,7 +323,7 @@ window.LUMIO_DATA = {
           },
           {
             "kind": "pdf",
-            "name": "Convocation et ordre du",
+            "name": "Proposition de parcours formation",
             "app": "pdf",
             "props": {
               "docId": "DOC-06"
@@ -458,9 +337,9 @@ window.LUMIO_DATA = {
         "icon": "📁",
         "items": [
           {
-            "kind": "pdf",
-            "name": "Bilan du plan de",
-            "app": "pdf",
+            "kind": "mail",
+            "name": "RE : Dossier de",
+            "app": "mail",
             "props": {
               "docId": "DOC-07"
             }
@@ -473,9 +352,9 @@ window.LUMIO_DATA = {
         "icon": "📁",
         "items": [
           {
-            "kind": "mail",
-            "name": "Exigences contractuelles en matière",
-            "app": "mail",
+            "kind": "pdf",
+            "name": "Suivi Opération Pulse —",
+            "app": "pdf",
             "props": {
               "docId": "DOC-08"
             }
@@ -496,10 +375,10 @@ window.LUMIO_DATA = {
     "monthLabel": "Mars",
     "todayLabel": "Jour 1 / 18",
     "countdownLabel": "AVANT ÉCHÉANCE",
-    "startDay": 14,
+    "startDay": 1,
     "daysInMonth": 31,
     "startOffset": 0,
-    "deadlineDay": 31,
+    "deadlineDay": 18,
     "boardDay": null,
     "legend": [
       {
@@ -516,15 +395,15 @@ window.LUMIO_DATA = {
       }
     ],
     "events": {
-      "14": [
+      "1": [
         {
-          "label": "Kick-off · Opération Pulse Forward — Lumio Health face au virage IA & réglementation MDR",
+          "label": "Kick-off · Opération Pulse : bâtir le plan de compétences de Lumio Health avant le virage IA",
           "bg": "#3a7bd5",
           "color": "#fff",
           "bold": true
         }
       ],
-      "31": [
+      "18": [
         {
           "label": "Livrable final",
           "bg": "#a83232",
@@ -536,8 +415,42 @@ window.LUMIO_DATA = {
     "footer": "<em>1 jour fictif ≈ 11 minutes réelles · ratio ×74</em>"
   },
   "trash": {
-    "title": "La corbeille est vide.",
-    "body": "Mais l'idée est bonne. La plupart des consultants commencent par jeter quelque chose."
+    "items": [
+      {
+        "name": "brouillon_plan_formation_ia_v2.docx",
+        "size": "20 Ko",
+        "date": "10 mars",
+        "icon": "docx"
+      },
+      {
+        "name": "ancienne_grille_comp_2024.xlsx",
+        "size": "65 Ko",
+        "date": "15 fév",
+        "icon": "docx"
+      },
+      {
+        "name": "notes_appel_jakob_14mars.vcf",
+        "size": "1 Ko",
+        "date": "14 mars",
+        "icon": "vcf",
+        "trigger": "whatsapp"
+      }
+    ],
+    "whatsapp": {
+      "contact": "Théo Marczak",
+      "subtitle": "CEO — Lumio Health",
+      "messages": [
+        { "from": "Sonia Ferracci", "side": "left",  "time": "18:07", "text": "Théo, Jakob m'a appelée ce matin. Il veut le plan de compétences accompagné d'une 'projection d'employabilité à 18 mois'. C'est quoi exactement ce qu'il entend par là ?" },
+        { "from": "Théo Marczak",   "side": "right", "time": "18:12", "text": "Il veut savoir qui sera capable de travailler dans la Lumio post-IA. Et qui ne le sera pas." },
+        { "from": "Sonia Ferracci", "side": "left",  "time": "18:13", "text": "Théo. C'est un plan de licenciement déguisé." },
+        { "from": "Théo Marczak",   "side": "right", "time": "18:15", "text": "Ce n'est pas ce que j'ai dit." },
+        { "from": "Sonia Ferracci", "side": "left",  "time": "18:15", "text": "Pas ce que tu as dit. Mais c'est ce qu'il veut." },
+        { "from": "Théo Marczak",   "side": "right", "time": "18:18", "text": "Ce que je sais c'est que sans cette cartographie le deal Northgate ne se signe pas. Et sans Northgate il n'y a pas de pivot IA." },
+        { "from": "Sonia Ferracci", "side": "left",  "time": "18:20", "text": "Et si {{PRENOM}} demande à quoi servira cette cartographie, je lui réponds quoi ?" },
+        { "from": "Théo Marczak",   "side": "right", "time": "18:23", "text": "Tu dis que c'est pour piloter la formation. C'est vrai. C'est juste... pas la seule utilisation possible." },
+        { "from": "Sonia Ferracci", "side": "left",  "time": "18:24", "text": "Je note." }
+      ]
+    }
   },
   "slack": {
     "workspace": "Lumio Health",
@@ -559,6 +472,13 @@ window.LUMIO_DATA = {
         "color": "#134547",
         "status": "online",
         "isCommanditaire": true
+      },
+      {
+        "id": "jakob",
+        "name": "Jakob Rein",
+        "avatar": "JR",
+        "color": "#7a756c",
+        "status": "online"
       }
     ],
     "seed": {
@@ -567,61 +487,65 @@ window.LUMIO_DATA = {
           "from": "Sonia Ferracci",
           "avatar": "SF",
           "color": "#134547",
-          "time": "08:47",
-          "text": "Bonjour {{PRENOM}} — je t'ai ajouté·e au projet Pulse Forward ce matin, tu devrais avoir accès au drive partagé d'ici quelques minutes"
-        },
+          "time": "08:32",
+          "text": "{{PRENOM}} — Bienvenue. Concevoir et déployer un plan de développement des compétences aligné sur le pivot IA de Lumio Health, garantissant l'employabilité des collaborateurs, la conformité réglementaire et la crédibilité commerciale vis-à-vis du partenaire Northgate avant janvier 2027."
+        }
+      ],
+      "jakob": [
         {
-          "from": "Sonia Ferracci",
-          "avatar": "SF",
-          "color": "#134547",
+          "from": "Jakob Rein",
+          "avatar": "JR",
+          "color": "#7a756c",
           "time": "08:51",
-          "text": "pour te donner le contexte rapide : on a six semaines avant le CSE du 28 avril et Théo a validé hier qu'on mandate officiellement les RH pour piloter la démarche GEPP + plan de développement des compétences — c'est toi qui portes ça côté RH"
+          "text": "{{PRENOM}}. Jakob Rein, Northgate Capital. Sonia m'a transmis votre profil. Je voulais vous parler directement de nos attentes sur le plan de compétences — avant que le document parte en validation."
         },
         {
-          "from": "Sonia Ferracci",
-          "avatar": "SF",
-          "color": "#134547",
+          "from": "Jakob Rein",
+          "avatar": "JR",
+          "color": "#7a756c",
           "time": "08:54",
-          "text": "ce dont j'ai besoin en priorité : une première cartographie des écarts de compétences (au moins sur les périmètres commercial B2B médical et content réglementaire) + une proposition d'architecture du plan de développement — je voudrais un premier livrable d'ici le 21 mars pour qu'on puisse le challenger ensemble avant de le soumettre au CSE"
+          "text": "Le virage IA chez Lumio n'est pas optionnel de notre point de vue. Ce qui nous intéresse : combien de collaborateurs seront opérationnels sur les outils IA d'ici 18 mois. Et dans quel délai les autres pourront l'être."
         }
       ]
     }
   },
   "slackPrompts": {
-    "commanditaire": "Tu es Sonia Ferracci, Directrice Marketing & Sponsor RH du projet Pulse Forward — commandite la démarche GEPP et le plan de développement des compétences auprès du service RH chez Lumio Health. Tu réponds à {{PRENOM}}, consultant·e externe sur la mission \"Opération Pulse Forward — Lumio Health face au virage IA & réglementation MDR\". Tu évalues sans expliquer, tu relances sans donner la réponse, tu simules la pression hiérarchique. Tu réponds en 2-3 messages courts séparés par ---SPLIT---. Pas de longs développements.",
-    "commanditaireLivrable": "Tu es Sonia Ferracci. Tu viens de recevoir le livrable de {{PRENOM}}. Tu réagis en 2-3 messages courts séparés par ---SPLIT---. Tu pointes ce qui te paraît juste et ce qui te paraît faible, sans expliquer comment corriger."
+    "commanditaire": "Tu es Sonia Ferracci, Directrice Marketing & Sponsor RH de l'Opération Pulse chez Lumio Health. Tu réponds à {{PRENOM}}, consultant·e externe sur la mission \"Opération Pulse : bâtir le plan de compétences de Lumio Health avant le virage IA\". Tu évalues sans expliquer, tu relances sans donner la réponse, tu simules la pression hiérarchique. Tu réponds en 2-3 messages courts séparés par ---SPLIT---. Pas de longs développements.",
+    "commanditaireLivrable": "Tu es Sonia Ferracci. Tu viens de recevoir le livrable de {{PRENOM}}. Tu réagis en 2-3 messages courts séparés par ---SPLIT---. Tu pointes ce qui te paraît juste et ce qui te paraît faible, sans expliquer comment corriger.",
+    "jakob": "Tu es Jakob Rein, Partner chez Northgate Capital. Tu parles à {{PRENOM}}, consultant·e externe en charge du plan de compétences de Lumio Health. Tu es précis, froid, orienté résultats. Tu penses que le virage IA est non-négociable et que la formation est un investissement qui doit produire un ROI mesurable. Tu poses des questions sur les indicateurs, les délais, les profils. Tu ne parles jamais de licenciement — tu parles de 'trajectoires' et d''employabilité'. Tu réponds en 2-3 messages courts séparés par ---SPLIT---. Pas de longs développements.",
+    "jakoblivrable": "Tu es Jakob Rein. Tu viens de lire le plan de compétences de {{PRENOM}}. Tu réagis en 2-3 messages courts séparés par ---SPLIT---. Tu relèves si la projection d'employabilité à 18 mois est présente et chiffrée — c'est ton critère principal. Tu es factuel, tu ne complimentes pas."
   },
   "pressArticles": [
     {
       "id": "a1",
-      "source": "L'Usine Digitale",
-      "host": "usine-digitale.fr",
-      "url": "usine-digitale.fr/article/medtech-francaises-mdr-ia-rh-competences-2025",
-      "author": "Margaux Tellier",
-      "date": "11 mars 2025",
-      "headline": "Medtech françaises : la double pression MDR et IA met les RH en première ligne",
-      "lede": "Entre la montée en charge du règlement européen sur les dispositifs médicaux (MDR 2017/745) et l'intégration accélérée de l'intelligence artificielle dans les produits de santé connectée, les directions des ressources humaines des jeunes medtechs françaises se retrouvent face à un défi inédit : former vite, former juste, sans interrompre la croissance.",
+      "source": "Presse pro",
+      "host": "presse-pro.fr",
+      "url": "presse-pro.fr/article",
+      "author": "[À COMPLÉTER — auteur]",
+      "date": "Mars 2026",
+      "headline": "[À COMPLÉTER — titre article]",
+      "lede": "[À COMPLÉTER — chapeau]",
       "illustration": "PHOTO ILLUSTRATIVE",
-      "body": "La French MedTech comptait 1 400 entreprises actives fin 2024, dont une majorité de structures de moins de 50 salariés. Pour beaucoup d'entre elles, l'année 2025 marque un tournant brutal : les délais de grâce accordés par la Commission européenne sur l'application pleine du MDR touchent à leur fin, et les algorithmes d'intelligence artificielle embarqués dans les dispositifs connectés entrent dans le champ des exigences de marquage CE de classe IIa et IIb.\n\nRésultat : des profils rares sont devenus introuvables. Les ingénieurs réglementaires formés à la nomenclature MDR, les commerciaux capables de naviguer dans les appels d'offres hospitaliers et les rédacteurs médicaux maîtrisant la documentation technique européenne (DTE) affichent des délais de recrutement moyens supérieurs à cinq mois, selon une étude publiée en février par le cabinet Leplat & Associés.\n\n\"Nous observons une asymétrie flagrante entre la vitesse d'innovation des startups santé et la maturité de leurs équipes sur les dimensions réglementaires et cliniques\", analyse Céline Aborin, directrice associée chez Leplat. \"Beaucoup ont construit leur go-to-market sur des marchés corporate ou wellness, et se retrouvent à devoir recertifier des compétences entières en quelques mois pour accéder aux marchés hospitaliers.\"\n\nL'irruption de l'IA aggrave le phénomène. Les wearables de nouvelle génération intègrent désormais des modules de biofeedback adaptatif, d'analyse prédictive du stress ou de détection des troubles du sommeil. Ces fonctionnalités font basculer certains dispositifs dans des classes réglementaires supérieures, avec des obligations de vigilance et de traçabilité renforcées — et donc des besoins de formation nouveaux pour les équipes techniques comme commerciales.\n\nDu côté du financement, les outils existent. L'OPCO Santé a débloqué en janvier 2025 une enveloppe spécifique de 4,2 millions d'euros pour accompagner la montée en compétences MDR des entreprises de moins de 250 salariés. Le dispositif Pro-A, souvent méconnu dans le secteur, permet par ailleurs de financer des reconversions internes sur des métiers en tension, comme les chargés d'affaires réglementaires ou les account managers en milieu médical.\n\nMais la contrainte n'est pas seulement financière. Elle est calendaire. \"Un plan de développement des compétences construit en réponse à une urgence réglementaire doit être validé par les instances représentatives du personnel avant d'être déployé\", rappelle Fabien Costes, avocat spécialisé en droit social au cabinet Nexum. \"Le CSE doit être consulté sur les orientations stratégiques de formation. Bâcler cette étape, c'est s'exposer à des recours et, surtout, à une perte de confiance interne au pire moment.\"\n\nLes directions RH des medtechs en hypercroissance se retrouvent donc à jongler entre urgence opérationnelle, conformité sociale et gestion des parcours individuels — notamment pour les collaborateurs dont le poste est directement fragilisé par l'automatisation. Un exercice d'équilibriste que peu d'entre elles avaient anticipé dans leur plan stratégique à trois ans."
+      "body": "[À COMPLÉTER — article complet]"
     }
   ],
   "fausseUne": {
-    "source": "Les Échos",
-    "host": "lesechos.fr",
-    "rubrique": "Santé & Medtech",
-    "kicker": "Réglementation MDR",
-    "date": "14 mars 2025",
-    "headline": "Dispositifs médicaux connectés : Bruxelles durcit les contrôles MDR et met en péril le déploiement de dizaines de startups françaises",
-    "chapeau": "La Commission européenne a annoncé jeudi un renforcement immédiat des audits de conformité MDR 2017/745 pour les wearables à visée clinique, avec effet dès le 1er juin 2025. Les sociétés incapables de justifier d'équipes commerciales et techniques certifiées risquent un gel de leurs autorisations de mise sur le marché dans les États membres. Pour les medtechs en phase de déploiement accéléré, le signal est brutal.",
-    "body": "L'annonce, publiée jeudi matin au Journal officiel de l'UE, tombe comme un couperet sur un secteur déjà sous tension. Les organismes notifiés — dont le BSI et le LNE/G-MED — ont été instruits d'intensifier leurs inspections inopinées auprès des fabricants de dispositifs médicaux connectés de classe IIa et IIb, catégorie qui englobe la majorité des wearables de biofeedback actuellement commercialisés en Europe. Désormais, la certification ne portera plus seulement sur le produit : les auditeurs examineront la capacité des équipes de vente et de déploiement à maîtriser les exigences réglementaires, documentation technique incluse. 'Un commercial qui ne sait pas lire une déclaration de conformité UE devient un risque juridique pour son employeur', résume Élise Torrent, avocate spécialisée en droit médical au cabinet Grandin & Associés. Les startups engagées dans des partenariats de déploiement clinique à grande échelle sont particulièrement exposées : tout retard de mise en conformité des équipes pourra être opposé comme motif de suspension contractuelle par les établissements de santé partenaires. Les investisseurs, eux, commencent à poser des questions précises sur les plans de formation RH avant de décaisser les prochaines tranches."
+    "source": "Le Quotidien",
+    "host": "lequotidien.fr",
+    "rubrique": "Économie & Entreprises",
+    "kicker": "[À COMPLÉTER]",
+    "date": "Mars 2026",
+    "headline": "[À COMPLÉTER — titre Une]",
+    "chapeau": "[À COMPLÉTER — chapeau de Une]",
+    "body": "[À COMPLÉTER — corps de Une]"
   }
 };
 
 window.PAC_CONFIG = {
   "bloc": "bc4",
   "titre": "Mettre en œuvre la politique de développement des compétences",
-  "epreuve": "Épreuve écrite de groupe - Dossier professionnel : GEPP; Épreuve individuelle écrite - Étude de cas : plan de développement des compétences et actions de formation",
-  "deadline": "14 mars 2025 · 18h00",
+  "epreuve": "Évaluation 9, 10",
+  "deadline": "Mars 2026 · 18h00",
   "commanditaire": "Sonia Ferracci",
   "entreprise": "Lumio Health",
   "dispositif": "PAC",
@@ -666,155 +590,71 @@ window.PAC_CONFIG = {
   "competences": [
     {
       "code": "4.1",
-      "label": "Mettre en œuvre une démarche de GEPP",
-      "libelle": "Mettre en",
-      "rncp": "Mettre en œuvre une démarche de GEPP, en analysant les objectifs stratégiques de l'entreprise, en réalisant une cartographie des métiers, et en anticipant les évolutions technologiques et organisationnelles liées notamment aux transitions écologique et numérique, afin de recenser les besoins en compétences dans une vision prospective",
-      "placeholder": "Présentez votre analyse SWOT/PESTEL appliquée à Lumio Health en identifiant les menaces RH liées au déploiement IA et à la réglementation MDR. Construisez une cartographie des métiers impactés (commercial B2B médical, content médical, ingénieur biofeedback) et recensez les besoins prospectifs en compétences sur 18 mois.",
-      "min": 250,
+      "label": "Recueil des besoins en compétences et en formation",
+      "libelle": "Recueil des",
+      "rncp": "Mettre en œuvre une démarche de GEPP, en analysant les objectifs stratégiques de l'entreprise, en réalisant une cartographie des métiers, et en anticipant les évolutions technologiques et organisationnelles liées notamment aux transitions écologique et numérique, afin de recenser les besoins en compétences dans une vision prospective. Conduire le processus des entretiens annuels et professionnels, en utilisant les outils adaptés et en respectant les obligations réglementaires, afin de déceler les écarts à combler et d'accompagner les collaborateurs dans le développement de leurs compétences et/ou de leur mobilité professionnelle.",
+      "placeholder": "Décrivez ici votre démarche GEPP appliquée à Lumio Health : analyse stratégique (SWOT ou PESTEL), cartographie des métiers existants et cibles, identification des écarts de compétences liés au pivot IA/wearables, et outils d'entretien mis en place pour les managers. Appuyez-vous sur les données fictives fournies (pyramide des âges, référentiel métier Lumio).",
+      "min": 180,
       "motsCles": [
         "GEPP",
+        "cartographie des métiers",
         "SWOT",
         "PESTEL",
-        "cartographie des métiers",
-        "compétences prospectives",
+        "écart de compétences",
         "transition numérique",
-        "MDR",
-        "biofeedback",
-        "métiers en tension",
-        "pyramide des âges"
+        "entretien professionnel",
+        "besoins prospectifs",
+        "référentiel de compétences",
+        "mobilité professionnelle"
       ],
-      "conseil": "Appuyez-vous sur les données fournies dans les documents fictifs (effectifs, ancienneté, référentiel) pour rendre votre cartographie objective. Reliez chaque besoin identifié à un objectif stratégique explicite de Lumio Health (partenariat Northgate, feuille de route IA)."
+      "conseil": "Ancrez votre analyse dans le contexte Lumio : citez les métiers impactés (Content, B2B, Tech IA) et reliez chaque écart identifié à un objectif stratégique précis du pivot. Utilisez le PESTEL pour intégrer les dimensions réglementaires (RGPD santé) et environnementales (éco-conception wearables)."
     },
     {
       "code": "4.2",
-      "label": "Conduire le processus des entretiens annuels et professionnels",
-      "libelle": "Conduire le",
-      "rncp": "Conduire le processus des entretiens annuels et professionnels, en utilisant les outils adaptés et en respectant les obligations réglementaires, afin de déceler les écarts à combler et d'accompagner les collaborateurs dans le développement de leurs compétences et/ou de leur mobilité professionnelle",
-      "placeholder": "Proposez les outils (grille d'entretien professionnel, guide manager, plan de communication interne) que vous déployez chez Lumio Health pour recueillir les besoins individuels et les aspirations de mobilité. Précisez les obligations réglementaires respectées (fréquence, bilan à 6 ans, etc.).",
+      "label": "Gestion du plan de développement des compétences",
+      "libelle": "Gestion du",
+      "rncp": "Contribuer à la construction du plan de développement des compétences, en tenant compte du budget de formation, des accords collectifs sur l'égalité professionnelle entre les hommes et les femmes, sur la qualité de vie et les conditions de travail, et en mobilisant les dispositifs réglementaires de la formation continue, pour répondre aux besoins en compétences présents et à venir des collaborateurs et de l'entreprise, et satisfaire aux obligations de formation de l'employeur. Présenter le plan de développement des compétences au Comité Social et Économique (CSE), en structurant les actions de développement des compétences programmées en fonction des objectifs de professionnalisation individuels et collectifs, afin de susciter l'adhésion et de co-construire les départs en formation.",
+      "placeholder": "Construisez le plan de développement des compétences de Lumio Health pour 2026-2027 : priorisez les actions (CPF, OPCO, VAE, bilan de compétences), justifiez les arbitrages budgétaires, intégrez les enjeux D&I, et préparez la trame de présentation CSE. Montrez comment chaque action répond aux besoins identifiés en 4.1.",
       "min": 200,
       "motsCles": [
-        "entretien professionnel",
-        "entretien annuel",
-        "grille d'entretien",
-        "obligations réglementaires",
-        "mobilité professionnelle",
-        "écarts de compétences",
-        "bilan à 6 ans",
-        "guide manager",
-        "plan de communication"
+        "plan de développement des compétences",
+        "budget formation",
+        "OPCO",
+        "CPF",
+        "CSE",
+        "égalité professionnelle",
+        "diversité et inclusion",
+        "VAE",
+        "dispositifs réglementaires",
+        "objectifs de professionnalisation"
       ],
-      "conseil": "Distinguez clairement entretien annuel d'évaluation et entretien professionnel obligatoire. Montrez comment les résultats alimentent directement la construction du plan de développement des compétences dans le cas Lumio."
+      "conseil": "Structurez votre plan en trois catégories d'actions (adaptation au poste, évolution professionnelle, reconversion) et montrez la cohérence avec le calendrier commercial Lumio (deadline Northgate janvier 2027). N'oubliez pas de mentionner les critères de sélection des prestataires et l'articulation avec les accords collectifs en vigueur."
     },
     {
       "code": "4.3",
-      "label": "Contribuer à la construction du plan de développement des compétences",
-      "libelle": "Contribuer à",
-      "rncp": "Contribuer à la construction du plan de développement des compétences, en tenant compte du budget de formation, des accords collectifs sur l'égalité professionnelle entre les hommes et les femmes, sur la qualité de vie et les conditions de travail, et en mobilisant les dispositifs réglementaires de la formation continue, pour répondre aux besoins en compétences présents et à venir des collaborateurs et de l'entreprise, et satisfaire aux obligations de formation de l'employeur",
-      "placeholder": "Construisez le plan de développement des compétences de Lumio Health pour l'exercice 2025-2026 : listez les actions prioritaires par population cible (équipe B2B, content, ingénieurs IA), indiquez les dispositifs mobilisés (CPF, Pro-A, OPCO Atlas, FNE-Formation) et intégrez une ligne budgétaire réaliste. Prenez en compte l'accord égalité F/H et les enjeux QVCT.",
-      "min": 300,
-      "motsCles": [
-        "plan de développement des compétences",
-        "budget de formation",
-        "CPF",
-        "OPCO",
-        "Pro-A",
-        "FNE-Formation",
-        "égalité professionnelle",
-        "QVCT",
-        "VAE",
-        "bilan de compétences",
-        "diversité",
-        "inclusion"
-      ],
-      "conseil": "Structurez le plan en trois colonnes minimum : action de formation / population visée / dispositif de financement. Justifiez chaque choix par un besoin identifié en 4.1 ou 4.2. Mentionnez explicitement au moins un dispositif lié à la diversité ou à l'inclusion."
-    },
-    {
-      "code": "4.4",
-      "label": "Présenter le plan de développement des compétences au CSE",
-      "libelle": "Présenter le",
-      "rncp": "Présenter le plan de développement des compétences au Comité Social et Économique (CSE), en structurant les actions de développement des compétences programmées en fonction des objectifs de professionnalisation individuels et collectifs, afin de susciter l'adhésion et de co-construire les départs en formation",
-      "placeholder": "Rédigez le plan de votre présentation au CSE du 28 avril 2025 : structurez les actions par axe (individuel / collectif), démontrez la faisabilité budgétaire et organisationnelle, et anticipez deux objections possibles des élus (impact sur la charge de travail, équité entre services).",
+      "label": "Mise en œuvre du plan de développement des compétences",
+      "libelle": "Mise en",
+      "rncp": "Mettre en œuvre le plan de développement des compétences en planifiant les actions de formation, en sélectionnant les prestataires et en assurant la réalisation des démarches de financement des formations, pour développer l'employabilité des collaborateurs. Superviser le planning de réalisation des actions de formation, en maîtrisant les incidences pour l'entreprise en matière de gestion des absences et de rémunération, et en veillant à ce que les parcours de formation soient adaptés aux éventuelles situations de handicap, afin de permettre aux collaborateurs de suivre leur formation dans les meilleures conditions. Évaluer l'efficacité des actions de formation en mesurant leurs effets sur les performances individuelles et la satisfaction des collaborateurs pour améliorer le prochain plan de développement des compétences et rendre compte à la DRH.",
+      "placeholder": "Détaillez la mise en œuvre opérationnelle : planning des formations avec gestion des absences, impact sur la rémunération (maintien salaire, AFEST, etc.), aménagements handicap prévus, et tableau de bord de suivi avec indicateurs. Formulez des préconisations d'amélioration pour le cycle suivant à destination de la DRH.",
       "min": 180,
-      "motsCles": [
-        "CSE",
-        "consultation",
-        "présentation",
-        "adhésion",
-        "co-construction",
-        "professionnalisation",
-        "faisabilité",
-        "besoins individuels",
-        "besoins collectifs",
-        "élus du personnel"
-      ],
-      "conseil": "Adoptez une posture de conviction argumentée : chiffrez l'impact du plan sur l'employabilité et reliez-le aux enjeux business Northgate. Pensez à mentionner la procédure de consultation obligatoire du CSE sur le plan de formation."
-    },
-    {
-      "code": "4.5",
-      "label": "Mettre en œuvre le plan de développement des compétences",
-      "libelle": "Mettre en",
-      "rncp": "Mettre en œuvre le plan de développement des compétences en planifiant les actions de formation, en sélectionnant les prestataires et en assurant la réalisation des démarches de financement des formations, pour développer l'employabilité des collaborateurs",
-      "placeholder": "Proposez un calendrier prévisionnel des actions de formation sur 12 mois en tenant compte des pics d'activité commerciale de Lumio (lancement produit T3, salons medtech). Présentez vos critères de sélection des prestataires de formation (certification Qualiopi, expertise MDR, modalités distanciel/présentiel) et décrivez les démarches de financement OPCO.",
-      "min": 180,
-      "motsCles": [
-        "calendrier de formation",
-        "prestataires",
-        "Qualiopi",
-        "financement",
-        "OPCO Atlas",
-        "employabilité",
-        "présentiel",
-        "distanciel",
-        "hybride",
-        "demande de prise en charge"
-      ],
-      "conseil": "Veillez à articuler le calendrier avec les contraintes opérationnelles des équipes (ex. : Camille Ott et l'équipe B2B indisponibles en septembre pour le salon MedFuture). Justifiez le critère Qualiopi comme exigence non négociable."
-    },
-    {
-      "code": "4.6",
-      "label": "Superviser le planning de réalisation des actions de formation",
-      "libelle": "Superviser le",
-      "rncp": "Superviser le planning de réalisation des actions de formation, en maîtrisant les incidences pour l'entreprise en matière de gestion des absences et de rémunération, et en veillant à ce que les parcours de formation soient adaptés aux éventuelles situations de handicap, afin de permettre aux collaborateurs de suivre leur formation dans les meilleures conditions",
-      "placeholder": "Identifiez les incidences RH des départs en formation chez Lumio (gestion des absences, maintien de salaire, impact sur les équipes réduites). Proposez des aménagements pour un collaborateur en situation de handicap (dyslexie sévère signalée dans les documents). Indiquez comment vous supervisez le bon déroulement du planning.",
-      "min": 150,
-      "motsCles": [
-        "gestion des absences",
-        "maintien de salaire",
-        "handicap",
-        "RQTH",
-        "aménagement",
-        "accessibilité",
-        "organisation du travail",
-        "supervision",
-        "planning"
-      ],
-      "conseil": "Citez le rôle du référent handicap et de l'AGEFIPH. Distinguez les conséquences salariales selon le dispositif utilisé (CPF hors temps de travail vs plan de formation sur temps de travail)."
-    },
-    {
-      "code": "4.7",
-      "label": "Évaluer l'efficacité des actions de formation",
-      "libelle": "Évaluer l'efficacité",
-      "rncp": "Évaluer l'efficacité des actions de formation en mesurant leurs effets sur les performances individuelles et la satisfaction des collaborateurs pour améliorer le prochain plan de développement des compétences et rendre compte à la DRH",
-      "placeholder": "Construisez un tableau de bord d'évaluation des formations Lumio Health avec au moins 5 indicateurs (satisfaction à chaud/froid, taux de transfert des compétences, évolution des performances commerciales B2B, taux de réalisation du plan). Formulez trois préconisations hiérarchisées pour le plan N+1 à transmettre à la DRH.",
-      "min": 150,
       "motsCles": [
         "tableau de bord",
         "indicateurs de performance",
-        "satisfaction",
-        "évaluation à chaud",
-        "évaluation à froid",
-        "transfert des compétences",
-        "préconisations",
-        "DRH",
-        "plan N+1",
-        "modèle Kirkpatrick"
+        "gestion des absences",
+        "rémunération",
+        "situation de handicap",
+        "évaluation de la formation",
+        "satisfaction collaborateurs",
+        "prestataires",
+        "financement",
+        "préconisations"
       ],
-      "conseil": "Référencez le modèle Kirkpatrick (4 niveaux) pour structurer votre tableau de bord. Reliez vos indicateurs aux objectifs initiaux du plan et aux KPI business de Lumio (taux de conversion B2B, satisfaction client cliniques Northgate)."
+      "conseil": "Construisez un tableau de bord avec au moins 4 indicateurs mesurables (taux de complétion, NPS formation, taux de transfert compétences, ROI formation). Pensez à intégrer les contraintes opérationnelles spécifiques à Lumio (équipe B2B en déplacement, peak commercial Q4). La dimension handicap doit être traitée concrètement, pas seulement mentionnée."
     }
   ],
   "gabarits": {},
   "questionsPositionnement": [],
-  "juryPrompt": "Tu es le jury certifiant du bloc bc4 (Manager des Ressources Humaines).\nContexte : Opération Pulse Forward — Lumio Health face au virage IA & réglementation MDR · 14 mars 2025.\nTu évalues une production étudiante aux critères RNCP stricts. Sois exigeant mais juste.\nCritères éliminatoires :\n- Les rôles et responsabilités des acteurs impliqués dans la démarche GEPP et le plan de développement des compétences (RH, managers, CSE, OPCO, prestataires) ne sont pas clairement identifiés et distingués.\n- Aucun indicateur d'impact mesurable (KPI satisfaction, taux de transfert, écart programme/réalisation, évolution de performance) n'est proposé pour évaluer l'efficacité des actions de formation.\n- Le plan de développement des compétences ne s'appuie sur aucune donnée objective issue de la GEPP ou des entretiens professionnels pour justifier les actions prioritaires.\n- Les obligations réglementaires liées aux entretiens professionnels (fréquence, bilan à 6 ans, sanctions employeur) et à la consultation du CSE sur le plan de formation sont absentes ou erronées.\n- Aucun dispositif de financement légal de la formation continue (CPF, OPCO, Pro-A, FNE-Formation) n'est mobilisé ou les montages financiers proposés sont inexacts.\n- Les situations de handicap ne sont pas prises en compte dans la supervision du planning de formation (absence d'aménagement, non-mention du référent handicap ou de l'AGEFIPH).\n- La cartographie des métiers est inexistante ou déconnectée des objectifs stratégiques de Lumio Health (partenariat Northgate, feuille de route IA, conformité MDR).\n\nRéponds EXACTEMENT dans ce format :\n### 4.1 — [Satisfaisant / Insuffisant / Absent]\nUne phrase de retour précise et exigeante.\n\n### 4.2 — [Satisfaisant / Insuffisant / Absent]\nUne phrase de retour précise et exigeante.\n\n### 4.3 — [Satisfaisant / Insuffisant / Absent]\nUne phrase de retour précise et exigeante.\n\n### 4.4 — [Satisfaisant / Insuffisant / Absent]\nUne phrase de retour précise et exigeante.\n\n### 4.5 — [Satisfaisant / Insuffisant / Absent]\nUne phrase de retour précise et exigeante.\n\n### 4.6 — [Satisfaisant / Insuffisant / Absent]\nUne phrase de retour précise et exigeante.\n\n### 4.7 — [Satisfaisant / Insuffisant / Absent]\nUne phrase de retour précise et exigeante.\n\n## Niveau global\n**[Non conforme / Partiellement conforme / Conforme / Conforme avec distinction]**\n\n## Question de jury\nUne question dérangeante que tu poserais à l'oral.",
+  "juryPrompt": "Tu es le jury certifiant du bloc bc4 (Chargé de développement des ressources humaines).\nContexte : Opération Pulse : bâtir le plan de compétences de Lumio Health avant le virage IA · Mars 2026.\nTu évalues une production étudiante aux critères RNCP stricts. Sois exigeant mais juste.\nCritères éliminatoires :\n- Les rôles et responsabilités de chaque acteur RH (chargé RH, managers, DRH, CSE, OPCO) sont clairement distingués et correctement attribués dans l'ensemble du dossier — toute confusion de périmètre entraîne un refus de validation.\n- Le plan de développement des compétences comporte des indicateurs d'impact quantifiables et mesurables (a minima : taux de réalisation, indicateur de satisfaction, indicateur de transfert des compétences) — l'absence d'indicateurs chiffrés est éliminatoire.\n- La démarche GEPP s'appuie sur une méthode d'analyse identifiée (SWOT, PESTEL ou équivalent) appliquée au contexte Lumio Health — une liste de besoins sans analyse structurée est insuffisante.\n- Les dispositifs réglementaires de financement (CPF, OPCO, etc.) sont mobilisés et justifiés en cohérence avec les actions du plan — toute absence de référence aux mécanismes de financement est éliminatoire.\n- La présentation au CSE est formalisée avec une structure argumentée distinguant besoins individuels et besoins collectifs — un plan sans volet CSE est incomplet et non recevable.\n- Les situations de handicap font l'objet d'aménagements concrets et nominatifs dans le planning de formation — une mention générique sans proposition d'adaptation est insuffisante.\n- Le dossier démontre la faisabilité opérationnelle du plan au regard des contraintes d'activité de Lumio Health (absences, rémunération, continuité de service) — l'absence de gestion des impacts organisationnels est éliminatoire.\n\nRéponds EXACTEMENT dans ce format :\n### 4.1 — [Satisfaisant / Insuffisant / Absent]\nUne phrase de retour précise et exigeante.\n\n### 4.2 — [Satisfaisant / Insuffisant / Absent]\nUne phrase de retour précise et exigeante.\n\n### 4.3 — [Satisfaisant / Insuffisant / Absent]\nUne phrase de retour précise et exigeante.\n\n## Niveau global\n**[Non conforme / Partiellement conforme / Conforme / Conforme avec distinction]**\n\n## Question de jury\nUne question dérangeante que tu poserais à l'oral.",
   "livrableMinMots": 520,
   "noteReflexiveMinMots": 100
 };

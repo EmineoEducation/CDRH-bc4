@@ -1,6 +1,6 @@
 # PAC BC4 — Mettre en œuvre la politique de développement des compétences
 
-Manager des Ressources Humaines
+Chargé de développement des ressources humaines
 
 ## Déploiement
 1. Créer le repo `lumio-bc4` avec **tout le contenu de ce ZIP**.
