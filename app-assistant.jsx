@@ -1,5 +1,5 @@
 // ══════════════════════════════════════════════════════════════
-//  JEFFERSON · PAC bc4
+//  JEFFERSON · PAC 4
 //  Composant générique — guide par acte + chat. Lit window.PAC_CONFIG.
 // ══════════════════════════════════════════════════════════════
 

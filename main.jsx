@@ -30,14 +30,9 @@ window.LUMIO_SESSION = {
 
 // Substitue {{PRENOM}} {{NOM}} {{EMAIL_ETUDIANT}} PARTOUT dans LUMIO_DATA, en un seul passage.
 function applyStudent(fullName, email) {
-  // Échappe les seules entrées libres de l'étudiant (vecteur XSS via dangerouslySetInnerHTML).
-  // Le narratif de data.js, lui, reste du HTML riche contrôlé et n'est pas touché.
-  const escHtml = (s) => String(s == null ? '' : s)
-    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-  const prenom = escHtml((fullName || '').split(' ')[0] || '');
-  const nom    = escHtml((fullName || '').split(' ').slice(1).join(' '));
-  const map = { '{{PRENOM}}': prenom, '{{NOM}}': nom, '{{EMAIL_ETUDIANT}}': escHtml(email || '') };
+  const prenom = (fullName || '').split(' ')[0] || '';
+  const nom    = (fullName || '').split(' ').slice(1).join(' ');
+  const map = { '{{PRENOM}}': prenom, '{{NOM}}': nom, '{{EMAIL_ETUDIANT}}': email || '' };
   try {
     const json = JSON.stringify(window.LUMIO_DATA)
       .replace(/\{\{PRENOM\}\}|\{\{NOM\}\}|\{\{EMAIL_ETUDIANT\}\}/g, m => map[m]);
@@ -373,20 +368,6 @@ function WelcomeBriefCard({ onClose, studentName }) {
 }
 
 // ─── ROOT ────────────────────────────────────────────────────
-// Lit les URL params transmis par le portail (?p=Prénom&n=Nom&e=email).
-// Si les 3 sont présents ET email valide → bypass NameScreen + lockscreen.
-function readPortalParams() {
-  try {
-    const sp = new URLSearchParams(window.location.search);
-    const p = (sp.get('p') || '').trim();
-    const n = (sp.get('n') || '').trim();
-    const e = (sp.get('e') || '').trim().toLowerCase();
-    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
-    if (p && emailOk) return { prenom: p, nom: n, email: e, fullName: p + (n ? ' ' + n : '') };
-  } catch (_) { /* SSR-safe / malformed URL */ }
-  return null;
-}
-
 function Root() {
   const [phase, setPhase] = useRootState('loading'); // loading | name | login | brief | desktop
   const [studentName, setStudentName] = useRootState('');
@@ -394,30 +375,8 @@ function Root() {
   const [sessionId, setSessionId] = useRootState(null);
   const [timerStart, setTimerStart] = useRootState(null);
 
-  // Au montage : 1) URL params du portail → bypass direct au brief
-  //              2) sinon, tenter de restaurer une session existante
-  //              3) sinon, démarrer en NameScreen
+  // Au montage : tenter de restaurer une session existante
   useRootEffect(() => {
-    // ── 1. URL params du portail (?p=&n=&e=) ──
-    const portal = readPortalParams();
-    if (portal) {
-      const sid = makeSessionId(portal.fullName + Date.now());
-      localStorage.setItem('lumio_sid', sid);
-      setSessionId(sid);
-      setStudentName(portal.fullName);
-      applyStudent(portal.fullName, portal.email);
-      window.LUMIO_SESSION.save(sid, {
-        studentName: portal.fullName,
-        studentEmail: portal.email,
-        phase: 'brief',
-        fromPortal: true
-      });
-      // Direct au brief (sans NameScreen ni lockscreen)
-      setPhase('brief');
-      return;
-    }
-
-    // ── 2. Session existante en cache ──
     const savedId = localStorage.getItem('lumio_sid');
     if (!savedId) { setPhase('name'); return; }
     window.LUMIO_SESSION.load(savedId).then(session => {

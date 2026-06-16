@@ -1,22 +1,40 @@
 // ══════════════════════════════════════════════════════════════
-//  NOTES APP — générique · piloté par window.LUMIO_DATA.notes
-//  Aucune narration hardcodée. PAC · Éminéo
+//  NOTES APP — BC2 · Note confidentielle Théo + contexte Lumio
 // ══════════════════════════════════════════════════════════════
-const { useState: useNotesState } = React;
-
-function _notesResolve(v) {
-  if (typeof v !== 'string' || v[0] !== '@') return v;
-  const D = window.LUMIO_DATA || {};
-  return v.slice(1).split('.').reduce((o, k) => (o == null ? o : o[k]), D) ?? '';
-}
 
 function NotesApp({ openNote }) {
-  const D = window.LUMIO_DATA || {};
-  const notes = (D.notes || []).map(n => ({ ...n, body: _notesResolve(n.body) }));
+  const D = window.LUMIO_DATA;
+  const notes = [
+    {
+      id: 'theo',
+      title: D.theoNote.title,
+      date: D.theoNote.date,
+      preview: 'Réflexions avant board — pour moi seul…',
+      theo: D.theoNote
+    },
+    {
+      id: 'contexte',
+      title: D.contexte.title,
+      date: 'Mise à jour oct. 2026',
+      preview: 'Lumio Health est une medtech parisienne fondée en 2018…',
+      contexte: D.contexte
+    },
+    {
+      id: 'd1', title: 'Préparer le board — points à tenir', date: '11 oct. 2026',
+      preview: 'Ne pas céder sur la MDR · Churn réel à ne pas lâcher…',
+      distractor: false,
+      body: '— Ne pas céder sur le calendrier MDR (réponse TÜV dans 80 jours max)\n— Accord Darty : décider si on le révèle ou pas\n— Churn réel 9 % : si Jakob le sait déjà, je suis grillé\n— Budget : 200K€ c\'est tenable si on séquence bien\n— Question à poser à Jakob : si on attend MDR, la clause de sortie s\'active à quelle date exactement ?'
+    },
+    {
+      id: 'd2', title: 'Notes perso — week-end', date: '10 oct. 2026',
+      preview: 'Rucola, vin blanc, appeler maman dimanche…',
+      distractor: true,
+      body: '— Marché dimanche matin\n— Rucola + pecorino\n— Appeler maman\n— Vin blanc pour samedi soir'
+    }
+  ];
 
-  const firstId = (notes[0] && notes[0].id) || '';
-  const [selectedId, setSelectedId] = useNotesState(openNote || firstId);
-  const note = notes.find(n => n.id === selectedId) || notes[0] || {};
+  const [selectedId, setSelectedId] = React.useState(openNote || 'theo');
+  const note = notes.find(n => n.id === selectedId) || notes[0];
 
   return (
     <div style={notesStyles.app}>
@@ -25,7 +43,9 @@ function NotesApp({ openNote }) {
           <div style={{ fontSize: 11, color: 'var(--ink-faint)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>Toutes les notes</div>
         </div>
         {notes.map(n => (
-          <div key={n.id} onClick={() => setSelectedId(n.id)}
+          <div
+            key={n.id}
+            onClick={() => setSelectedId(n.id)}
             style={{ ...notesStyles.row, ...(selectedId === n.id ? notesStyles.rowActive : {}) }}>
             <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', marginBottom: 2 }}>{n.title}</div>
             <div style={{ display: 'flex', gap: 8, alignItems: 'baseline' }}>
@@ -42,43 +62,45 @@ function NotesApp({ openNote }) {
           <div style={{ flex: 1 }} />
           <span>{note.date}</span>
         </div>
-        <NoteRender note={note} />
+        {note.theo ? <TheoNoteRender data={note.theo} /> :
+         note.contexte ? <ContexteNoteRender data={note.contexte} /> : (
+          <div style={{ padding: '24px 32px', fontFamily: 'var(--font-display)', fontSize: 14, lineHeight: 1.8, color: 'var(--ink)', whiteSpace: 'pre-wrap' }}>
+            <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 22, marginBottom: 10 }}>{note.title}</h1>
+            {note.body}
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
-function NoteRender({ note }) {
-  const render = note.render || 'plain';
-  if (render === 'confidential') {
-    return (
-      <div style={{ padding: '28px 36px', fontFamily: 'var(--font-display)', color: 'var(--ink)' }}>
-        {note.kicker && <div style={{ fontSize: 10, fontFamily: 'var(--font-mono)', letterSpacing: '0.18em', color: '#c4420f', textTransform: 'uppercase', marginBottom: 12 }}>{note.kicker}</div>}
-        <h1 style={{ fontSize: 26, fontWeight: 400, lineHeight: 1.15, letterSpacing: '-0.01em', marginBottom: 4 }}>{note.title}</h1>
-        <div style={{ fontSize: 12, color: 'var(--ink-mute)', borderBottom: '1px solid var(--rule)', paddingBottom: 14, marginBottom: 20 }}>{note.byline || note.date}</div>
-        {note.banner && (
-          <div style={{ background: '#fff8d8', border: '1px solid #c4420f', padding: '10px 14px', borderRadius: 4, fontSize: 12, color: '#5a3010', lineHeight: 1.55, marginBottom: 20, fontFamily: 'var(--font-sans)' }}>
-            ⚠ {note.banner}
-          </div>
-        )}
-        <div style={{ fontSize: 14.5, lineHeight: 1.8, color: 'var(--ink-soft)', whiteSpace: 'pre-wrap' }}>{note.body}</div>
-      </div>
-    );
-  }
-  if (render === 'contexte') {
-    return (
-      <div style={{ padding: '28px 36px', fontFamily: 'var(--font-display)', color: 'var(--ink)' }}>
-        {note.kicker && <div style={{ fontSize: 10, fontFamily: 'var(--font-mono)', letterSpacing: '0.18em', color: '#1b3a6b', textTransform: 'uppercase', marginBottom: 12 }}>{note.kicker}</div>}
-        <h1 style={{ fontSize: 26, fontWeight: 400, lineHeight: 1.15, marginBottom: 4 }}>{note.title}</h1>
-        {note.subtitle && <div style={{ fontSize: 12, color: 'var(--ink-mute)', borderBottom: '1px solid var(--rule)', paddingBottom: 14, marginBottom: 20 }}>{note.subtitle}</div>}
-        <div style={{ fontSize: 14.5, lineHeight: 1.8, color: 'var(--ink-soft)', whiteSpace: 'pre-wrap' }}>{note.body}</div>
-      </div>
-    );
-  }
+function TheoNoteRender({ data }) {
   return (
-    <div style={{ padding: '24px 32px', fontFamily: 'var(--font-display)', fontSize: 14, lineHeight: 1.8, color: 'var(--ink)', whiteSpace: 'pre-wrap' }}>
-      <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 22, marginBottom: 10 }}>{note.title}</h1>
-      {note.body}
+    <div style={{ padding: '28px 36px', fontFamily: 'var(--font-display)', color: 'var(--ink)' }}>
+      <div style={{ fontSize: 10, fontFamily: 'var(--font-mono)', letterSpacing: '0.18em', color: '#c4420f', textTransform: 'uppercase', marginBottom: 12 }}>{data.tag} — {data.author}</div>
+      <h1 style={{ fontSize: 26, fontWeight: 400, lineHeight: 1.15, letterSpacing: '-0.01em', marginBottom: 4 }}>{data.title}</h1>
+      <div style={{ fontSize: 12, color: 'var(--ink-mute)', borderBottom: '1px solid var(--rule)', paddingBottom: 14, marginBottom: 20 }}>
+        {data.author} · {data.date}
+      </div>
+      <div style={{ background: '#fff8d8', border: '1px solid #c4420f', padding: '10px 14px', borderRadius: 4, fontSize: 12, color: '#5a3010', lineHeight: 1.55, marginBottom: 20, fontFamily: 'var(--font-sans)' }}>
+        ⚠ Ce document n'est pas destiné à être partagé. Il a été mis dans votre espace par Sonia — « à vous de juger comment l'utiliser ».
+      </div>
+      <div style={{ fontSize: 14.5, lineHeight: 1.8, color: 'var(--ink-soft)', whiteSpace: 'pre-wrap' }}>
+        {data.body}
+      </div>
+    </div>
+  );
+}
+
+function ContexteNoteRender({ data }) {
+  return (
+    <div style={{ padding: '28px 36px', fontFamily: 'var(--font-display)', color: 'var(--ink)' }}>
+      <div style={{ fontSize: 10, fontFamily: 'var(--font-mono)', letterSpacing: '0.18em', color: '#1b3a6b', textTransform: 'uppercase', marginBottom: 12 }}>FICHE CONTEXTE — Lumio Health</div>
+      <h1 style={{ fontSize: 26, fontWeight: 400, lineHeight: 1.15, marginBottom: 4 }}>{data.title}</h1>
+      <div style={{ fontSize: 12, color: 'var(--ink-mute)', borderBottom: '1px solid var(--rule)', paddingBottom: 14, marginBottom: 20 }}>{data.subtitle}</div>
+      <div style={{ fontSize: 14.5, lineHeight: 1.8, color: 'var(--ink-soft)', whiteSpace: 'pre-wrap' }}>
+        {data.body}
+      </div>
     </div>
   );
 }
