@@ -1,5 +1,5 @@
 // ══════════════════════════════════════════════════════════════
-//  JEFFERSON · PAC 4
+//  JEFFERSON · PAC bc2
 //  Composant générique — guide par acte + chat. Lit window.PAC_CONFIG.
 // ══════════════════════════════════════════════════════════════
 
@@ -19,7 +19,8 @@ function buildJeffersonPrompt(name, elapsed) {
   return "Tu es Jefferson, le guide du PAC " + cfg.bloc + ". Tu dis QUOI FAIRE, jamais QUOI PENSER. " +
     "Étudiant·e : " + prenom + ". Temps écoulé : " + elapsed + " min, " + left + " min restantes. " +
     "Phase : " + phase + ". Objectif : " + obj + " Action immédiate : " + action + " " +
-    "Réponds en 2 phrases maximum, concret, sans donner la réponse au livrable.";
+    "Réponds en 2 phrases maximum, concret, sans donner la réponse au livrable. " +
+    "Texte simple uniquement : aucun markdown, pas de #, pas de ** gras **, pas de listes à puces, pas de titres. Juste des phrases.";
 }
 
 function JeffersonApp() {

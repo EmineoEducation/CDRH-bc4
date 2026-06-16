@@ -30,9 +30,14 @@ window.LUMIO_SESSION = {
 
 // Substitue {{PRENOM}} {{NOM}} {{EMAIL_ETUDIANT}} PARTOUT dans LUMIO_DATA, en un seul passage.
 function applyStudent(fullName, email) {
-  const prenom = (fullName || '').split(' ')[0] || '';
-  const nom    = (fullName || '').split(' ').slice(1).join(' ');
-  const map = { '{{PRENOM}}': prenom, '{{NOM}}': nom, '{{EMAIL_ETUDIANT}}': email || '' };
+  // Échappe les seules entrées libres de l'étudiant (vecteur XSS via dangerouslySetInnerHTML).
+  // Le narratif de data.js, lui, reste du HTML riche contrôlé et n'est pas touché.
+  const escHtml = (s) => String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  const prenom = escHtml((fullName || '').split(' ')[0] || '');
+  const nom    = escHtml((fullName || '').split(' ').slice(1).join(' '));
+  const map = { '{{PRENOM}}': prenom, '{{NOM}}': nom, '{{EMAIL_ETUDIANT}}': escHtml(email || '') };
   try {
     const json = JSON.stringify(window.LUMIO_DATA)
       .replace(/\{\{PRENOM\}\}|\{\{NOM\}\}|\{\{EMAIL_ETUDIANT\}\}/g, m => map[m]);
@@ -290,7 +295,27 @@ function WelcomeBriefCard({ onClose, studentName }) {
           Bienvenue, {prenom}.
         </h1>
         <p style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--ink-soft)', marginBottom: 10 }}>
-          Tu es <strong>{studentName}</strong>, consultant·e stratégie marcom. Théo Marczak, CEO de Lumio Health, t'a confié une mission urgente : produire la <strong>recommandation stratégique</strong> que l'entreprise défendra vendredi devant son board d'investisseurs. Tu as accès à un poste de mission : email de Théo, email confidentiel de Jakob, deck board Q3, veille concurrentielle, verbatims terrain. <em>Jakob Rein attend une décision, pas une analyse.</em>
+          {(() => {
+            const cfg  = window.PAC_CONFIG || {};
+            const data = window.LUMIO_DATA || {};
+            const mission = data.mission || {};
+            const role = ((data.student && data.student.role) || 'consultant·e externe').toLowerCase();
+            const commanditaire = cfg.commanditaire || 'le commanditaire';
+            const commanditaireRole = mission.commanditaire_role || '';
+            const titreAffaire = mission.titre_affaire || (cfg.titre || 'la mission');
+            const situation = mission.situation || '';
+            const enjeu = mission.enjeu_central || '';
+            const docsLabel = mission.documents_label || 'le poste de mission';
+            return (
+              <>
+                Tu es <strong>{studentName}</strong>, {role}. <strong>{commanditaire}</strong>
+                {commanditaireRole ? ' (' + commanditaireRole + ')' : ''} t'a confié une mission urgente :{' '}
+                <strong>{titreAffaire}</strong>. {situation ? situation + ' ' : ''}
+                Tu as accès à un poste de mission contenant {docsLabel}.{' '}
+                {enjeu ? <em>{enjeu}</em> : null}
+              </>
+            );
+          })()}
         </p>
 
         {/* Bloc temporel — central */}
@@ -298,7 +323,7 @@ function WelcomeBriefCard({ onClose, studentName }) {
           <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 12 }}>
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: 26, fontWeight: 700, color: 'white', letterSpacing: '-0.02em' }}>3h30</span>
             <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', fontFamily: 'var(--font-mono)' }}>=</span>
-            <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)' }}>3 semaines dans la vraie vie</span>
+            <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)' }}>{(window.LUMIO_DATA && window.LUMIO_DATA.mission && window.LUMIO_DATA.mission.ratio_label) || '18 jours dans la vraie vie'}</span>
           </div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {actes.map(a => (
@@ -323,11 +348,15 @@ function WelcomeBriefCard({ onClose, studentName }) {
         <div style={{ background: '#f7f4ef', borderRadius: 8, padding: '14px 18px', marginBottom: 16 }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--ink)', fontFamily: 'var(--font-mono)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 10 }}>Trois règles, pas de négociation</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            {[
-              { ico: '📄', txt: 'Tout ce que tu sais, c\'est dans les documents.' },
-              { ico: '🤐', txt: 'Jakob ne te dira pas "si c\'est juste". Il teste chaque hypothèse. Il ne cherche pas à t\'aider — il protège son investissement.' },
-              { ico: '💬', txt: 'Quand tu as une hypothèse solide → Slack → Jakob. Sa réaction débloque la suite.' },
-            ].map((r, i) => (
+            {(() => {
+              const cmd = (window.PAC_CONFIG && window.PAC_CONFIG.commanditaire) || 'le commanditaire';
+              const cmdPrenom = cmd.split(/\s+/)[0] || cmd;
+              return [
+                { ico: '📄', txt: 'Tout ce que tu sais, c\'est dans les documents.' },
+                { ico: '🤐', txt: cmd + ' ne te dira pas « si c\'est juste ». ' + cmdPrenom + ' teste tes hypothèses sans te donner la réponse — et sans te juger publiquement.' },
+                { ico: '💬', txt: 'Quand tu as une hypothèse solide → Slack → ' + cmdPrenom + '. Sa réaction débloque la suite.' },
+              ];
+            })().map((r, i) => (
               <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
                 <span style={{ fontSize: 16, flexShrink: 0 }}>{r.ico}</span>
                 <span style={{ fontSize: 13, color: '#2a2620', lineHeight: 1.55 }}>{r.txt}</span>
@@ -368,6 +397,20 @@ function WelcomeBriefCard({ onClose, studentName }) {
 }
 
 // ─── ROOT ────────────────────────────────────────────────────
+// Lit les URL params transmis par le portail (?p=Prénom&n=Nom&e=email).
+// Si les 3 sont présents ET email valide → bypass NameScreen + lockscreen.
+function readPortalParams() {
+  try {
+    const sp = new URLSearchParams(window.location.search);
+    const p = (sp.get('p') || '').trim();
+    const n = (sp.get('n') || '').trim();
+    const e = (sp.get('e') || '').trim().toLowerCase();
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
+    if (p && emailOk) return { prenom: p, nom: n, email: e, fullName: p + (n ? ' ' + n : '') };
+  } catch (_) { /* SSR-safe / malformed URL */ }
+  return null;
+}
+
 function Root() {
   const [phase, setPhase] = useRootState('loading'); // loading | name | login | brief | desktop
   const [studentName, setStudentName] = useRootState('');
@@ -375,8 +418,30 @@ function Root() {
   const [sessionId, setSessionId] = useRootState(null);
   const [timerStart, setTimerStart] = useRootState(null);
 
-  // Au montage : tenter de restaurer une session existante
+  // Au montage : 1) URL params du portail → bypass direct au brief
+  //              2) sinon, tenter de restaurer une session existante
+  //              3) sinon, démarrer en NameScreen
   useRootEffect(() => {
+    // ── 1. URL params du portail (?p=&n=&e=) ──
+    const portal = readPortalParams();
+    if (portal) {
+      const sid = makeSessionId(portal.fullName + Date.now());
+      localStorage.setItem('lumio_sid', sid);
+      setSessionId(sid);
+      setStudentName(portal.fullName);
+      applyStudent(portal.fullName, portal.email);
+      window.LUMIO_SESSION.save(sid, {
+        studentName: portal.fullName,
+        studentEmail: portal.email,
+        phase: 'brief',
+        fromPortal: true
+      });
+      // Direct au brief (sans NameScreen ni lockscreen)
+      setPhase('brief');
+      return;
+    }
+
+    // ── 2. Session existante en cache ──
     const savedId = localStorage.getItem('lumio_sid');
     if (!savedId) { setPhase('name'); return; }
     window.LUMIO_SESSION.load(savedId).then(session => {
