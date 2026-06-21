@@ -171,6 +171,26 @@ window.LUMIO_DATA = {
 
 window.PAC_CONFIG = {
   "bloc": "bc4",
+  accroche_namescreen: {
+    "subtitle": "Développer les compétences face au décrochage",
+    "role": "consultant·e RH externe",
+    "intro": "Tu es {{STUDENT}}, consultant·e RH chez Lumio Health pour le Projet Pulse Forward — l'entreprise fait face à un décrochage de compétences à l'approche de sa série B. Pyramide des âges, données RH, enjeux GEPP et plan de développement : construis une démarche de développement des compétences argumentée.",
+    "ratio_label": "3 semaines dans la vraie vie",
+    "regles": [
+      {
+        "ico": "📄",
+        "txt": "Tout ce que tu sais, c'est dans les documents RH et GEPP du poste de mission."
+      },
+      {
+        "ico": "🤐",
+        "txt": "Le jury RH teste la cohérence de ta démarche GEPP et la mesurabilité de ton plan de développement."
+      },
+      {
+        "ico": "💬",
+        "txt": "Quand tu as une hypothèse solide → Slack → ta commanditaire RH. Sa réaction débloque la suite."
+      }
+    ]
+  },
   "titre": "Mettre en œuvre la politique de développement des compétences",
   "epreuve": "Épreuve écrite de groupe - Dossier professionnel et Épreuve individuelle écrite - Étude de cas",
   "deadline": "14 mars 2025 · 18h00",
@@ -359,7 +379,7 @@ window.PAC_CONFIG = {
   ],
   "gabarits": {},
   "questionsPositionnement": [],
-  "juryPrompt": "Tu es le jury certifiant du bloc 4 (Responsable Ressources Humaines).\nContexte : Projet Pulse Forward — Lumio Health face au décrochage compétences · 14 mars 2025.\nTu évalues une production étudiante aux critères RNCP stricts. Sois exigeant mais juste.\nCritères éliminatoires :\n- Les rôles et responsabilités des acteurs impliqués dans le déploiement du PDC (RRH, managers, CSE, OPCO, prestataires) ne sont pas clairement identifiés et distingués dans la copie\n- Aucun indicateur d'impact mesurable n'est proposé pour évaluer l'efficacité des actions de formation (absence de tableau de bord ou d'indicateurs chiffrés)\n- Le plan de développement des compétences ne fait pas référence à au moins un dispositif de financement réglementaire (CPF, Pro-A, OPCO, plan de formation légal) avec sa modalité de mise en œuvre\n- La cartographie des métiers et compétences est absente ou non reliée aux objectifs stratégiques de Lumio Health (lancement IA, canal B2B, exigences Northgate)\n- Les obligations réglementaires relatives aux entretiens professionnels (loi du 5 septembre 2018, bilan sexennal, sanctions) ne sont pas mentionnées ou sont erronées\n- Aucune mesure concrète n'est proposée pour adapter les parcours de formation aux situations de handicap des collaborateurs concernés\n- La présentation au CSE ne respecte pas les exigences légales de consultation (délai de remise des documents, nombre de réunions obligatoires, droit d'information des élus)\n\nRéponds EXACTEMENT dans ce format :\n### 4.1 — [Satisfaisant / Insuffisant / Absent]\nUne phrase de retour précise et exigeante.\n\n### 4.2 — [Satisfaisant / Insuffisant / Absent]\nUne phrase de retour précise et exigeante.\n\n### 4.3 — [Satisfaisant / Insuffisant / Absent]\nUne phrase de retour précise et exigeante.\n\n### 4.4 — [Satisfaisant / Insuffisant / Absent]\nUne phrase de retour précise et exigeante.\n\n### 4.5 — [Satisfaisant / Insuffisant / Absent]\nUne phrase de retour précise et exigeante.\n\n### 4.6 — [Satisfaisant / Insuffisant / Absent]\nUne phrase de retour précise et exigeante.\n\n### 4.7 — [Satisfaisant / Insuffisant / Absent]\nUne phrase de retour précise et exigeante.\n\n## Niveau global\n**[Non conforme / Partiellement conforme / Conforme / Conforme avec distinction]**\n\n## Question de jury\nUne question dérangeante que tu poserais à l'oral.",
+  "juryPrompt": "Tu es le jury certifiant du bloc 4 (Chargé de développement des ressources humaines — CDRH, RNCP 38438).\nContexte : Projet Pulse Forward — Lumio Health face au décrochage compétences · 14 mars 2025.\nTu évalues une production étudiante aux critères RNCP stricts. Sois exigeant mais juste.\nCritères éliminatoires :\n- Les rôles et responsabilités des acteurs impliqués dans le déploiement du PDC (RRH, managers, CSE, OPCO, prestataires) ne sont pas clairement identifiés et distingués dans la copie\n- Aucun indicateur d'impact mesurable n'est proposé pour évaluer l'efficacité des actions de formation (absence de tableau de bord ou d'indicateurs chiffrés)\n- Le plan de développement des compétences ne fait pas référence à au moins un dispositif de financement réglementaire (CPF, Pro-A, OPCO, plan de formation légal) avec sa modalité de mise en œuvre\n- La cartographie des métiers et compétences est absente ou non reliée aux objectifs stratégiques de Lumio Health (lancement IA, canal B2B, exigences Northgate)\n- Les obligations réglementaires relatives aux entretiens professionnels (loi du 5 septembre 2018, bilan sexennal, sanctions) ne sont pas mentionnées ou sont erronées\n- Aucune mesure concrète n'est proposée pour adapter les parcours de formation aux situations de handicap des collaborateurs concernés\n- La présentation au CSE ne respecte pas les exigences légales de consultation (délai de remise des documents, nombre de réunions obligatoires, droit d'information des élus)\n\nRéponds EXACTEMENT dans ce format :\n### 4.1 — [Satisfaisant / Insuffisant / Absent]\nUne phrase de retour précise et exigeante.\n\n### 4.2 — [Satisfaisant / Insuffisant / Absent]\nUne phrase de retour précise et exigeante.\n\n### 4.3 — [Satisfaisant / Insuffisant / Absent]\nUne phrase de retour précise et exigeante.\n\n### 4.4 — [Satisfaisant / Insuffisant / Absent]\nUne phrase de retour précise et exigeante.\n\n### 4.5 — [Satisfaisant / Insuffisant / Absent]\nUne phrase de retour précise et exigeante.\n\n### 4.6 — [Satisfaisant / Insuffisant / Absent]\nUne phrase de retour précise et exigeante.\n\n### 4.7 — [Satisfaisant / Insuffisant / Absent]\nUne phrase de retour précise et exigeante.\n\n## Niveau global\n**[Non conforme / Partiellement conforme / Conforme / Conforme avec distinction]**\n\n## Question de jury\nUne question dérangeante que tu poserais à l'oral.",
   "livrableMinMots": 520,
   "noteReflexiveMinMots": 100
 };

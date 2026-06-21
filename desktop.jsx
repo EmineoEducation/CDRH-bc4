@@ -232,7 +232,6 @@ function Dock({ openApp, openWindows, livrableUnlocked }) {
     { id: 'notepad', label: 'Bloc-notes' },
     { id: 'slack', label: 'Slack' },
     { id: 'calendar', label: 'Calendrier' },
-    { id: 'jefferson', label: 'Jefferson' },
     { id: 'trash', label: 'Corbeille' }
   ];
   const items = livrableUnlocked
@@ -812,6 +811,7 @@ Camille`
         <PacTimeline />
         <NotificationStack notifications={notifications} onDismiss={dismissNotif} onClick={clickNotif} />
         {/* Bouton ? — aide à la demande */}
+        <JeffersonFab openApp={openApp} isOpen={windows.some(w => w.app === 'jefferson')} />
         <button
           onClick={() => openApp('finder', { openFolder: 'guide' })}
           title="Guide de mission"
@@ -832,6 +832,45 @@ Camille`
         >?</button>
       </div>
     </WindowsCtx.Provider>
+  );
+}
+
+
+// ═════ Jefferson FAB ═══════════════════════════════════════
+// Bouton flottant en bas à droite (hors dock). États visuels :
+// idle (gris), talking (animé quand la fenêtre Jefferson est ouverte).
+function JeffersonFab({ openApp, isOpen }) {
+  const Icon = window.JeffersonIcon;
+  const [hover, setHover] = useWmState(false);
+  useWmEffect(() => {
+    if (!document.getElementById('jefferson-fab-style')) {
+      const s = document.createElement('style'); s.id = 'jefferson-fab-style';
+      s.textContent = '@keyframes jefferson-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}.jefferson-talking{animation:jefferson-pulse 1.4s ease-in-out infinite}';
+      document.head.appendChild(s);
+    }
+  }, []);
+  return (
+    <button
+      onClick={() => openApp('jefferson')}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      title="Jefferson · Guide PAC"
+      className={isOpen ? 'jefferson-talking' : ''}
+      style={{
+        position: 'fixed', bottom: 22, right: 22, zIndex: 9998,
+        width: 60, height: 60, borderRadius: '50%',
+        background: 'rgba(245,243,239,0.78)',
+        backdropFilter: 'blur(20px) saturate(1.4)',
+        WebkitBackdropFilter: 'blur(20px) saturate(1.4)',
+        border: '1px solid rgba(255,255,255,0.5)',
+        boxShadow: hover ? '0 14px 36px rgba(20,24,36,0.28)' : '0 8px 22px rgba(20,24,36,0.18)',
+        cursor: 'pointer', padding: 0,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        transition: 'transform 220ms cubic-bezier(.34,1.56,.64,1), box-shadow 220ms ease',
+        transform: hover ? 'translateY(-3px) scale(1.04)' : 'none'
+      }}>
+      {Icon ? <Icon size={42} /> : <span style={{ fontSize: 24 }}>🐰</span>}
+    </button>
   );
 }
 
