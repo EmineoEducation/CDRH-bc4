@@ -3,18 +3,31 @@
 //  corporate / article / linkedin / search / fausse-une / portrait
 //  Aucune narration hardcodée. PAC · Éminéo
 // ══════════════════════════════════════════════════════════════
-const { useState: useStateBrowser } = React;
+const { useState: useStateBrowser, useEffect: useStateBrowserEffect } = React;
 
 function BrowserApp({ openTab, openPortrait }) {
   const D = window.LUMIO_DATA || {};
   const B = D.browser || {};
   const portraits = D.portraits || [];
 
-  // Portrait demandé via Finder
-  const portraitMeta = openPortrait ? portraits.find(p => p.key === openPortrait) : null;
-  const portraitTab = portraitMeta ? { ...portraitMeta, id: portraitMeta.id || ('portrait-' + portraitMeta.key), type: 'portrait' } : null;
+  // Portraits demandés via Finder : on les ACCUMULE en onglets (un nouvel onglet
+  // par portrait ouvert), au lieu de remplacer l'onglet courant.
+  const [openedPortraitKeys, setOpenedPortraitKeys] = useStateBrowser(openPortrait ? [openPortrait] : []);
+  const [activeTab, setActiveTab] = useStateBrowser(openPortrait ? ('portrait-' + openPortrait) : (openTab || null));
 
-  // Onglets : sites pilotés par data + articles presse + fausse Une (Acte 2) + portrait
+  useStateBrowserEffect(() => {
+    if (openPortrait) {
+      setOpenedPortraitKeys(keys => keys.includes(openPortrait) ? keys : [...keys, openPortrait]);
+      setActiveTab('portrait-' + openPortrait);
+    }
+  }, [openPortrait]);
+
+  const portraitTabs = openedPortraitKeys
+    .map(k => portraits.find(p => p.key === k))
+    .filter(Boolean)
+    .map(p => ({ ...p, id: p.id || ('portrait-' + p.key), type: 'portrait' }));
+
+  // Onglets : sites pilotés par data + articles presse + fausse Une (Acte 2) + portraits
   const sites = (B.sites || []).map(s => ({ ...s }));
   const articleTabs = (D.pressArticles || []).map((a, i) => ({
     id: 'press-' + i,
@@ -38,21 +51,18 @@ function BrowserApp({ openTab, openPortrait }) {
     type: 'fausse-une'
   }] : [];
 
-  const TABS = [...sites, ...articleTabs, ...uneTab, ...(portraitTab ? [portraitTab] : [])];
+  const TABS = [...sites, ...articleTabs, ...uneTab, ...portraitTabs];
   if (TABS.length === 0) TABS.push({ id: 'blank', favicon: '·', faviconColor: '#5b6b85', host: '', title: 'Nouvel onglet', url: 'about:blank', type: 'blank' });
 
-  const initialTab = portraitTab ? portraitTab.id
-    : (openTab && TABS.find(t => t.id === openTab)) ? openTab
-    : (TABS[0] && TABS[0].id);
-  const [activeTab, setActiveTab] = useStateBrowser(initialTab);
-  const tab = TABS.find(t => t.id === activeTab) || TABS[0];
+  const effectiveActive = (activeTab && TABS.find(t => t.id === activeTab)) ? activeTab : (TABS[0] && TABS[0].id);
+  const tab = TABS.find(t => t.id === effectiveActive) || TABS[0];
 
   return (
     <div style={browserStyles.app}>
       <div style={browserStyles.tabBar}>
         {TABS.map(t => (
           <div key={t.id} onClick={() => setActiveTab(t.id)}
-            style={{ ...browserStyles.tab, ...(activeTab === t.id ? browserStyles.tabActive : {}) }}>
+            style={{ ...browserStyles.tab, ...(effectiveActive === t.id ? browserStyles.tabActive : {}) }}>
             <div style={{ ...browserStyles.favicon, background: t.faviconColor }}>{t.favicon}</div>
             <span style={browserStyles.tabTitle}>{t.title}</span>
             <span style={browserStyles.tabClose}>×</span>
