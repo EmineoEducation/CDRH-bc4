@@ -466,6 +466,17 @@ function WelcomeBriefCard({ onClose, studentName }) {
 
 // ─── ROOT ────────────────────────────────────────────────────
 // Lit les URL params transmis par le portail (?p=Prénom&n=Nom&e=email).
+// ══════════════════════════════════════════════════════════════
+//  Redirect portail — aucun écran intermédiaire dans le PAC.
+//  L'identité vient TOUJOURS du portail (?p=&n=&e=&c=).
+// ══════════════════════════════════════════════════════════════
+function getPortalUrl() {
+  var h = (window.location.hostname || '').toLowerCase();
+  if (h.indexOf('cdrh') >= 0) return 'https://cdrh-pac.vercel.app';
+  if (h.indexOf('lumio') >= 0) return 'https://msmc-pac.vercel.app';
+  return 'https://emineo-pac.vercel.app';
+}
+
 // Si les 3 sont présents ET email valide → bypass NameScreen + lockscreen.
 function readPortalParams() {
   try {
@@ -480,7 +491,7 @@ function readPortalParams() {
 }
 
 function Root() {
-  const [phase, setPhase] = useRootState('loading'); // loading | name | login | brief | desktop
+  const [phase, setPhase] = useRootState('loading'); // loading | brief | desktop
   const [studentName, setStudentName] = useRootState('');
   const [showLogin, setShowLogin] = useRootState(false);
   const [sessionId, setSessionId] = useRootState(null);
@@ -511,9 +522,9 @@ function Root() {
 
     // ── 2. Session existante en cache ──
     const savedId = localStorage.getItem('lumio_sid');
-    if (!savedId) { setPhase('name'); return; }
+    if (!savedId) { window.location.replace(getPortalUrl()); return; }
     window.LUMIO_SESSION.load(savedId).then(session => {
-      if (!session || !session.studentName) { setPhase('name'); return; }
+      if (!session || !session.studentName) { window.location.replace(getPortalUrl()); return; }
       // Session trouvée — restaurer
       const n = session.studentName;
       setStudentName(n);
@@ -561,9 +572,9 @@ function Root() {
   };
 
   const logout = () => {
-    window.LUMIO_SESSION.save(sessionId, { phase: 'login' });
-    setPhase('login');
-    setShowLogin(true);
+    if (sessionId) window.LUMIO_SESSION.clear(sessionId);
+    localStorage.removeItem('lumio_sid');
+    window.location.replace(getPortalUrl());
   };
 
   const resetSession = () => {
@@ -582,10 +593,8 @@ function Root() {
 
   return (
     <>
-      {phase === 'name' && <NameScreen onConfirm={handleNameConfirm} />}
       {phase === 'desktop' && <window.LumioDesktop onLogout={logout} studentName={studentName} timerStart={timerStart} />}
       {phase === 'brief' && <WelcomeBriefCard onClose={dismissBrief} studentName={studentName} />}
-      {showLogin && phase !== 'name' && <LoginScreen onLogin={handleLogin} studentName={studentName} />}
     </>
   );
 }
