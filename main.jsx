@@ -378,9 +378,9 @@ function Root() {
   // Au montage : tenter de restaurer une session existante
   useRootEffect(() => {
     const savedId = localStorage.getItem('lumio_sid');
-    if (!savedId) { setPhase('name'); return; }
+    if (!savedId) { setPhase('brief'); return; }
     window.LUMIO_SESSION.load(savedId).then(session => {
-      if (!session || !session.studentName) { setPhase('name'); return; }
+      if (!session || !session.studentName) { setPhase('brief'); return; }
       // Session trouvée — restaurer
       const n = session.studentName;
       setStudentName(n);
@@ -402,9 +402,8 @@ function Root() {
     setSessionId(sid);
     setStudentName(name);
     applyStudent(name, studentEmail || `${name.split(' ')[0].toLowerCase()}@consult.fr`);
-    window.LUMIO_SESSION.save(sid, { studentName: name, studentEmail: studentEmail || '', phase: 'login' });
-    setShowLogin(true);
-    setPhase('login');
+    window.LUMIO_SESSION.save(sid, { studentName: name, studentEmail: studentEmail || '', phase: 'brief' });
+    setPhase('brief');
   };
 
   const handleLogin = () => {
@@ -444,10 +443,10 @@ function Root() {
 
   return (
     <>
-      {phase === 'name' && <NameScreen onConfirm={handleNameConfirm} />}
+      {/* NameScreen supprimé — identification via portail cdrh-pac */}
       {phase === 'desktop' && <window.LumioDesktop onLogout={logout} studentName={studentName} timerStart={timerStart} />}
       {phase === 'brief' && <WelcomeBriefCard onClose={dismissBrief} studentName={studentName} />}
-      {showLogin && phase !== 'name' && <LoginScreen onLogin={handleLogin} studentName={studentName} />}
+      {/* LoginScreen supprimé — identification via portail cdrh-pac */}
     </>
   );
 }
