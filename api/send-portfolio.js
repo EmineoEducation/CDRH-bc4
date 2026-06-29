@@ -10,6 +10,15 @@ import { createHash } from 'crypto';
 const PORTAIL_URL = 'https://cdrh-pac.vercel.app/api/progress';
 const BLOC_ID     = 'bc4';
 
+// ── Mapping campus → email RP (Sylvain complétera) ──
+const CAMPUS_RP = {
+  'paris':    ['chloe.guyot@cesacom.fr', 'celine.maheo@cesacom.fr'],
+  'nantes':   ['manon.parageaud@cesacom.fr', 'lara.naccache@emineo-education.fr'],
+  'bordeaux': ['anthony.nabli@emineo-education.fr'],
+  'le mans':  ['etienne.azerad@cesacom.fr'],
+  'lemans':   ['etienne.azerad@cesacom.fr'],
+};
+
 function hashEmail(email) {
   return createHash('sha256')
     .update(email.toLowerCase().trim())
