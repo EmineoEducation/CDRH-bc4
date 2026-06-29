@@ -14,7 +14,7 @@ function VoiceApp() {
     id: `memo-${i}`,
     label: v.title,
     date: v.date || '',
-    durationSec: v.durationSec || 60
+    durationSec: v.durationSec || (v.duration ? (function(d){ const p=d.split(':'); return parseInt(p[0]||0)*60+parseInt(p[1]||0); })(v.duration) : 60)
   }));
 
   const safeMemos = memos.length ? memos : [{ id: 'memo-0', label: '—', date: '', durationSec: 1, transcript: '', author: '', role: '' }];
@@ -94,7 +94,7 @@ function VoiceApp() {
               ▶ Appuie sur lecture pour entendre l'entretien.<br /><span style={{ fontSize: 11 }}>(la transcription apparaîtra au fil de l'écoute)</span>
             </div>
           ) : (
-            <div style={voiceStyles.transcriptText}>{displayTranscript ? '«\u00A0' : ''}{displayTranscript}{playing && '▌'}{position >= selected.durationSec && displayTranscript ? '\u00A0»' : ''}</div>
+            <div style={voiceStyles.transcriptText}>\u00AB\u00A0{displayTranscript}{playing && '▌'}{position >= selected.durationSec && '\u00A0\u00BB'}</div>
           )}
         </div>
       </div>
