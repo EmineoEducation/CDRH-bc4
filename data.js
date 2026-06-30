@@ -166,7 +166,36 @@ window.LUMIO_DATA = {
         "channel": "DM"
       }
     ]
-  }
+  },
+  "voiceMemos": [
+    {
+      "title": "Cartographie compétences — on part de zéro",
+      "author": "Isabelle Kwan",
+      "role": "Directrice des Ressources Humaines",
+      "date": "2 avril 2025",
+      "context": "mémo dicté après audit interne",
+      "durationSec": 51,
+      "transcript": "J'ai terminé l'état des lieux. La cartographie des compétences est quasi inexistante. Les entretiens professionnels ont été réalisés pour 34 % des salariés seulement — et la plupart datent de plus d'un an. Le plan de formation actuel est centré sur des formations bureautiques génériques qui ne correspondent ni aux besoins IA annoncés par Théo, ni à l'ouverture du canal B2B santé de Camille. On a des collaborateurs qui font de l'analyse de données au quotidien sans aucune formation certifiante en data. Et on prétend lancer de l'IA prédictive dans dix-huit mois. L'écart entre l'ambition et la réalité des compétences est vertigineux."
+    },
+    {
+      "title": "IA prédictive — l'équipe n'est pas prête",
+      "author": "Théo Marczak",
+      "role": "CEO Lumio Health",
+      "date": "5 avril 2025",
+      "context": "mémo dicté après point technique",
+      "durationSec": 45,
+      "transcript": "J'ai fait un point avec le lead dev sur l'intégration de l'IA prédictive dans l'algorithme de détection du stress. Sa réponse est claire : avec les compétences actuelles de l'équipe, on ne peut pas livrer dans les délais annoncés. Il nous manque au minimum deux profils machine learning, et les développeurs actuels n'ont pas de formation en traitement de données de santé. Soit on recrute, soit on forme, soit on sous-traite — mais on ne peut pas prétendre que l'équipe actuelle suffit. C'est un arbitrage stratégique, pas un simple problème RH."
+    },
+    {
+      "title": "Gap compétences B2B santé — mon équipe décroche",
+      "author": "Camille Ott",
+      "role": "Responsable partenariats B2B",
+      "date": "8 avril 2025",
+      "context": "mémo dicté après réunion d'équipe",
+      "durationSec": 43,
+      "transcript": "Mon équipe est composée de commerciaux formés au B2B tech classique. Depuis qu'on a ouvert le canal santé-entreprise, ils doivent parler HDS, RGPD santé, conformité dispositifs médicaux, et dialogue social avec les CSE. Personne n'a été formé sur ces sujets. Résultat : les rendez-vous avec les DSI et DPO des grands comptes santé tournent court parce qu'on n'a pas le vocabulaire. J'ai besoin d'un plan de montée en compétences ciblé et rapide — pas une formation catalogue, un vrai parcours adapté à nos enjeux terrain."
+    }
+  ]
 };
 
 window.PAC_CONFIG = {
