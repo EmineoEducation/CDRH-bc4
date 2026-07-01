@@ -407,9 +407,15 @@ function Desktop({ onLogout }) {
     return app + '::' + key;
   };
 
-  const openApp = (app, props = {}) => {
+  const openApp = (app, rawProps = {}) => {
     const meta = APP_META[app];
     if (!meta) return;
+    // Le Finder envoie parfois `docId` de façon générique ; chaque app attend son propre nom de prop.
+    let props = rawProps;
+    if (props.docId && !props.openDoc && !props.openId && !props.openNote) {
+      const DOC_PROP = { pdf: 'openDoc', mail: 'openId', notes: 'openNote' };
+      if (DOC_PROP[app]) props = { ...props, [DOC_PROP[app]]: props.docId };
+    }
     if (window.__onAppOpened) window.__onAppOpened(app);
     setWindows(ws => {
       const sig = winSignature(app, props);
