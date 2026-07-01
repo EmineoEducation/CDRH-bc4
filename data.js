@@ -1136,3 +1136,21 @@ window.PASS_CONFIG = window.PAC_CONFIG;
   }
 })();
 // === [Chantier PDF+Browser] fin ===
+
+// === [Portrait Isabelle Kwan] ajout D.portraits[] + Finder — 01/07/2026 ===
+// Fichiers requis en complement : portraits/Isabelle_Kwan.png + portraits/portrait_isabelle_kwan.html
+(function() {
+  var D = window.LUMIO_DATA;
+  if (!D) return;
+  D.portraits = D.portraits || [];
+  if (!D.portraits.some(function(p) { return p.key === 'isabelle_kwan'; })) {
+    D.portraits.push({ key: 'isabelle_kwan', title: 'Isabelle Kwan', file: 'portraits/portrait_isabelle_kwan.html' });
+  }
+  if (D.finder && D.finder.folders && D.finder.folders.portraits) {
+    var items = D.finder.folders.portraits.items;
+    if (!items.some(function(it) { return it.props && it.props.openPortrait === 'isabelle_kwan'; })) {
+      items.push({ kind: 'portrait', name: 'Isabelle Kwan', app: 'browser', props: { openPortrait: 'isabelle_kwan' } });
+    }
+  }
+})();
+// === [Portrait Isabelle Kwan] fin ===
