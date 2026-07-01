@@ -196,6 +196,30 @@ window.LUMIO_DATA = {
       "transcript": "Mon équipe est composée de commerciaux formés au B2B tech classique. Depuis qu'on a ouvert le canal santé-entreprise, ils doivent parler HDS, RGPD santé, conformité dispositifs médicaux, et dialogue social avec les CSE. Personne n'a été formé sur ces sujets. Résultat : les rendez-vous avec les DSI et DPO des grands comptes santé tournent court parce qu'on n'a pas le vocabulaire. J'ai besoin d'un plan de montée en compétences ciblé et rapide — pas une formation catalogue, un vrai parcours adapté à nos enjeux terrain."
     }
   ]
+,
+  "finder": {
+    "folders": {
+      "guide": {
+        "title": "Guide de mission",
+        "sidebar": "⌘ Guide",
+        "icon": "📕",
+        "items": [
+          { "kind": "mail", "name": "Brief de mission", "app": "mail", "props": { "openId": "brief" } }
+        ]
+      },
+      "espace": {
+        "title": "Espace de travail",
+        "sidebar": "Espace de travail",
+        "icon": "📁",
+        "items": [
+          { "kind": "mail", "name": "Boîte mail", "app": "mail", "props": {} },
+          { "kind": "note", "name": "Notes", "app": "notes", "props": {} },
+          { "kind": "audio", "name": "Mémos vocaux", "app": "voice", "props": {} }
+        ]
+      }
+    },
+    "order": ["guide", "espace"]
+  }
 };
 
 window.PAC_CONFIG = {
