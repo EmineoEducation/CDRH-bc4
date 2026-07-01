@@ -1,5 +1,5 @@
 // ══════════════════════════════════════════════════════════════
-//  NOTES APP — BC2 · Note confidentielle Théo + contexte Lumio
+//  NOTES APP — note confidentielle du commanditaire + contexte Lumio
 // ══════════════════════════════════════════════════════════════
 
 function NotesApp({ openNote }) {
@@ -9,7 +9,7 @@ function NotesApp({ openNote }) {
       id: 'theo',
       title: D.theoNote.title,
       date: D.theoNote.date,
-      preview: 'Réflexions avant board — pour moi seul…',
+      preview: 'Réflexions personnelles — pour moi seul…',
       theo: D.theoNote
     },
     {
@@ -18,12 +18,6 @@ function NotesApp({ openNote }) {
       date: 'Mise à jour oct. 2026',
       preview: 'Lumio Health est une medtech parisienne fondée en 2018…',
       contexte: D.contexte
-    },
-    {
-      id: 'd1', title: 'Préparer le board — points à tenir', date: '11 oct. 2026',
-      preview: 'Ne pas céder sur la MDR · Churn réel à ne pas lâcher…',
-      distractor: false,
-      body: '— Ne pas céder sur le calendrier MDR (réponse TÜV dans 80 jours max)\n— Accord Darty : décider si on le révèle ou pas\n— Churn réel 9 % : si Jakob le sait déjà, je suis grillé\n— Budget : 200K€ c\'est tenable si on séquence bien\n— Question à poser à Jakob : si on attend MDR, la clause de sortie s\'active à quelle date exactement ?'
     },
     {
       id: 'd2', title: 'Notes perso — week-end', date: '10 oct. 2026',
@@ -83,7 +77,7 @@ function TheoNoteRender({ data }) {
         {data.author} · {data.date}
       </div>
       <div style={{ background: '#fff8d8', border: '1px solid #c4420f', padding: '10px 14px', borderRadius: 4, fontSize: 12, color: '#5a3010', lineHeight: 1.55, marginBottom: 20, fontFamily: 'var(--font-sans)' }}>
-        ⚠ Ce document n'est pas destiné à être partagé. Il a été mis dans votre espace par Sonia — « à vous de juger comment l'utiliser ».
+        ⚠ Ce document n'est pas destiné à être partagé. Il a été mis dans votre espace par votre commanditaire — « à vous de juger comment l'utiliser ».
       </div>
       <div style={{ fontSize: 14.5, lineHeight: 1.8, color: 'var(--ink-soft)', whiteSpace: 'pre-wrap' }}>
         {data.body}

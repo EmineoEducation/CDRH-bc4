@@ -1,137 +1,178 @@
 // ══════════════════════════════════════════════════════════════
-//  SLACK APP — BC2 · Jakob Rein commanditaire IA
-//  PAC · Parcours Activation Compétences · Éminéo · MSMC
+//  SLACK APP — générique · persona dynamique (cfg.commanditaire)
+//  PAC · Parcours Activation Compétences · Éminéo
+//  Ne contient aucun contenu figé par affaire : tout est lu depuis
+//  window.LUMIO_DATA (D) et window.PAC_CONFIG / window.PASS_CONFIG (cfg).
 // ══════════════════════════════════════════════════════════════
 const { useState: useSlackState, useEffect: useSlackEffect, useRef: useSlackRef } = React;
 
-// ─── Prompt Jakob Rein ────────────────────────────────────────
-const JAKOB_PROMPT = `Tu es Jakob Rein, Partner chez Northgate Capital, fonds américain.
+// ─── Casting Lumio Health — repères visuels de repli ─────────
+// Utilisé seulement si D.personnages ne fournit pas déjà avatar/couleur/rôle
+// pour la personne concernée. N'importe quel nom absent de cette table
+// reçoit des initiales et une couleur neutre générées automatiquement.
+const LUMIO_CAST = {
+  'Théo Marczak':   { avatar: 'TM', color: '#5c2d8f', role: 'CEO fondateur' },
+  'Sonia Ferracci': { avatar: 'SF', color: '#c4420f', role: 'Directrice Marketing' },
+  'Camille Ott':    { avatar: 'CO', color: '#0a7a6e', role: 'Responsable partenariats B2B' },
+  'Jakob Rein':     { avatar: 'JR', color: '#1b3a6b', role: 'Partner, Northgate Capital' },
+  'Yassine Morel':  { avatar: 'YM', color: '#2d6a4f', role: 'Content Manager' },
+  'Isabelle Kwan':  { avatar: 'IK', color: '#7a3b46', role: 'Directrice des Ressources Humaines' }
+};
 
-Tu attends une recommandation stratégique d'un(e) consultant(e) externe (Lou) missionné(e) par Théo Marczak pour préparer le board de vendredi. Tu n'es pas là pour aider — tu es là pour tester. Chaque hypothèse que Lou t'envoie, tu l'évalues à l'aune d'une seule logique : est-ce que ça protège mon investissement de 22 M$ ?
+function slackSlugify(name) {
+  return (name || 'contact').toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'contact';
+}
 
-Contexte que tu connais :
-- Lumio Health : medtech B2B, wearable stress, 8 ans, 180 références actives (pas 230 — tu as vu les chiffres)
-- Objectif Northgate : 20 M€ CA en 36 mois, passage B2C obligatoire selon ton term sheet
-- MDR : procédure en cours, Q2 2027 best case — mais tu sais que TÜV a émis un 3e avis en septembre (Théo te l'a dit au téléphone)
-- Budget : tension 200K€ (Théo) vs 380K€ (Sonia) — tu te fous du montant, tu veux un ROI crédible
-- Tu as une clause de sortie à 18 mois si le pivot n'est pas engagé — tu ne la mentionnes pas spontanément
-- Tu as lu la plateforme de marque de Sonia. C'est un bon document de brand. Ce n'est pas une stratégie.
+function slackAutoInitials(name) {
+  return (name || '??').split(' ').filter(Boolean).map(w => w[0]).join('').substring(0, 2).toUpperCase() || '??';
+}
 
-Ton style :
-- Anglicismes naturels ("ROI", "time to market", "make it work", "bottom line")
-- Phrases courtes. Directes. Sans politesse inutile.
-- Tu ne complimentes jamais une hypothèse — tu la pousses dans ses retranchements
-- Si Lou ne chiffre pas, tu demandes des chiffres. Si Lou ne date pas, tu demandes des dates.
-- Si Lou propose "on attend la MDR", tu demandes une lettre de l'organisme notifié
-- Si Lou propose "on pivote maintenant", tu demandes comment on vend un non-certifié en Europe post-MDR
-- Tu ne joues pas le mentor. Tu évalues.
+// ─── Construction du prompt d'évaluation (dialogue courant) ──
+function buildSlackEvalPrompt(primaryName, role, cfg, D) {
+  const contexte = (D.contexte && D.contexte.body) || '';
+  const brief = (D.briefEmail && D.briefEmail.body) || '';
+  const titre = cfg.titre || cfg.epreuve || 'la mission en cours';
+  return `Tu es ${primaryName}, ${role} chez Lumio Health.
 
-Format de réponse :
+Tu accompagnes ou tu as mandaté un·e consultant·e externe sur la mission suivante : "${titre}".
+
+Contexte factuel dont tu disposes — n'invente aucun fait qui n'y figure pas :
+"""
+${contexte}
+"""
+
+Le cadrage de la mission, tel qu'il a été transmis :
+"""
+${brief}
+"""
+
+Ta posture dans cet échange Slack :
+- Tu évalues les hypothèses du/de la consultant·e sans jamais donner la réponse à sa place.
+- Tu relances par une question précise quand une hypothèse manque de méthode, de preuve ou de chiffres issus du dossier.
+- Tu gardes le ton et les priorités de ton rôle (${role}) — jamais un ton de coach ou de professeur.
+- Si le/la consultant·e ne s'appuie sur aucune source du dossier, tu le relèves directement.
+
+Format de réponse strict :
 - 2 à 3 messages courts séparés par "---SPLIT---"
 - Chaque message : 1 à 3 phrases
 - Termine par une question précise ou une demande concrète
 - Maximum 150 mots cumulés
+- N'écris jamais "Bonjour" ni "Merci" en ouverture. Entre directement dans le sujet.`;
+}
 
-Ne commence jamais par "Bonjour" ou "Merci". Entre direct dans le sujet.`;
-
-// ─── Prompt réaction livrable soumis ─────────────────────────
-const JAKOB_LIVRABLE_PROMPT = `Tu es Jakob Rein, Partner Northgate Capital. Le/la consultant·e vient de te soumettre la recommandation stratégique que tu attendais pour le board. Tu l'as parcourue rapidement. Tu réagis en Slack — en 3 messages maximum, séparés par ---SPLIT---. Tu dis si ça tient la route pour un board d'investisseurs ou pas. Tu poses une question de jury : celle que tu vas poser vendredi matin à Théo si cette recommandation est mise sur la table. 120 mots maximum.`;
+// ─── Prompt de réaction au livrable soumis ────────────────────
+function buildSlackLivrablePrompt(primaryName, role, cfg) {
+  const titre = cfg.titre || cfg.epreuve || 'la mission';
+  return `Tu es ${primaryName}, ${role} chez Lumio Health. Le/la consultant·e externe vient de soumettre sa production pour "${titre}". Tu la parcours rapidement et tu réagis en Slack : dis si ça tient la route par rapport à ce que tu attendais, ce qui te convainc ou t'interroge encore, puis termine par la question exigeante que tu poserais avant de la valider. 2 à 3 messages séparés par "---SPLIT---", 120 mots maximum cumulés. Ne commence jamais par "Bonjour" ou "Merci".`;
+}
 
 function SlackApp({ openChannel }) {
   const D = window.LUMIO_DATA;
-  const cfg = window.PASS_CONFIG;
+  const cfg = window.PAC_CONFIG || window.PASS_CONFIG || {};
+
+  // ── Repères visuels : D.personnages (si présent) prime sur LUMIO_CAST ──
+  const personnagesData = D.personnages || {};
+  const overrides = {};
+  Object.keys(personnagesData).forEach(k => {
+    const p = personnagesData[k];
+    if (p && p.nom) overrides[p.nom] = { avatar: p.avatar, color: p.couleur, role: p.role };
+  });
+  const castOf = (name) => overrides[name] || LUMIO_CAST[name] || {
+    avatar: slackAutoInitials(name), color: '#5b6b85', role: ''
+  };
+
+  const slackSeed = D.slackMessages || {};
+  const primaryName = cfg.commanditaire
+    || (slackSeed.initial && slackSeed.initial[0] && slackSeed.initial[0].from)
+    || 'Commanditaire';
+  const primaryId = slackSlugify(primaryName);
+  const primaryRole = castOf(primaryName).role || 'commanditaire de la mission';
+  const primaryFirst = primaryName.split(' ')[0];
+
+  // ── DM list construite depuis les personnes réellement citées dans D.slackMessages ──
+  const seenNames = [];
+  const pushName = (n) => { if (n && seenNames.indexOf(n) === -1) seenNames.push(n); };
+  pushName(primaryName);
+  (slackSeed.initial || []).forEach(m => pushName(m.from));
+  (slackSeed.delayed || []).forEach(m => pushName(m.from));
+
+  const dms = seenNames.map(name => {
+    const info = castOf(name);
+    return { id: slackSlugify(name), name, avatar: info.avatar, color: info.color, status: name === primaryName ? 'online' : 'away' };
+  });
 
   const channels = [
-    { id: 'general', name: 'général', type: 'channel', members: 12 },
-    { id: 'mission-board', name: 'mission-board-reco', type: 'channel', members: 4, special: true },
-    { id: 'random', name: 'random', type: 'channel', members: 11 },
-  ];
-  const dms = [
-    { id: 'jakob', name: 'Jakob Rein', avatar: 'JR', color: '#1b3a6b', status: 'online' },
-    { id: 'sonia', name: 'Sonia Ferracci', avatar: 'SF', color: '#c4420f', status: 'online' },
-    { id: 'camille', name: 'Camille Ott', avatar: 'CO', color: '#0a7a6e', status: 'online' },
-    { id: 'theo', name: 'Théo Marczak', avatar: 'TM', color: '#5c2d8f', status: 'away' }
+    { id: 'general', name: 'général', type: 'channel', members: 12 }
   ];
 
-  const [unreads, setUnreads] = useSlackState({ 'mission-board': 1, sonia: 1 });
-  const [activeId, setActiveId] = useSlackState(openChannel || 'jakob');
-  const activeIdRef = useSlackRef(openChannel || 'jakob');
+  const [unreads, setUnreads] = useSlackState({});
+  const [activeId, setActiveId] = useSlackState(openChannel || primaryId);
+  const activeIdRef = useSlackRef(openChannel || primaryId);
   const setActive = (id) => { activeIdRef.current = id; setActiveId(id); };
   const [chatHistory, setChatHistory] = useSlackState({});
   const [draft, setDraft] = useSlackState('');
   const [sending, setSending] = useSlackState(false);
+  const [exchangeCount, setExchangeCountLocal] = useSlackState(0);
   const scrollRef = useSlackRef(null);
 
-  const studentName = D?.student?.name || "Lou Bertrand";
+  const studentName = (D && D.student && D.student.name) || 'Lou Bertrand';
 
-  // Messages initiaux
-  const seed = {
-    jakob: [
-      { from: 'Jakob Rein', avatar: 'JR', color: '#1b3a6b', time: '07:25', text: 'Lou. Théo me dit que vous préparez la recommandation pour vendredi.' },
-      { from: 'Jakob Rein', avatar: 'JR', color: '#1b3a6b', time: '07:25', text: "One thing : I need a decision, not a diagnosis. If the document doesn't end with a clear recommendation, it's not useful to me." }
-    ],
-    sonia: [
-      { from: 'Sonia Ferracci', avatar: 'SF', color: '#c4420f', time: '07:31', text: "Lou, je sais que Théo t'a briefé. Si tu veux mon angle sur la strat avant de plonger dans les docs, je suis dispo." },
-      { from: 'Sonia Ferracci', avatar: 'SF', color: '#c4420f', time: '07:32', text: "Il y a des choses qu'il ne t'a pas dites. Notamment sur l'accord Darty. Dis-moi si tu veux qu'on se parle." }
-    ],
-    camille: [
-      { from: 'Camille Ott', avatar: 'CO', color: '#0a7a6e', time: '07:44', text: "Hello 👋 Bon courage pour la reco. Si tu veux les vrais chiffres du terrain — pas ceux du deck —, je suis là." }
-    ],
-    theo: [
-      { from: 'Théo Marczak', avatar: 'TM', color: '#5c2d8f', time: '07:20', text: "Lou — bien reçu mon mail ? Le board c'est vendredi. Jeudi soir max pour la reco." }
-    ],
-    'mission-board': [
-      { from: 'Théo Marczak', avatar: 'TM', color: '#5c2d8f', time: 'lun. 09:12', text: "J'ai missionné Lou pour préparer la recommandation board. @sonia @jakob merci de lui faciliter l'accès aux infos utiles." },
-      { from: 'Sonia Ferracci', avatar: 'SF', color: '#c4420f', time: 'lun. 09:34', text: "Reçu. Lou — je t'ai ajouté sur les canaux pertinents. Les docs sont sur ton espace partagé." },
-      { from: 'Jakob Rein', avatar: 'JR', color: '#1b3a6b', time: 'lun. 16:18', text: "I'll be in Paris Wednesday evening. Expecting a draft before dinner." }
-    ],
-    general: [
-      { from: 'lumio-bot', avatar: '🤖', color: '#9a9ea8', time: '08:00', text: '☀️ Bonjour à tous · 18 personnes connectées ce matin' }
-    ]
-  };
-
+  // ── Seed initial depuis D.slackMessages ──
   useSlackEffect(() => {
-    if (Object.keys(chatHistory).length === 0) {
-      setChatHistory(seed);
-    }
+    if (Object.keys(chatHistory).length > 0) return;
+    const seed = {};
+    seed[primaryId] = (slackSeed.initial || []).map(m => {
+      const info = castOf(m.from);
+      return { from: m.from, avatar: info.avatar, color: info.color, time: m.time || '', text: m.text };
+    });
+    seed.general = [
+      { from: 'lumio-bot', avatar: '🤖', color: '#9a9ea8', time: '08:00', text: '☀️ Bonjour à tous · 18 personnes connectées ce matin' }
+    ];
+    setChatHistory(seed);
+  }, []);
+
+  // ── Révélation différée des messages "delayed" ──
+  useSlackEffect(() => {
+    const list = slackSeed.delayed || [];
+    const timers = list.map((m, i) => {
+      const match = /(\d+)\s*min/i.exec(m.time || '');
+      const mins = match ? parseInt(match[1], 10) : (i + 1) * 12;
+      const realDelayMs = Math.min(8000 + mins * 400, 30000);
+      return setTimeout(() => {
+        const chanId = slackSlugify(m.from);
+        const info = castOf(m.from);
+        setChatHistory(h => ({ ...h, [chanId]: [...(h[chanId] || []), { from: m.from, avatar: info.avatar, color: info.color, time: m.time || '', text: m.text }] }));
+        if (activeIdRef.current !== chanId) setUnreads(u => ({ ...u, [chanId]: (u[chanId] || 0) + 1 }));
+      }, realDelayMs);
+    });
+    return () => timers.forEach(t => clearTimeout(t));
   }, []);
 
   useSlackEffect(() => {
-    if (openChannel) {
-      setActive(openChannel);
-      setUnreads(u => ({ ...u, [openChannel]: 0 }));
-    }
+    if (openChannel) { setActive(openChannel); setUnreads(u => ({ ...u, [openChannel]: 0 })); }
   }, [openChannel]);
 
   useSlackEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
+    if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
   }, [chatHistory, activeId, sending]);
 
-  // Réaction de Jakob quand le livrable est soumis
+  // ── Réaction de la persona commanditaire quand le livrable est soumis ──
   useSlackEffect(() => {
     window.__onSoniaLivrableReaction = async (sections) => {
-      setActive('jakob');
+      setActive(primaryId);
       setSending(true);
-      const now = new Date();
-      const time = `${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}`;
-
       const livrableResume = Object.entries(sections || {})
         .map(([code, text]) => `${code} : ${(text || '').substring(0, 300)}`)
         .join('\n\n');
-
-      const prompt = `${JAKOB_LIVRABLE_PROMPT}\n\nRecommandation reçue :\n${livrableResume}`;
-
+      const prompt = `${buildSlackLivrablePrompt(primaryName, primaryRole, cfg)}\n\nProduction reçue :\n${livrableResume}`;
+      const info = castOf(primaryName);
       try {
         const resp = await fetch('/api/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            model: 'claude-sonnet-4-6',
-            max_tokens: 400,
-            messages: [{ role: 'user', content: prompt }]
-          })
+          body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 400, messages: [{ role: 'user', content: prompt }] })
         });
         const data = await resp.json();
         const raw = data.content?.map(b => b.text || '').join('') || '';
@@ -140,24 +181,14 @@ function SlackApp({ openChannel }) {
         for (const reply of replies) {
           await new Promise(r => setTimeout(r, delay));
           const t = new Date();
-          const tt = `${t.getHours().toString().padStart(2,'0')}:${t.getMinutes().toString().padStart(2,'0')}`;
-          setChatHistory(h => ({
-            ...h,
-            jakob: [...(h.jakob || []), { from: 'Jakob Rein', avatar: 'JR', color: '#1b3a6b', time: tt, text: reply }]
-          }));
-          if (activeIdRef.current !== 'jakob') {
-            setUnreads(u => ({ ...u, jakob: (u.jakob || 0) + 1 }));
-          }
+          const tt = `${t.getHours().toString().padStart(2, '0')}:${t.getMinutes().toString().padStart(2, '0')}`;
+          setChatHistory(h => ({ ...h, [primaryId]: [...(h[primaryId] || []), { from: primaryName, avatar: info.avatar, color: info.color, time: tt, text: reply }] }));
+          if (activeIdRef.current !== primaryId) setUnreads(u => ({ ...u, [primaryId]: (u[primaryId] || 0) + 1 }));
           delay = 1200 + reply.length * 8;
         }
-      } catch(e) {
-        setChatHistory(h => ({
-          ...h,
-          jakob: [...(h.jakob || []), { from: 'Jakob Rein', avatar: 'JR', color: '#1b3a6b', time, text: 'Received. We\'ll discuss Friday.' }]
-        }));
-        if (activeIdRef.current !== 'jakob') {
-          setUnreads(u => ({ ...u, jakob: (u.jakob || 0) + 1 }));
-        }
+      } catch (e) {
+        setChatHistory(h => ({ ...h, [primaryId]: [...(h[primaryId] || []), { from: primaryName, avatar: info.avatar, color: info.color, time: 'maintenant', text: 'Bien reçu. J\'y reviens rapidement.' }] }));
+        if (activeIdRef.current !== primaryId) setUnreads(u => ({ ...u, [primaryId]: (u[primaryId] || 0) + 1 }));
       } finally {
         setSending(false);
       }
@@ -165,78 +196,67 @@ function SlackApp({ openChannel }) {
     return () => { window.__onSoniaLivrableReaction = null; };
   }, [chatHistory]);
 
-  const isJakob = activeId === 'jakob';
+  const isPrimary = activeId === primaryId;
   const messages = chatHistory[activeId] || [];
-  const [exchangeCount, setExchangeCountLocal] = useSlackState(0);
 
   const sendMessage = async () => {
     if (!draft.trim() || sending) return;
     const text = draft.trim();
     setDraft('');
     const now = new Date();
-    const time = `${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}`;
+    const time = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
     const studentInitial = (studentName.split(' ').map(w => w[0]).join('') || 'LB').substring(0, 2).toUpperCase();
     const userMsg = { from: studentName, avatar: studentInitial, color: '#1a2436', time, text, isMe: true };
     setChatHistory(h => ({ ...h, [activeId]: [...(h[activeId] || []), userMsg] }));
 
-    if (isJakob) {
-      const newCount = exchangeCount + 1;
-      setExchangeCountLocal(newCount);
-      if (window.__onSlackExchange) window.__onSlackExchange(newCount);
-      if (window.__onSlackSent) window.__onSlackSent();
+    if (!isPrimary) return; // seule la persona commanditaire répond via l'IA
 
-      setSending(true);
-      setTimeout(async () => {
-        try {
-          const history = (chatHistory.jakob || []).filter(m => !m.typing).map(m =>
-            `${m.isMe ? studentName.split(' ')[0] : 'Jakob'}: ${m.text}`
-          ).join('\n');
-          const userPrompt = `${history}\n${studentName.split(' ')[0]}: ${text}\n\nRéponds maintenant en tant que Jakob (2-3 messages courts séparés par ---SPLIT---).`;
+    const newCount = exchangeCount + 1;
+    setExchangeCountLocal(newCount);
+    if (window.__onSlackExchange) window.__onSlackExchange(newCount);
+    if (window.__onSlackSent) window.__onSlackSent();
 
-          const resp = await fetch('/api/chat', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              model: 'claude-sonnet-4-6',
-              max_tokens: 500,
-              system: JAKOB_PROMPT,
-              messages: [{ role: 'user', content: userPrompt }]
-            })
-          });
-          if (!resp.ok) {
-            const err = await resp.json().catch(() => ({}));
-            throw new Error(err.error || `HTTP ${resp.status}`);
-          }
-          const data = await resp.json();
-          const raw = data.content?.map(b => b.text || '').join('') || '';
-          const replies = raw.split('---SPLIT---').map(s => s.trim()).filter(Boolean);
-          let delay = 800;
-          for (const reply of replies) {
-            await new Promise(r => setTimeout(r, delay));
-            const t = new Date();
-            const tt = `${t.getHours().toString().padStart(2,'0')}:${t.getMinutes().toString().padStart(2,'0')}`;
-            setChatHistory(h => ({
-              ...h,
-              jakob: [...(h.jakob || []), { from: 'Jakob Rein', avatar: 'JR', color: '#1b3a6b', time: tt, text: reply }]
-            }));
-            if (activeIdRef.current !== 'jakob') {
-              setUnreads(u => ({ ...u, jakob: (u.jakob || 0) + 1 }));
-            }
-            delay = 1400 + reply.length * 8;
-          }
-        } catch(e) {
-          setChatHistory(h => ({
-            ...h,
-            jakob: [...(h.jakob || []), { from: 'Jakob Rein', avatar: 'JR', color: '#1b3a6b', time: 'maintenant', text: 'Network issue. Send me the doc directly.' }]
-          }));
-          if (activeIdRef.current !== 'jakob') {
-            setUnreads(u => ({ ...u, jakob: (u.jakob || 0) + 1 }));
-          }
-        } finally {
-          setSending(false);
+    setSending(true);
+    setTimeout(async () => {
+      const info = castOf(primaryName);
+      try {
+        const history = (chatHistory[primaryId] || []).map(m =>
+          `${m.isMe ? studentName.split(' ')[0] : primaryFirst}: ${m.text}`
+        ).join('\n');
+        const userPrompt = `${history}\n${studentName.split(' ')[0]}: ${text}\n\nRéponds maintenant en tant que ${primaryName} (2-3 messages courts séparés par ---SPLIT---).`;
+        const resp = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-6',
+            max_tokens: 500,
+            system: buildSlackEvalPrompt(primaryName, primaryRole, cfg, D),
+            messages: [{ role: 'user', content: userPrompt }]
+          })
+        });
+        if (!resp.ok) {
+          const err = await resp.json().catch(() => ({}));
+          throw new Error(err.error || `HTTP ${resp.status}`);
         }
-      }, 600);
-    }
+        const data = await resp.json();
+        const raw = data.content?.map(b => b.text || '').join('') || '';
+        const replies = raw.split('---SPLIT---').map(s => s.trim()).filter(Boolean);
+        let delay = 800;
+        for (const reply of replies) {
+          await new Promise(r => setTimeout(r, delay));
+          const t = new Date();
+          const tt = `${t.getHours().toString().padStart(2, '0')}:${t.getMinutes().toString().padStart(2, '0')}`;
+          setChatHistory(h => ({ ...h, [primaryId]: [...(h[primaryId] || []), { from: primaryName, avatar: info.avatar, color: info.color, time: tt, text: reply }] }));
+          if (activeIdRef.current !== primaryId) setUnreads(u => ({ ...u, [primaryId]: (u[primaryId] || 0) + 1 }));
+          delay = 1400 + reply.length * 8;
+        }
+      } catch (e) {
+        setChatHistory(h => ({ ...h, [primaryId]: [...(h[primaryId] || []), { from: primaryName, avatar: info.avatar, color: info.color, time: 'maintenant', text: 'Souci réseau. Renvoie-moi ça directement.' }] }));
+        if (activeIdRef.current !== primaryId) setUnreads(u => ({ ...u, [primaryId]: (u[primaryId] || 0) + 1 }));
+      } finally {
+        setSending(false);
+      }
+    }, 600);
   };
 
   const onKeyDown = (e) => {
@@ -244,7 +264,7 @@ function SlackApp({ openChannel }) {
   };
 
   const activeMeta = [...channels, ...dms].find(x => x.id === activeId);
-  const activeColor = dms.find(d => d.id === activeId)?.color || '#1a2436';
+  const primaryInfo = castOf(primaryName);
 
   return (
     <div style={slackStyles.app}>
@@ -311,16 +331,16 @@ function SlackApp({ openChannel }) {
               </div>
             </div>
           ))}
-          {sending && isJakob && (
+          {sending && isPrimary && (
             <div style={slackStyles.message}>
-              <div style={{ ...slackStyles.msgAvatar, background: '#1b3a6b' }}>JR</div>
+              <div style={{ ...slackStyles.msgAvatar, background: primaryInfo.color }}>{primaryInfo.avatar}</div>
               <div>
                 <div style={{ display: 'flex', gap: 4, padding: '6px 0' }}>
                   <span style={slackStyles.typeDot} />
                   <span style={{ ...slackStyles.typeDot, animationDelay: '0.15s' }} />
                   <span style={{ ...slackStyles.typeDot, animationDelay: '0.3s' }} />
                 </div>
-                <div style={{ fontSize: 11, color: 'var(--ink-faint)' }}>Jakob est en train d'écrire…</div>
+                <div style={{ fontSize: 11, color: 'var(--ink-faint)' }}>{primaryFirst} est en train d'écrire…</div>
               </div>
             </div>
           )}
@@ -332,8 +352,8 @@ function SlackApp({ openChannel }) {
               value={draft}
               onChange={(e) => setDraft(e.target.value)}
               onKeyDown={onKeyDown}
-              placeholder={isJakob
-                ? 'Écris à Jakob…  (Entrée pour envoyer)'
+              placeholder={isPrimary
+                ? `Écris à ${primaryFirst}…  (Entrée pour envoyer)`
                 : `Message ${activeMeta?.type === 'channel' ? '#' + activeMeta?.name : activeMeta?.name}`}
               style={slackStyles.textarea}
               rows={2}
@@ -350,9 +370,9 @@ function SlackApp({ openChannel }) {
               </button>
             </div>
           </div>
-          {isJakob && messages.filter(m => m.isMe).length === 0 && (
+          {isPrimary && messages.filter(m => m.isMe).length === 0 && (
             <div style={{ fontSize: 11, color: 'var(--ink-faint)', textAlign: 'center', marginTop: 8, fontStyle: 'italic' }}>
-              💬 Jakob attend votre première hypothèse. Envoyez-lui votre lecture du dossier — sa réaction débloque l'accès au Livrable.
+              💬 {primaryFirst} attend votre première hypothèse. Envoyez votre lecture du dossier — sa réaction débloque l'accès au Livrable.
             </div>
           )}
         </div>
@@ -363,7 +383,7 @@ function SlackApp({ openChannel }) {
 
 const slackStyles = {
   app: { display: 'flex', height: '100%', background: 'white', overflow: 'hidden' },
-  sidebar: { width: 220, flexShrink: 0, background: '#1b3a6b', color: 'rgba(255,255,255,0.85)', padding: 0, overflowY: 'auto' },
+  sidebar: { width: 220, flexShrink: 0, background: '#3f0e40', color: 'rgba(255,255,255,0.85)', padding: 0, overflowY: 'auto' },
   workspace: { padding: '14px 16px', borderBottom: '1px solid rgba(255,255,255,0.1)' },
   section: { padding: '12px 0' },
   sectionTitle: { padding: '4px 16px', fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.55)', letterSpacing: '0.02em' },
@@ -382,7 +402,7 @@ const slackStyles = {
   composerInner: { border: '1px solid rgba(20,24,36,0.18)', borderRadius: 8, background: 'white' },
   textarea: { width: '100%', border: 'none', outline: 'none', padding: '10px 14px', fontSize: 14, fontFamily: 'inherit', resize: 'none', color: 'var(--ink)' },
   composerToolbar: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '6px 10px', borderTop: '1px solid var(--rule)' },
-  sendBtn: { background: '#1b3a6b', color: 'white', border: 'none', borderRadius: 4, padding: '4px 12px', cursor: 'pointer', fontSize: 14, fontWeight: 700 },
+  sendBtn: { background: '#3f0e40', color: 'white', border: 'none', borderRadius: 4, padding: '4px 12px', cursor: 'pointer', fontSize: 14, fontWeight: 700 },
   sendBtnDisabled: { background: 'rgba(20,24,36,0.1)', color: 'var(--ink-faint)', cursor: 'not-allowed' }
 };
 

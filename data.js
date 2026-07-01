@@ -152,7 +152,7 @@ window.LUMIO_DATA = {
   "slackMessages": {
     "initial": [
       {
-        "from": "Théo Marczak",
+        "from": "Isabelle Kwan",
         "time": "08:32",
         "text": "{{PRENOM}} — Construire de toutes pièces, en situation de ressources contraintes, un plan de développement des compétences crédible, finançable et présentable au CSE, qui permette à Lumio Health de tenir sa trajectoire de croissance sans sacrifier l'employabilité ni l'inclusion de ses 47 collaborateurs.",
         "read": true
@@ -160,7 +160,7 @@ window.LUMIO_DATA = {
     ],
     "delayed": [
       {
-        "from": "Théo Marczak",
+        "from": "Isabelle Kwan",
         "time": "+15min",
         "text": "{{PRENOM}}, dès que tu as une hypothèse solide, envoie-la moi ici.",
         "channel": "DM"
@@ -247,7 +247,7 @@ window.PAC_CONFIG = {
   "titre": "Mettre en œuvre la politique de développement des compétences",
   "epreuve": "Épreuve écrite de groupe - Dossier professionnel et Épreuve individuelle écrite - Étude de cas",
   "deadline": "14 mars 2025 · 18h00",
-  "commanditaire": "Théo Marczak",
+  "commanditaire": "Isabelle Kwan",
   "dispositif": "PAC",
   "note_reflexive": false,
   "temps": [
