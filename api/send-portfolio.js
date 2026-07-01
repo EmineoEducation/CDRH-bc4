@@ -56,7 +56,7 @@ export default async function handler(req, res) {
     let body = req.body;
     if (typeof body === 'string') body = JSON.parse(body);
 
-    const { email, studentName, portfolioHTML, bloc, date } = body || {};
+    const { email, studentName, portfolioHTML, bloc, date, campus } = body || {};
 
     if (!email || !portfolioHTML) {
       return res.status(400).json({ error: 'Champs requis manquants : email, portfolioHTML' });
@@ -108,7 +108,7 @@ export default async function handler(req, res) {
             </p>
             <p style="margin:0;font-size:14px;color:#555;line-height:1.6;">
               Ce document retrace votre parcours dans l'affaire Lumio Health et
-              l'évaluation IA de vos productions sur les critères du référentiel RNCP 38504.
+              l'évaluation IA de vos productions sur les critères du référentiel RNCP 38438.
             </p>
           </td>
         </tr>
@@ -144,7 +144,7 @@ export default async function handler(req, res) {
         <tr>
           <td style="background:#0B2B2D;padding:20px 32px;">
             <p style="margin:0;font-size:12px;color:#E3FFF0;opacity:0.6;text-align:center;">
-              Éminéo Education · RNCP 38504 · PAC ${nomBloc} · ${dateStr}
+              Éminéo Education · RNCP 38438 · PAC ${nomBloc} · ${dateStr}
             </p>
           </td>
         </tr>
@@ -165,6 +165,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         from,
         to:       [email],
+        cc:       (campus && CAMPUS_RP[(campus || '').toLowerCase()]) ? CAMPUS_RP[campus.toLowerCase()] : [],
         reply_to: [],
         subject,
         html,
