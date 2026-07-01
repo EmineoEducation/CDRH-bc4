@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Portrait · Isabelle Kwan · Liaisons Sociales Magazine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #111111;
+  --ink-2: #2a2a2a;
+  --ink-3: #555555;
+  --ink-4: #999999;
+  --rule: #e0e0e0;
+  --bg: #ffffff;
+  --accent: #1a4d7a;
+  --accent-dark: #0d3155;
+  --accent-light: #eaf1f7;
+  --gold: #a8842a;
+  --ff-display: 'Libre Baskerville', Georgia, serif;
+  --ff-body: 'Barlow', sans-serif;
+  --ff-cond: 'Barlow Condensed', sans-serif;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--ff-body);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* MASTHEAD */
+.masthead {
+  border-bottom: 3px solid var(--accent);
+  padding: 0;
+}
+.masthead-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 40px;
+  border-bottom: 1px solid var(--rule);
+}
+.masthead-logo {
+  font-family: var(--ff-cond);
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.masthead-logo span { color: var(--accent); }
+.masthead-tagline {
+  font-family: var(--ff-cond);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+.masthead-nav {
+  display: flex;
+  gap: 0;
+  font-family: var(--ff-cond);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.masthead-nav span {
+  padding: 10px 18px;
+  color: var(--ink-3);
+  border-right: 1px solid var(--rule);
+}
+.masthead-nav span:last-child { border-right: none; }
+.masthead-nav span.active {
+  color: var(--accent);
+  background: var(--accent-light);
+}
+
+/* HERO PHOTO */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  opacity: 0.9;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.75) 100%);
+}
+.hero-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 32px 48px;
+  color: white;
+}
+.hero-rubrique {
+  font-family: var(--ff-cond);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: white;
+  display: inline-block;
+  padding: 4px 10px;
+  margin-bottom: 14px;
+}
+.hero-title {
+  font-family: var(--ff-display);
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.18;
+  color: white;
+  max-width: 740px;
+  margin-bottom: 12px;
+}
+.hero-title em { font-style: italic; color: rgba(255,255,255,0.85); }
+.hero-standfirst {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.82);
+  max-width: 620px;
+}
+
+/* META */
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 48px;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--ff-cond);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  background: #fafafa;
+}
+.meta-author { color: var(--ink-2); font-weight: 600; }
+.meta-sep { color: var(--rule); }
+.meta-tag {
+  background: var(--accent);
+  color: white;
+  padding: 3px 8px;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+
+/* ARTICLE */
+.article {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 48px 80px;
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 52px;
+}
+.article-main { min-width: 0; }
+.article-aside {}
+
+/* TEXTE */
+.article-main p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--ink-2);
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+.article-main p:first-child::first-letter {
+  font-family: var(--ff-display);
+  font-size: 58px;
+  font-weight: 700;
+  float: left;
+  margin-right: 8px;
+  margin-top: 6px;
+  line-height: 0.8;
+  color: var(--accent);
+}
+.article-main strong { font-weight: 600; color: var(--ink); }
+.article-main em { font-style: italic; }
+
+.inter-titre {
+  font-family: var(--ff-cond);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 36px 0 16px;
+  padding-left: 14px;
+  border-left: 4px solid var(--accent);
+}
+
+.pull-quote {
+  background: var(--accent-light);
+  border-left: 4px solid var(--accent);
+  padding: 24px 28px;
+  margin: 32px 0;
+}
+.pull-quote-text {
+  font-family: var(--ff-display);
+  font-size: 20px;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.pull-quote-attr {
+  font-family: var(--ff-cond);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-dark);
+}
+
+.article-footer {
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 3px solid var(--ink);
+  font-family: var(--ff-cond);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.footer-author { color: var(--ink-2); font-weight: 600; }
+
+/* ASIDE */
+.aside-bio {
+  border: 1px solid var(--rule);
+  margin-bottom: 24px;
+}
+.aside-bio-head {
+  background: var(--ink);
+  padding: 12px 16px;
+  font-family: var(--ff-cond);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: white;
+}
+.aside-bio-body { padding: 16px; }
+.bio-line {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.5;
+}
+.bio-year {
+  font-family: var(--ff-cond);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  flex-shrink: 0;
+  padding-top: 1px;
+}
+.bio-fact { color: var(--ink-2); }
+
+.aside-numbers {
+  background: var(--accent);
+  padding: 20px;
+  margin-bottom: 24px;
+  color: white;
+}
+.aside-numbers-title {
+  font-family: var(--ff-cond);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 16px;
+}
+.number-item {
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+.number-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.number-val {
+  font-family: var(--ff-cond);
+  font-size: 30px;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.number-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.4;
+  font-weight: 300;
+}
+
+.aside-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.aside-tag {
+  font-family: var(--ff-cond);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid var(--rule);
+  padding: 4px 8px;
+  color: var(--ink-3);
+}
+
+/* FOOTER SITE */
+.site-footer {
+  background: var(--ink);
+  padding: 18px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--ff-cond);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+.site-footer-logo {
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 0.06em;
+}
+.site-footer-logo span { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-top">
+    <div>
+      <div class="masthead-logo">Liaisons <span>Sociales</span></div>
+      <div class="masthead-tagline">Droit social · RH · Relations sociales</div>
+    </div>
+    <div class="masthead-nav">
+      <span>Actualité</span>
+      <span>Droit social</span>
+      <span>RH &amp; Organisations</span>
+      <span class="active">Portraits</span>
+      <span>Formation</span>
+    </div>
+  </div>
+</div>
+
+<div class="hero">
+  <img src="Isabelle_Kwan.png" alt="Isabelle Kwan, Directrice des Ressources Humaines, Lumio Health"/>
+  <div class="hero-overlay"></div>
+  <div class="hero-caption">
+    <div class="hero-rubrique">Portrait · Directrice des Ressources Humaines</div>
+    <h1 class="hero-title">Isabelle Kwan : <em>« Soit on structure avant, soit on répare après. Moi, je répare. »</em></h1>
+    <p class="hero-standfirst">Seule DRH d'une medtech parisienne passée de 15 à 48 salariés en dix-huit mois, elle incarne une réalité que peu de portraits racontent : celle d'une fonction RH qui ne grandit jamais aussi vite que l'entreprise qu'elle doit structurer.</p>
+  </div>
+</div>
+
+<div class="article-meta">
+  <span class="meta-author">Nadège Ferrand</span>
+  <span class="meta-sep">·</span>
+  <span>16 janvier 2025</span>
+  <span class="meta-sep">·</span>
+  <span>Lecture : 7 min</span>
+  <span class="meta-sep">·</span>
+  <span class="meta-tag">Portrait</span>
+  <span class="meta-tag">RH &amp; croissance</span>
+  <span class="meta-tag">Medtech</span>
+</div>
+
+<div class="article">
+  <div class="article-main">
+
+    <p>Sur son bureau, trois piles de dossiers ne racontent pas tout à fait la même histoire. La première, c'est l'urgence du jour. La seconde, ce qui attend depuis trois semaines. La troisième, elle préfère ne pas la commenter. Isabelle Kwan dirige les ressources humaines de Lumio Health, une medtech parisienne spécialisée dans les wearables de mesure du stress au travail. Elle est aussi, à elle seule, l'intégralité de la fonction RH de l'entreprise — assistée d'une alternante en dernière année de master. <em>« Sur le papier, c'est un service. Dans les faits, c'est une personne et demie pour quarante-huit salariés. »</em></p>
+
+    <div class="inter-titre">Quinze salariés, puis quarante-huit</div>
+
+    <p>Quand Isabelle Kwan rejoint Lumio Health en janvier 2022, l'entreprise compte quinze personnes et n'a jamais eu de fonction RH dédiée. <em>« Avant moi, c'était Théo Marczak avec un tableau Excel et beaucoup de bonne volonté. »</em> Elle vient d'un grand groupe industriel où elle a passé seize ans à gravir les échelons d'une direction RH de quinze personnes — recrutement, puis SIRH, puis relations sociales. Un parcours solide, mais cloisonné. <strong>Elle est arrivée chez Lumio pour la largeur du poste, pas pour la taille de l'entreprise.</strong> <em>« Dans un grand groupe, tu deviens très bon sur un petit périmètre. Ici, je fais tout, du contrat de travail au disciplinaire. C'est exactement ce que je voulais — je n'avais juste pas anticipé la vitesse. »</em></p>
+
+    <p>La vitesse, justement, est devenue le sujet. En dix-huit mois, l'effectif de Lumio Health a crû de plus de 60 %, porté par la signature d'un fonds d'investissement américain et l'ouverture de nouveaux marchés B2B. <strong>Le service RH, lui, n'a pas grandi</strong>. <em>« On m'a proposé un recrutement RH il y a six mois. Je l'ai refusé — j'avais besoin d'un chargé de recrutement opérationnel avant d'avoir besoin d'un collègue RH. On ne peut pas tout structurer en même temps. »</em></p>
+
+    <div class="pull-quote">
+      <div class="pull-quote-text">« On ne peut pas faire du sur-mesure à cette vitesse. Soit on structure avant que ça arrive, soit on répare après. Moi, avec les moyens que j'ai, je répare. Ce n'est pas un aveu d'échec, c'est un choix d'arbitrage assumé. »</div>
+      <div class="pull-quote-attr">Isabelle Kwan · Directrice des Ressources Humaines, Lumio Health</div>
+    </div>
+
+    <div class="inter-titre">Ce que la loi n'attend pas la structuration pour s'appliquer</div>
+
+    <p>Ce que raconte Isabelle Kwan n'est pas une success story de startup. C'est un exercice d'équilibriste juridique. <strong>DUERP, élections CSE, politique de télétravail, écarts de rémunération</strong> : tous les seuils réglementaires qu'une entreprise franchit en grossissant sont arrivés chez Lumio en même temps, sans que l'organisation ait eu le temps de s'y préparer. <em>« La loi ne demande pas si tu es prêt. Elle s'applique. »</em> Un chiffre qu'elle cite sans détour : un taux d'absentéisme qui a grimpé au-dessus de 9 % sur les derniers mois — signal qu'elle prend au sérieux, sans céder à la dramatisation ni au déni. <em>« Ce n'est pas une crise. C'est un symptôme. Il faut juste avoir le temps de le regarder, ce que je n'ai pas toujours. »</em></p>
+
+    <p>Elle refuse cependant le récit de la DRH seule et débordée qui n'aurait d'autre choix que de subir. <em>« Je fais des choix. Je décide ce qui attend et ce qui n'attend pas. La différence entre une bonne et une mauvaise DRH sous tension, ce n'est pas la charge — c'est la lucidité sur ce qu'on laisse volontairement de côté. »</em> C'est aussi pour cette raison qu'elle a, depuis peu, ouvert la porte à un regard extérieur sur certains chantiers RH — une manière, dit-elle, <em>« de faire auditer mes arbitrages par quelqu'un qui n'est pas fatigué comme moi »</em>.</p>
+
+    <div class="article-footer">
+      <span class="footer-author">Nadège Ferrand</span>
+      <span>·</span>
+      <span>16 janvier 2025</span>
+      <span>·</span>
+      <span>Liaisons Sociales Magazine</span>
+    </div>
+
+  </div>
+
+  <div class="article-aside">
+
+    <div class="aside-bio">
+      <div class="aside-bio-head">Repères</div>
+      <div class="aside-bio-body">
+        <div class="bio-line"><span class="bio-year">1980</span><span class="bio-fact">Naissance à Lyon</span></div>
+        <div class="bio-line"><span class="bio-year">2003</span><span class="bio-fact">Master RH, IAE Lyon</span></div>
+        <div class="bio-line"><span class="bio-year">2003–19</span><span class="bio-fact">Chargée de recrutement puis Responsable RH, groupe industriel (15 pers. en direction RH)</span></div>
+        <div class="bio-line"><span class="bio-year">2019–21</span><span class="bio-fact">Responsable RH, ETI logistique (60 salariés)</span></div>
+        <div class="bio-line"><span class="bio-year">Jan. 2022</span><span class="bio-fact">DRH, Lumio Health — première embauche RH de l'entreprise</span></div>
+      </div>
+    </div>
+
+    <div class="aside-numbers">
+      <div class="aside-numbers-title">La fonction RH en chiffres</div>
+      <div class="number-item">
+        <div class="number-val">1,5</div>
+        <div class="number-label">ETP pour toute la fonction RH (elle + 1 alternante à mi-temps)</div>
+      </div>
+      <div class="number-item">
+        <div class="number-val">48</div>
+        <div class="number-label">salariés à ce jour</div>
+      </div>
+      <div class="number-item">
+        <div class="number-val">+60 %</div>
+        <div class="number-label">croissance de l'effectif en 18 mois</div>
+      </div>
+      <div class="number-item">
+        <div class="number-val">16 ans</div>
+        <div class="number-label">d'expérience RH avant de rejoindre Lumio</div>
+      </div>
+    </div>
+
+    <div class="aside-tags">
+      <span class="aside-tag">Croissance RH</span>
+      <span class="aside-tag">PME &amp; Medtech</span>
+      <span class="aside-tag">Dialogue social</span>
+      <span class="aside-tag">Fonction RH</span>
+      <span class="aside-tag">Hypercroissance</span>
+    </div>
+
+  </div>
+</div>
+
+<div class="site-footer">
+  <div class="site-footer-logo">Liaisons <span>Sociales</span></div>
+  <span>© 2025 — Tous droits réservés</span>
+  <span>Un média du groupe Lefebvre Dalloz</span>
+</div>
+
+</body>
+</html>
