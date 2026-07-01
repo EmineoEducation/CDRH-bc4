@@ -71,23 +71,25 @@ function GuideApp() {
 function PdfApp({ openGuide, openDoc }) {
   const D = window.LUMIO_DATA || {};
   const dossiers = (D.dossiers || []).filter(d => d.type !== 'guide');
-  const firstId = (dossiers[0] && dossiers[0].id) || '';
-  const [activeId, setActiveId] = usePdfState(openDoc || firstId);
+  const firstId = (dossiers[0] && dossiers[0].id) || '__guide__';
+  const [activeId, setActiveId] = usePdfState(openGuide ? '__guide__' : (openDoc || firstId));
   const [page, setPage] = usePdfState(1);
 
-  if (openGuide) return <GuideApp />;
-  if (dossiers.length === 0) return <GuideApp />;
-
-  const doc = dossiers.find(d => d.id === activeId) || dossiers[0];
-  const totalPages = doc.type === 'deck' ? (doc.slides || []).length : (doc.pages || []).length || 1;
+  const isGuide = activeId === '__guide__' || dossiers.length === 0;
+  const doc = !isGuide ? (dossiers.find(d => d.id === activeId) || dossiers[0]) : null;
+  const totalPages = doc ? (doc.type === 'deck' ? (doc.slides || []).length : (doc.pages || []).length || 1) : 1;
   const switchDoc = (id) => { setActiveId(id); setPage(1); };
 
   return (
     <div style={pdfStyles.app}>
       <div style={pdfStyles.toolbar}>
         <div style={{ display: 'flex', gap: 4, marginRight: 8 }}>
+          <button onClick={() => switchDoc('__guide__')}
+            style={{ ...pdfStyles.tbBtn, background: isGuide ? '#1a243622' : 'transparent', fontWeight: isGuide ? 700 : 400, color: isGuide ? '#1a2436' : 'var(--ink-soft)' }}>
+            📕 Guide
+          </button>
           {dossiers.map(d => {
-            const active = d.id === doc.id;
+            const active = !isGuide && d.id === doc.id;
             const accent = d.accent || '#1b3a6b';
             return (
               <button key={d.id} onClick={() => switchDoc(d.id)}
@@ -97,12 +99,16 @@ function PdfApp({ openGuide, openDoc }) {
             );
           })}
         </div>
-        <div style={pdfStyles.tbDivider} />
-        <div style={pdfStyles.tbGroup}>
-          <button style={pdfStyles.tbBtn} onClick={() => setPage(Math.max(1, page - 1))}>‹</button>
-          <span style={pdfStyles.pageInd}>{page} / {totalPages}</span>
-          <button style={pdfStyles.tbBtn} onClick={() => setPage(Math.min(totalPages, page + 1))}>›</button>
-        </div>
+        {!isGuide && (
+          <>
+            <div style={pdfStyles.tbDivider} />
+            <div style={pdfStyles.tbGroup}>
+              <button style={pdfStyles.tbBtn} onClick={() => setPage(Math.max(1, page - 1))}>‹</button>
+              <span style={pdfStyles.pageInd}>{page} / {totalPages}</span>
+              <button style={pdfStyles.tbBtn} onClick={() => setPage(Math.min(totalPages, page + 1))}>›</button>
+            </div>
+          </>
+        )}
         <div style={pdfStyles.tbDivider} />
         <div style={pdfStyles.tbGroup}>
           <button style={pdfStyles.tbBtn}>—</button>
@@ -114,25 +120,29 @@ function PdfApp({ openGuide, openDoc }) {
       </div>
 
       <div style={pdfStyles.body}>
-        <div style={pdfStyles.thumbCol} className="scroll">
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
-            <div key={p} onClick={() => setPage(p)} style={{ ...pdfStyles.thumb, ...(page === p ? pdfStyles.thumbActive : {}) }}>
-              <div style={pdfStyles.thumbPage}>
-                <div style={{ height: 4, background: doc.accent || '#1b3a6b', width: '70%', margin: '4px auto' }} />
-                <div style={{ height: 2, background: '#9a9ea8', width: '85%', margin: '3px auto' }} />
-                <div style={{ height: 2, background: '#9a9ea8', width: '85%', margin: '2px auto' }} />
-                <div style={{ height: 2, background: '#9a9ea8', width: '60%', margin: '2px auto' }} />
-                <div style={{ height: 2, background: '#9a9ea8', width: '85%', margin: '6px auto 2px' }} />
-                <div style={{ height: 2, background: '#9a9ea8', width: '50%', margin: '2px auto' }} />
-              </div>
-              <div style={pdfStyles.thumbLabel}>{p}</div>
+        {isGuide ? <GuideApp /> : (
+          <>
+            <div style={pdfStyles.thumbCol} className="scroll">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
+                <div key={p} onClick={() => setPage(p)} style={{ ...pdfStyles.thumb, ...(page === p ? pdfStyles.thumbActive : {}) }}>
+                  <div style={pdfStyles.thumbPage}>
+                    <div style={{ height: 4, background: doc.accent || '#1b3a6b', width: '70%', margin: '4px auto' }} />
+                    <div style={{ height: 2, background: '#9a9ea8', width: '85%', margin: '3px auto' }} />
+                    <div style={{ height: 2, background: '#9a9ea8', width: '85%', margin: '2px auto' }} />
+                    <div style={{ height: 2, background: '#9a9ea8', width: '60%', margin: '2px auto' }} />
+                    <div style={{ height: 2, background: '#9a9ea8', width: '85%', margin: '6px auto 2px' }} />
+                    <div style={{ height: 2, background: '#9a9ea8', width: '50%', margin: '2px auto' }} />
+                  </div>
+                  <div style={pdfStyles.thumbLabel}>{p}</div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        <div style={pdfStyles.pageWrap} className="scroll">
-          {doc.type === 'deck' && <DeckPage doc={doc} page={page} />}
-          {doc.type === 'rich' && <RichPage doc={doc} page={page} />}
-        </div>
+            <div style={pdfStyles.pageWrap} className="scroll">
+              {doc.type === 'deck' && <DeckPage doc={doc} page={page} />}
+              {doc.type === 'rich' && <RichPage doc={doc} page={page} />}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

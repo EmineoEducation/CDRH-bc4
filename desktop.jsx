@@ -413,7 +413,7 @@ function Desktop({ onLogout }) {
     // Le Finder envoie parfois `docId` de façon générique ; chaque app attend son propre nom de prop.
     let props = rawProps;
     if (props.docId && !props.openDoc && !props.openId && !props.openNote) {
-      const DOC_PROP = { pdf: 'openDoc', mail: 'openId', notes: 'openNote' };
+      const DOC_PROP = { pdf: 'openDoc', mail: 'openId', notes: 'openNote', browser: 'openPortrait' };
       if (DOC_PROP[app]) props = { ...props, [DOC_PROP[app]]: props.docId };
     }
     if (window.__onAppOpened) window.__onAppOpened(app);

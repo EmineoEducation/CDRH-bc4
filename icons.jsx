@@ -128,6 +128,7 @@ window.FileIcon = ({ size = 56, kind = 'doc', label = '' }) => {
     pdf: '#c4420f',
     mail: '#1f7ad9',
     audio: '#1a2436',
+    portrait: '#7a3b46',
     doc: '#5b6b85'
   };
   return (

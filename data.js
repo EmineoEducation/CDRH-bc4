@@ -438,3 +438,701 @@ window.PAC_CONFIG = {
 };
 // Alias de compatibilité (les apps existantes lisent encore PASS_CONFIG)
 window.PASS_CONFIG = window.PAC_CONFIG;
+
+
+// === [Chantier PDF+Browser] dossiers/guide/portraits — 02/07/2026 ===
+// Restructuration de D.documents[]/D.deckBoard/D.yassineVeille (déjà écrits) en
+// D.dossiers[]/D.guide pour app-pdf.jsx. Ajout D.portraits[] (5 personnages
+// universels, fichiers déjà déployés dans /portraits/) + dossier Finder dédié.
+// Aucun contenu narratif nouveau : uniquement restructuration + câblage.
+(function() {
+  var D = window.LUMIO_DATA;
+  if (!D) return;
+  D.dossiers = [
+  {
+    "id": "DOC-01",
+    "title": "Feuille de route Lumio 2025-2026 : cap série B et obligations partenaires",
+    "tab": "Feuille de route Lumio 2025-2…",
+    "accent": "#1b3a6b",
+    "warning": false,
+    "type": "rich",
+    "pages": [
+      {
+        "kicker": "Théo Marczak — CEO",
+        "title": "Feuille de route Lumio 2025-2026 : cap série B et obligations partenaires",
+        "byline": "note_interne · Acte 1",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "{{PRENOM}},"
+          },
+          {
+            "type": "p",
+            "text": "Je vous confie la mission de construire le premier Plan de Développement des Compétences de Lumio Health, à présenter au CSE lors de la réunion du 15 octobre 2025."
+          },
+          {
+            "type": "h3",
+            "text": "CONTEXTE STRATÉGIQUE 2025-2026 :"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Levée de fonds Northgate : 18 M€, avec exigences de conformité réglementaire documentées",
+              "Certification MDR Classe IIa en cours (délai : juin 2027) — exige des formations réglementaires spécifiques pour 6 collaborateurs",
+              "Lancement app Consumer B2C prévu fin 2026 — nouvelles compétences acquisition digitale requises",
+              "Partenariat B2B international (UK, DACH) — compétences interculturelles à renforcer",
+              "Projet IA générative en discussion — formations IA éthique et RGPD santé à anticiper"
+            ]
+          },
+          {
+            "type": "h3",
+            "text": "URGENCES RH IDENTIFIÉES :"
+          },
+          {
+            "type": "p",
+            "text": "1. 34 % seulement des entretiens professionnels réalisés en 2024 (obligation biennale)\n2. 3 salariés RQTH sans plan d'aménagement formalisé\n3. Northgate attend une preuve de certifications réglementaires (ISO 13485, RGPD santé) de nos équipes\n4. Budget formation 2024 non optimisé — 60 % sur des événements/conférences non qualifiants"
+          },
+          {
+            "type": "h3",
+            "text": "ATTENDUS :"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Cartographie des emplois et des compétences actuelles vs besoins prospectifs",
+              "Entretiens professionnels de rattrapage avec les managers (grille à construire)",
+              "PDC structuré avec axes, actions, financement (OPCO Atlas, CPF, budget propre) et indicateurs",
+              "Présentation CSE : fond + forme, préparée pour les questions des élus"
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Vous avez accès à tous les documents RH du SIRH Lucca et à l'historique des formations 2024."
+          },
+          {
+            "type": "p",
+            "text": "— Théo Marczak"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "DOC-02",
+    "title": "Données RH au 28 février 2025 : pyramide des âges, ancienneté, postes, taux de réalisation entretiens, RQTH",
+    "tab": "Données RH au 28 février 2025…",
+    "accent": "#c4420f",
+    "warning": false,
+    "type": "rich",
+    "pages": [
+      {
+        "kicker": "Service RH Lumio (données consolidées)",
+        "title": "Données RH au 28 février 2025 : pyramide des âges, ancienneté, postes, taux de réalisation entretiens, RQTH",
+        "byline": "tableau_rh · Acte 1",
+        "blocks": [
+          {
+            "type": "h3",
+            "text": "EXPORT SIRH LUCCA — DONNÉES RH CONSOLIDÉES"
+          },
+          {
+            "type": "p",
+            "text": "Lumio Health · Septembre 2025 · CONFIDENTIEL RH"
+          },
+          {
+            "type": "h3",
+            "text": "I. CARTOGRAPHIE DES EFFECTIFS PAR MÉTIER"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Tech & Produit : 18 personnes (Lead Dev ×1, Développeurs iOS/Android/Backend ×9, Product Managers ×4, QA ×2, Données ×2)",
+              "Commercial & Partenariats : 7 personnes (Resp. B2B ×1, Account Managers ×4, Avant-vente ×2)",
+              "Marketing & Communication : 6 personnes (DirMkt ×1, Content ×2, Growth ×1, Social Media ×1, Design ×1)",
+              "Opérations & Finance : 5 personnes (DAF ×1, Contrôle de gestion ×1, Ops ×3)",
+              "RH : 2 personnes (DRH ×1, Alternante RH ×1)",
+              "Direction : 2 personnes (CEO ×1, Directrice Scientifique ×1)",
+              "Autres : 4 personnes (support, réglementaire, juridique)"
+            ]
+          },
+          {
+            "type": "h3",
+            "text": "II. ENTRETIENS PROFESSIONNELS 2024"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Total collaborateurs éligibles (≥ 2 ans ancienneté) : 29",
+              "Entretiens réalisés : 10 (34 %)",
+              "Entretiens non réalisés : 19 (66 %)",
+              "Collaborateurs à risque d'abondement CPF (> 6 ans sans EP ni formation) : 3"
+            ]
+          },
+          {
+            "type": "h3",
+            "text": "III. COLLABORATEURS RQTH"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Maxime Lenoir (Data Scientist) — RQTH : handicap auditif sévère — Plan aménagement : À FORMALISER",
+              "Antoine Bernard (Développeur Backend) — RQTH : trouble DYS sévère — Plan aménagement : NOTE INFORMELLE SEULEMENT",
+              "Nina Sorlin (Chargée de com) — RQTH : mobilité réduite partielle — Plan aménagement : À FORMALISER"
+            ]
+          },
+          {
+            "type": "h3",
+            "text": "IV. BUDGET FORMATION 2024 (réalisé)"
+          },
+          {
+            "type": "p",
+            "text": "Total dépensé : 22 400 €\n• Conférences et événements : 13 200 € (59 %)\n• Formations certifiantes : 6 800 €\n• E-learning et abonnements : 2 400 €\nRatios : 430 €/ETP (recommandé sectoriel : 900-1 200 €/ETP)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "DOC-03",
+    "title": "RE : Partenariat commercial Lumio x Northgate — conditions préalables",
+    "tab": "RE : Partenariat commercial L…",
+    "accent": "#0a7a6e",
+    "warning": false,
+    "type": "rich",
+    "pages": [
+      {
+        "kicker": "Jakob Rein — Northgate",
+        "title": "RE : Partenariat commercial Lumio x Northgate — conditions préalables",
+        "byline": "email · Acte 2",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "From: Jakob Rein — Northgate Capital\nTo: Théo Marczak\nDate: September 12, 2025\nSubject: Q3 Review — Training & Compliance Requirements"
+          },
+          {
+            "type": "p",
+            "text": "Théo,"
+          },
+          {
+            "type": "p",
+            "text": "As part of our Q3 portfolio review, I want to flag a point that will become increasingly important for Lumio's positioning in the Nordic and DACH markets."
+          },
+          {
+            "type": "p",
+            "text": "Northgate's enterprise clients (hospital groups, insurance networks) are now systematically asking their technology partners for proof of staff training on two topics:"
+          },
+          {
+            "type": "p",
+            "text": "1. ISO 13485 : Quality Management for Medical Devices. Not just a company certification — several procurement teams are now asking for evidence that key team members have completed ISO 13485-related training modules. Without this, some tenders will simply not be accessible."
+          },
+          {
+            "type": "p",
+            "text": "2. GDPR for Health Data : European health data regulations are tightening. Clients want to see that the people handling their data at Lumio have completed structured GDPR training specific to health data and the HDS (Hébergeur de Données de Santé) framework."
+          },
+          {
+            "type": "p",
+            "text": "I strongly recommend that Lumio includes both of these in its 2025-2026 training plan, with documentation of completion. This will be a verification point in our next due diligence review (March 2026)."
+          },
+          {
+            "type": "p",
+            "text": "Jakob"
+          },
+          {
+            "type": "p",
+            "text": "---\nTRADUCTION RH : Jakob signale que les clients grands comptes Northgate exigent maintenant la preuve de formations ISO 13485 et RGPD données de santé pour les équipes Lumio. Ces deux axes doivent figurer en priorité dans le PDC 2025-2026."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "DOC-04",
+    "title": "CODIR 5 mars 2025 — Point canal B2B santé-entreprise : besoins formation identifiés",
+    "tab": "CODIR 5 mars 2025 — Point can…",
+    "accent": "#5c2d8f",
+    "warning": false,
+    "type": "rich",
+    "pages": [
+      {
+        "kicker": "Camille Ott — Responsable B2B",
+        "title": "CODIR 5 mars 2025 — Point canal B2B santé-entreprise : besoins formation identifiés",
+        "byline": "compte_rendu_codir · Acte 2",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "De : Camille Ott\nÀ : Mission RH externe\nObjet : Besoins formation équipe commerciale B2B"
+          },
+          {
+            "type": "p",
+            "text": "Bonjour,"
+          },
+          {
+            "type": "p",
+            "text": "Théo m'a dit que vous construisez le plan de formation. Je vous envoie ce que j'observe sur le terrain."
+          },
+          {
+            "type": "p",
+            "text": "Mes 4 Account Managers sont bons sur la partie relationnelle et la connaissance produit. Mais depuis qu'on travaille avec Northgate et qu'on prospecte des cliniques européennes, deux lacunes sont vraiment bloquantes :"
+          },
+          {
+            "type": "p",
+            "text": "1. Négociation interculturelle : les acheteurs danois et allemands ne fonctionnent pas comme les DRH français. Ils veulent des études de cas chiffrées, pas de pitch commercial. Ils détestent la pression de closing. Un de mes AMs a failli perdre un compte Northgate la semaine dernière parce qu'il a relancé trop vite et de façon trop directe. Ça m'a coûté une explication avec Jakob."
+          },
+          {
+            "type": "p",
+            "text": "2. Réglementation dispositifs médicaux : quand un acheteur demande \"quelle est la différence entre votre certification MDR et celle de Withings\", mes AMs bafouillent. Ils ne connaissent pas suffisamment la réglementation pour répondre avec assurance. C'est crédibilisant pour nous et ça crée de la friction dans le cycle de vente."
+          },
+          {
+            "type": "p",
+            "text": "Ces deux formations sont prioritaires pour moi. Si vous avez besoin que je participe à l'identification des prestataires, je suis disponible."
+          },
+          {
+            "type": "p",
+            "text": "— Camille"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "DOC-05",
+    "title": "Objet : mon entretien professionnel — ça fait 4 ans qu'on m'attend",
+    "tab": "Objet : mon entretien profess…",
+    "accent": "#7a3b46",
+    "warning": false,
+    "type": "rich",
+    "pages": [
+      {
+        "kicker": "Yassine Morel — Content Manager",
+        "title": "Objet : mon entretien professionnel — ça fait 4 ans qu'on m'attend",
+        "byline": "email · Acte 2",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Canal Slack #rh-questions — Message de Yassine Morel"
+          },
+          {
+            "type": "p",
+            "text": "Yassine Morel [11h23] : Bonjour, je suis content qu'il y ait maintenant un canal RH. Question directe : je suis chez Lumio depuis 26 mois. Je n'ai jamais eu d'entretien professionnel. Est-ce que c'est normal ? J'ai lu que c'est obligatoire tous les 2 ans."
+          },
+          {
+            "type": "p",
+            "text": "RH Externe [11h41] : Bonjour Yassine, vous avez raison. C'est une obligation légale que nous allons rattraper dans les prochaines semaines. Vous serez contacté pour planifier cet entretien."
+          },
+          {
+            "type": "p",
+            "text": "Yassine Morel [11h44] : Ok merci. Je voulais aussi dire que si vous planifiez des formations, j'aimerais beaucoup évoluer vers de la gestion de projet digital. J'adore le contenu mais je me vois plus dans un rôle transversal. Est-ce que c'est quelque chose qu'on peut discuter ?"
+          },
+          {
+            "type": "p",
+            "text": "RH Externe [11h48] : Absolument, c'est exactement le type de projet qui se discute dans un entretien professionnel. On note votre aspiration."
+          },
+          {
+            "type": "p",
+            "text": "Yassine Morel [11h49] : Super. Une dernière chose : j'ai 2 380 € sur mon CPF. Est-ce que Lumio peut abonder si je trouve une formation chef de projet qui coûte plus cher ?"
+          },
+          {
+            "type": "p",
+            "text": "RH Externe [11h51] : C'est possible dans le cadre d'un CPF co-construit. On en parle lors de l'entretien professionnel."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "DOC-06",
+    "title": "Proposition pédagogique et tarifaire — parcours ISO 13485 & RGPD santé — Lumio Health",
+    "tab": "Proposition pédagogique et ta…",
+    "accent": "#1a6641",
+    "warning": false,
+    "type": "rich",
+    "pages": [
+      {
+        "kicker": "FormaMed Solutions (organisme Qualiopi)",
+        "title": "Proposition pédagogique et tarifaire — parcours ISO 13485 & RGPD santé — Lumio Health",
+        "byline": "devis_prestataire · Acte 3",
+        "blocks": [
+          {
+            "type": "h3",
+            "text": "PROPOSITIONS PRESTATAIRES — FORMATION PRIORITAIRE MDR & RGPD SANTÉ"
+          },
+          {
+            "type": "p",
+            "text": "Comparatiif transmis par l'OPCO Atlas sur demande Lumio Health — Septembre 2025"
+          },
+          {
+            "type": "h3",
+            "text": "PRESTATAIRE A : AFNOR FORMATION"
+          },
+          {
+            "type": "p",
+            "text": "Formation : \"Dispositifs Médicaux — Introduction à la MDR 2017/745 et ISO 13485\"\nDurée : 2 jours (14h)\nModalités : Présentiel Paris ou distanciel synchrone\nPrix unitaire : 1 390 € HT/personne\nEligibilité OPCO Atlas : OUI — code CPF 237289\nNombre de sessions disponibles : 3 entre octobre et décembre 2025\nPoints forts : organisme de référence, attestation reconnue, exercices pratiques sur des cas réels\nPoints faibles : pas de personnalisation possible pour un groupe entreprise < 8 personnes"
+          },
+          {
+            "type": "h3",
+            "text": "PRESTATAIRE B : FORMA-SANTÉ DIGITAL"
+          },
+          {
+            "type": "p",
+            "text": "Formation : \"RGPD et données de santé — obligations pratiques pour les équipes tech et produit\"\nDurée : 1 jour (7h) + module e-learning 3h\nModalités : Hybride (présentiel + plateforme LMS)\nPrix unitaire : 890 € HT/personne\nIntra-entreprise : devis sur mesure à partir de 6 personnes — estimation 5 200 € pour 8 personnes\nEligibilité OPCO Atlas : OUI — prise en charge jusqu'à 70 % sur dispositif FNE-Formation\nPoints forts : très orienté terrain, certifié Qualiopi, module spécifique \"IA et données de santé\"\nPoints faibles : organisme récent (fondé 2021), peu de références grandes entreprises"
+          },
+          {
+            "type": "h3",
+            "text": "PRESTATAIRE C : ISO CONNECT"
+          },
+          {
+            "type": "p",
+            "text": "Formation : \"Sensibilisation ISO 13485 — Référentiel qualité dispositifs médicaux\"\nDurée : 0,5 jour (3h30)\nModalités : 100 % distanciel asynchrone\nPrix : 290 € HT/personne\nEligibilité OPCO Atlas : OUI\nPoints forts : très accessible, format flexible, adapté pour une sensibilisation large\nPoints faibles : niveau introductif uniquement, pas d'attestation certifiante"
+          },
+          {
+            "type": "p",
+            "text": "RECOMMANDATION PROVISOIRE : Combinaison Prestataire C (sensibilisation large 20 personnes × 290 € = 5 800 €) + Prestataire A (formation approfondie 6 personnes clés × 1 390 € = 8 340 €). Financement OPCO Atlas possible jusqu'à 60 % sur les deux. Budget résiduel Lumio estimé : 5 656 €."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "DOC-07",
+    "title": "Convocation — Réunion extraordinaire CSE — Consultation plan de développement des compétences — 25 avril 2025",
+    "tab": "Convocation — Réunion extraor…",
+    "accent": "#2d6a4f",
+    "warning": false,
+    "type": "rich",
+    "pages": [
+      {
+        "kicker": "Secrétaire du CSE Lumio Health",
+        "title": "Convocation — Réunion extraordinaire CSE — Consultation plan de développement des compétences — 25 avril 2025",
+        "byline": "convocation_cse · Acte 4",
+        "blocks": [
+          {
+            "type": "h3",
+            "text": "NOTE INTERNE — CALENDRIER CSE ET OBLIGATIONS DOCUMENTAIRES"
+          },
+          {
+            "type": "p",
+            "text": "De : Isabelle Kwan (DRH)\nPour : Mission RH externe\nDate : 16 septembre 2025"
+          },
+          {
+            "type": "p",
+            "text": "Rappel des obligations de consultation CSE sur le PDC :"
+          },
+          {
+            "type": "p",
+            "text": "Selon les articles L.2312-26 et R.2312-22 du Code du travail, le CSE doit être consulté sur le plan de développement des compétences lors de 2 réunions distinctes par an. La première réunion porte sur les orientations générales, la seconde sur le projet de plan définitif."
+          },
+          {
+            "type": "h3",
+            "text": "CALENDRIER POUR LUMIO :"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Réunion 1 (orientations) : 15 octobre 2025 (dans 4 semaines)",
+              "Réunion 2 (plan définitif) : 19 novembre 2025 (dans 9 semaines)",
+              "Obligation : documents remis aux élus 3 jours ouvrables AVANT chaque réunion"
+            ]
+          },
+          {
+            "type": "h3",
+            "text": "COMPOSITION DU CSE :"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Yassine Morel (titulaire — élu liste non syndicale) : a déjà exprimé en réunion de proximité que \"les formations ne doivent pas profiter qu'au pôle tech — les équipes content et marketing sont les grandes oubliées du PDC 2024\". Point de vigilance à anticiper dans la présentation.",
+              "Antoine Bernard (titulaire — élu liste non syndicale) : discret, questions techniques précises, sensible aux sujets handicap (RQTH lui-même)",
+              "Nina Sorlin (suppléante — élu liste non syndicale) : intervient peu mais très attentive à la parité et à l'égalité salariale"
+            ]
+          },
+          {
+            "type": "p",
+            "text": "ATTENTION SPÉCIFIQUE : Pour cette première présentation au CSE, la forme compte autant que le fond. Les élus doivent recevoir un document lisible, structuré, pas un export SIRH brut. Prévoir une synthèse exécutive d'une page + tableau récapitulatif des axes/actions/financements."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "DOC-08",
+    "title": "Retour à chaud et à froid — formation Data Storytelling pôle Mkt — janvier 2025",
+    "tab": "Retour à chaud et à froid — f…",
+    "accent": "#a0522d",
+    "warning": true,
+    "type": "rich",
+    "pages": [
+      {
+        "kicker": "Sonia Ferracci — Directrice Marketing",
+        "title": "Retour à chaud et à froid — formation Data Storytelling pôle Mkt — janvier 2025",
+        "byline": "rapport_evaluation · Acte 5",
+        "blocks": [
+          {
+            "type": "h3",
+            "text": "ÉVALUATION FORMATION — SYNTHÈSE 2024"
+          },
+          {
+            "type": "p",
+            "text": "Données issues du module évaluation Lucca + retours managers\nDocument interne RH — Septembre 2025"
+          },
+          {
+            "type": "p",
+            "text": "FORMATION ÉVALUÉE : \"Négociation commerciale avancée\" — 4 participants (équipe commerciale)\nPrestataire : Cegos · Durée : 2 jours · Coût : 4 160 € HT"
+          },
+          {
+            "type": "h3",
+            "text": "NIVEAU 1 — SATISFACTION (évaluation à chaud, J+0)"
+          },
+          {
+            "type": "p",
+            "text": "Score moyen : 4,1/5\nCommentaires positifs : \"formateur dynamique\", \"exercices de simulation pertinents\"\nCommentaires négatifs : \"trop généraliste, pas adapté au secteur medtech\""
+          },
+          {
+            "type": "h3",
+            "text": "NIVEAU 2 — APPRENTISSAGE (évaluation des acquis, J+0)"
+          },
+          {
+            "type": "p",
+            "text": "Test de connaissances avant/après : progression moyenne +22 points sur 100"
+          },
+          {
+            "type": "h3",
+            "text": "NIVEAU 3 — TRANSFERT (mesure à 3 mois) : NON RÉALISÉ"
+          },
+          {
+            "type": "p",
+            "text": "[⚠ LACUNE : aucun indicateur de transfert n'a été défini en amont. Impossible de mesurer si les compétences acquises ont été appliquées sur le poste. Les managers rapportent que \"c'est difficile à dire\". Un des 4 participants a quitté l'entreprise 6 semaines après la formation.]"
+          },
+          {
+            "type": "h3",
+            "text": "NIVEAU 4 — RÉSULTATS / ROI : NON CALCULÉ"
+          },
+          {
+            "type": "p",
+            "text": "[⚠ LACUNE : aucune corrélation n'a été établie entre la formation et des indicateurs business (taux de conversion, durée de cycle de vente, taux de closing). Le ROI de cette formation est donc inconnu.]"
+          },
+          {
+            "type": "h3",
+            "text": "PRÉCONISATION POUR LE TABLEAU DE BORD PDC 2025-2026 :"
+          },
+          {
+            "type": "p",
+            "text": "Définir avant chaque formation : (1) indicateurs de transfert mesurables à 3 mois, (2) indicateurs de résultats alignés sur les objectifs stratégiques, (3) responsable de la mesure. Sans ces éléments définis en amont, l'évaluation de niveau 3 et 4 est impossible."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "deck-board",
+    "title": "Plan de développement des compétences 2025-2026 — Lumio Health",
+    "tab": "Présentation CODIR",
+    "accent": "#1b3a6b",
+    "type": "deck",
+    "subtitle": "Présentation",
+    "slides": [
+      {
+        "titre": "Cadre légal et contexte",
+        "contenu": "Obligation légale depuis la loi du 5 septembre 2018 (\"Avenir Professionnel\"). Lumio Health : 52 ETP, CSE constitué juin 2025. Premier PDC à soumettre au CSE avant le 31 octobre 2025."
+      },
+      {
+        "titre": "Diagnostic situation emplois-compétences",
+        "contenu": "• 3 domaines en tension critique : Réglementation MDR (Classe IIa), Cybersécurité données de santé (RGPD + HDS), Négociation B2B internationale\n• 34 % des entretiens professionnels réalisés en 2024 (obligation biennale non respectée pour 21 collaborateurs)\n• 3 salariés RQTH (Maxime Lenoir, Antoine Bernard, Nina Sorlin) — plans d'aménagement à formaliser"
+      },
+      {
+        "titre": "Axes stratégiques du PDC",
+        "contenu": "Axe 1 : Conformité réglementaire (priorité Northgate)\n  - Formation MDR Classe IIa : équipes produit + réglementaire (6 personnes)\n  - Formation RGPD données de santé : équipe tech + marketing (12 personnes)\n  - Certification ISO 13485 : pilote sur 3 managers\nAxe 2 : Développement commercial B2B international\n  - Négociation interculturelle UK/DACH (8 personnes)\n  - Anglais professionnel renforcé (5 personnes)\nAxe 3 : Transition numérique et IA\n  - Sensibilisation IA générative et éthique des données (tout l'effectif)\n  - Formation data visualisation : équipe marketing (4 personnes)\nAxe 4 : Management et leadership\n  - Formation managers aux entretiens professionnels (8 managers)\n  - Parcours de développement pour 3 collaborateurs à potentiel identifiés"
+      },
+      {
+        "titre": "Budget prévisionnel",
+        "contenu": "Budget formation estimé : 52 000 € (1 000 €/ETP, ratio sectoriel minimal)\nFinancement possible via OPCO Atlas : 18 000 € (formations prioritaires secteur numérique)\nCPF mobilisable : 8 000 € estimés (5 collaborateurs avec projets identifiés)\nReste à charge Lumio : 26 000 €"
+      },
+      {
+        "titre": "Calendrier et indicateurs",
+        "contenu": "Octobre-décembre 2025 : démarrage formations prioritaires MDR + RGPD\nJanvier-mars 2026 : formations commerciales + management\nAvril-juin 2026 : bilan intermédiaire, ajustements\nIndicateurs : taux de réalisation PDC ≥ 85 %, satisfaction post-formation ≥ 4/5, taux de transfert mesuré à 3 mois"
+      }
+    ]
+  },
+  {
+    "id": "veille",
+    "title": "Veille concurrentielle",
+    "tab": "Veille concurrentielle",
+    "accent": "#1a6641",
+    "type": "rich",
+    "pages": [
+      {
+        "kicker": "14 mars 2025",
+        "title": "Veille concurrentielle",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Veille RH — Formation et développement des compétences\nSeptembre 2025 — Périmètre : GEPP, entretiens professionnels, financement formation"
+          },
+          {
+            "type": "h3",
+            "text": "ENTRETIENS PROFESSIONNELS — OBLIGATIONS ET SANCTIONS"
+          },
+          {
+            "type": "p",
+            "text": "L'entretien professionnel est obligatoire tous les 2 ans pour tout salarié. À 6 ans, un bilan récapitulatif doit avoir lieu. Si l'employeur ne respecte pas cette obligation ET n'a pas assuré au moins une formation non obligatoire dans les 6 ans, il doit abonder le CPF du salarié de 3 000 €. Pour Lumio avec 21 collaborateurs n'ayant pas eu d'EP depuis 2 ans, le risque financier potentiel est de 63 000 € en cas de contrôle."
+          },
+          {
+            "type": "h3",
+            "text": "PLAN DE DÉVELOPPEMENT DES COMPÉTENCES (PDC)"
+          },
+          {
+            "type": "p",
+            "text": "Depuis 2019 (loi Avenir Professionnel), le plan de formation devient \"Plan de Développement des Compétences\". Il distingue : actions de formation obligatoires (imposées par une norme) et actions facultatives. Il doit être présenté et discuté avec le CSE lors de 2 réunions distinctes par an. Le CSE ne valide pas — il donne un avis consultatif. L'employeur reste décisionnaire."
+          },
+          {
+            "type": "h3",
+            "text": "OPCO ATLAS ET FINANCEMENT"
+          },
+          {
+            "type": "p",
+            "text": "L'OPCO Atlas (Opérateur de compétences) couvre le secteur du numérique et des services. Lumio Health est éligible. Dispositifs mobilisables : prise en charge des coûts de formation (catalogue ATLAS ou hors catalogue sur demande), aide au financement de la FOAD, Pro-A (reconversion ou promotion professionnelle). Condition : adhésion à jour et déclaration mensuelle des contributions."
+          },
+          {
+            "type": "h3",
+            "text": "DISPOSITIFS CPF"
+          },
+          {
+            "type": "p",
+            "text": "Le Compte Personnel de Formation est alimenté à hauteur de 500 €/an pour un temps plein (plafond 5 000 €). Le salarié décide seul de son utilisation. L'employeur peut \"abonder' le CPF pour financer des formations stratégiques (accord possible). CPF co-construit : permet à l'employeur de proposer des formations en accord avec le projet du salarié."
+          },
+          {
+            "type": "h3",
+            "text": "ACCESSIBILITÉ EN FORMATION"
+          },
+          {
+            "type": "p",
+            "text": "Depuis 2018, tout organisme de formation doit nommer un référent accessibilité. Lumio Health doit s'assurer que les prestataires sélectionnés pour le PDC garantissent l'accessibilité aux collaborateurs RQTH (Maxime, Antoine, Nina). Critères à inclure dans la grille d'évaluation des prestataires."
+          }
+        ]
+      }
+    ]
+  }
+];
+  D.guide = {
+  "tips": [
+    {
+      "day": "Acte 1",
+      "title": "Feuille de route Lumio 2025-2026 : cap série B et…",
+      "body": "Pose le contexte stratégique global (levée de fonds, lancement IA, canal B2B Northgate) et actent l'urgence RH. Sert de base à l'analyse SWOT/PESTEL pour la compétence 4.1."
+    },
+    {
+      "day": "Acte 1",
+      "title": "Données RH au 28 février 2025 : pyramide des âges…",
+      "body": "Fournit les données objectives nécessaires à la cartographie des métiers (4.1), à l'état des lieux des entretiens professionnels (4.2) et à la prise en compte du handicap (4.6). Révèle le taux de 34 % d'entretiens réalisés et les 3 collaborateurs RQTH."
+    },
+    {
+      "day": "Acte 2",
+      "title": "RE : Partenariat commercial Lumio x Northgate — c…",
+      "body": "Conditionne la recommandation Northgate aux grands comptes à la preuve de certifications RGPD santé et ISO 13485 des équipes Lumio. Crée l'urgence externe et justifie les actions prioritaires du PDC (4.3 et 4.5)."
+    },
+    {
+      "day": "Acte 2",
+      "title": "CODIR 5 mars 2025 — Point canal B2B santé-entrepr…",
+      "body": "Camille Ott alerte sur le déficit de compétences de son équipe en négociation B2B et en réglementation des dispositifs médicaux. Fournit des besoins concrets pour la priorisation du PDC (4.3) et alimente la cartographie prospective (4.1)."
+    },
+    {
+      "day": "Acte 2",
+      "title": "Objet : mon entretien professionnel — ça fait 4 a…",
+      "body": "Yassine interpelle la RRH sur l'absence d'entretien professionnel depuis son embauche et exprime une aspiration à la mobilité vers un poste de chef de projet digital. Illustre le dysfonctionnement documenté dans DOC-02 et nourrit la compétence 4.2 sur la remédiation des entretiens."
+    },
+    {
+      "day": "Acte 3",
+      "title": "Proposition pédagogique et tarifaire — parcours I…",
+      "body": "Fournit les éléments concrets pour l'évaluation des prestataires (4.5) : programme, modalités (hybride), durée, coût unitaire, éligibilité OPCO Atlas. Permet de travailler les critères de sélection et le montage financier."
+    },
+    {
+      "day": "Acte 4",
+      "title": "Convocation — Réunion extraordinaire CSE — Consul…",
+      "body": "Formalise l'échéance CSE à 6 semaines. Mentionne la composition du CSE (3 élus, dont un élu qui a déjà exprimé des réserves sur la concentration des formations au pôle tech) et rappelle l'obligation de remise des documents 3 jours ouvrables avant. Alimente la compétence 4.4."
+    },
+    {
+      "day": "Acte 5",
+      "title": "Retour à chaud et à froid — formation Data Storyt…",
+      "body": "Fournit un exemple réel d'évaluation de formation à Lumio (niveaux 1 et 3 de Kirkpatrick) avec des lacunes constatées (pas d'indicateurs de transfert, pas de ROI). Sert de cas pratique pour construire le tableau de bord d'évaluation (4.7) et formuler des préconisations d'amélioration."
+    }
+  ]
+};
+  D.portraits = [
+  {
+    "key": "theo_marczak",
+    "title": "Théo Marczak",
+    "file": "portraits/portrait_theo_marczak.html"
+  },
+  {
+    "key": "sonia_ferracci",
+    "title": "Sonia Ferracci",
+    "file": "portraits/portrait_sonia_ferracci.html"
+  },
+  {
+    "key": "camille_ott",
+    "title": "Camille Ott",
+    "file": "portraits/portrait_camille_ott.html"
+  },
+  {
+    "key": "jakob_rein",
+    "title": "Jakob Rein",
+    "file": "portraits/portrait_jakob_rein.html"
+  },
+  {
+    "key": "yassine_morel",
+    "title": "Yassine Morel",
+    "file": "portraits/portrait_yassine_morel.html"
+  }
+];
+  D.finder = D.finder || { folders: {}, order: [] };
+  D.finder.folders.portraits = {
+  "title": "Portraits",
+  "sidebar": "👥 Portraits",
+  "icon": "👥",
+  "items": [
+    {
+      "kind": "portrait",
+      "name": "Théo Marczak",
+      "app": "browser",
+      "props": {
+        "openPortrait": "theo_marczak"
+      }
+    },
+    {
+      "kind": "portrait",
+      "name": "Sonia Ferracci",
+      "app": "browser",
+      "props": {
+        "openPortrait": "sonia_ferracci"
+      }
+    },
+    {
+      "kind": "portrait",
+      "name": "Camille Ott",
+      "app": "browser",
+      "props": {
+        "openPortrait": "camille_ott"
+      }
+    },
+    {
+      "kind": "portrait",
+      "name": "Jakob Rein",
+      "app": "browser",
+      "props": {
+        "openPortrait": "jakob_rein"
+      }
+    },
+    {
+      "kind": "portrait",
+      "name": "Yassine Morel",
+      "app": "browser",
+      "props": {
+        "openPortrait": "yassine_morel"
+      }
+    }
+  ]
+};
+  if (D.finder.order.indexOf('portraits') === -1) {
+    var gIdx = D.finder.order.indexOf('guide');
+    D.finder.order.splice(gIdx >= 0 ? gIdx + 1 : 0, 0, 'portraits');
+  }
+})();
+// === [Chantier PDF+Browser] fin ===
