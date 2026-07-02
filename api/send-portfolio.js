@@ -10,14 +10,40 @@ import { createHash } from 'crypto';
 const PORTAIL_URL = 'https://cdrh-pac.vercel.app/api/progress';
 const BLOC_ID     = 'bc4';
 
-// ── Mapping campus → email RP (Sylvain complétera) ──
-const CAMPUS_RP = {
+// ── Mapping campus → email RP ──
+// Source de vérité : hub emineo-campus-rp (éditable sans redéploiement,
+// via /admin sur ce hub). CAMPUS_RP_FALLBACK n'est utilisé que si le hub
+// est injoignable — l'envoi du portfolio ne doit jamais en dépendre.
+const CAMPUS_RP_HUB = 'https://emineo-campus-rp.vercel.app/api/campus-rp';
+const TITRE_CODE    = 'CDRH'; // MSMC | CDRH | MMD | MDO — résout les exceptions par titre côté hub
+const CAMPUS_RP_FALLBACK = {
   'paris':    ['chloe.guyot@cesacom.fr', 'celine.maheo@cesacom.fr'],
   'nantes':   ['manon.parageaud@cesacom.fr', 'lara.naccache@emineo-education.fr'],
   'bordeaux': ['anthony.nabli@emineo-education.fr'],
-  'le mans':  ['etienne.azerad@cesacom.fr'],
-  'lemans':   ['etienne.azerad@cesacom.fr'],
+  'le mans':  ['johnny.nicolas@isme.fr'],
+  'lemans':   ['johnny.nicolas@isme.fr'],
 };
+
+async function getCampusRPMap() {
+  try {
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), 2500);
+    const r = await fetch(CAMPUS_RP_HUB + '?titre=' + TITRE_CODE, { signal: ctrl.signal });
+    clearTimeout(t);
+    if (!r.ok) throw new Error('hub non-OK: ' + r.status);
+    const data = await r.json();
+    const map = {};
+    for (const c of (data.campuses || [])) {
+      const emails = (c.rp || []).map(p => p.email).filter(Boolean);
+      if (c.id) map[String(c.id).toLowerCase()] = emails;
+      if (c.label) map[String(c.label).toLowerCase()] = emails;
+    }
+    return map;
+  } catch (e) {
+    console.warn('Hub campus-rp injoignable, fallback local:', e.message);
+    return CAMPUS_RP_FALLBACK;
+  }
+}
 
 function hashEmail(email) {
   return createHash('sha256')
@@ -27,17 +53,19 @@ function hashEmail(email) {
 }
 
 async function markCompleted(email) {
-  if (!email) return;
+  if (!email) return false;
   try {
     const hash = hashEmail(email);
-    await fetch(PORTAIL_URL, {
+    const r = await fetch(PORTAIL_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ hash, bloc: BLOC_ID, status: 'completed' }),
     });
+    return r.ok;
   } catch (err) {
     // Non bloquant — la complétion est best-effort
     console.warn('markCompleted error:', err.message);
+    return false;
   }
 }
 
@@ -67,7 +95,13 @@ export default async function handler(req, res) {
       return res.status(503).json({ error: 'RESEND_API_KEY non configurée', sent: false });
     }
 
-    const nomBloc    = bloc || 'BC1 MSMC';
+    // ── Coche de completion AVANT Resend (garantit la progression Redis
+    // même si l'envoi de l'email échoue ensuite — cf. principe markCompleted) ──
+    const completed = await markCompleted(email);
+
+    const campusRPMap = await getCampusRPMap();
+
+    const nomBloc    = bloc || 'BC4 CDRH';
     const dateStr    = date || new Date().toLocaleDateString('fr-FR');
     const prenom     = studentName ? studentName.split(' ')[0] : 'Étudiant(e)';
     const subject    = `Votre portfolio de compétences PAC — ${nomBloc}`;
@@ -165,7 +199,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         from,
         to:       [email],
-        cc:       (campus && CAMPUS_RP[(campus || '').toLowerCase()]) ? CAMPUS_RP[campus.toLowerCase()] : [],
+        cc:       (campus && campusRPMap[(campus || '').toLowerCase()]) ? campusRPMap[campus.toLowerCase()] : [],
         reply_to: [],
         subject,
         html,
@@ -175,14 +209,17 @@ export default async function handler(req, res) {
     const resendData = await resendRes.json();
 
     if (!resendRes.ok) {
+      // Resend KO mais la coche Redis est déjà passée → 200 avec warning
       console.error('Resend error:', resendData);
-      return res.status(502).json({ error: 'Resend error', details: resendData, sent: false });
+      return res.status(200).json({
+        sent: false,
+        completed,
+        warning: 'Email failed but progress saved on portal',
+        resendError: resendData,
+      });
     }
 
-    // ── Complétion portail (best-effort, non bloquant) ────────────────────
-    await markCompleted(email);
-
-    return res.status(200).json({ sent: true, id: resendData.id });
+    return res.status(200).json({ sent: true, completed, id: resendData.id });
 
   } catch (err) {
     console.error('send-portfolio handler error:', err);
