@@ -250,6 +250,7 @@ window.PAC_CONFIG = {
   "commanditaire": "Isabelle Kwan",
   "dispositif": "PAC",
   "note_reflexive": false,
+  "dureeMinutes": 250,
   "temps": [
     {
       "n": 1,
@@ -262,28 +263,28 @@ window.PAC_CONFIG = {
       "n": 2,
       "label": "Entrée dans l'affaire",
       "debut": 20,
-      "fin": 50,
+      "fin": 55,
       "couleur": "#1b4f8a"
     },
     {
       "n": 3,
       "label": "Diagnostic",
-      "debut": 50,
-      "fin": 95,
+      "debut": 55,
+      "fin": 110,
       "couleur": "#1a6641"
     },
     {
       "n": 4,
       "label": "Production",
-      "debut": 95,
-      "fin": 175,
+      "debut": 110,
+      "fin": 215,
       "couleur": "#c4420f"
     },
     {
       "n": 5,
       "label": "Réflexion",
-      "debut": 175,
-      "fin": 210,
+      "debut": 215,
+      "fin": 250,
       "couleur": "#7a756c"
     }
   ],

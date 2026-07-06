@@ -33,7 +33,11 @@ function Win({ win, onFocus, onClose, onMinimize, onMove, onResize }) {
     if (win.maximized) return;
     onFocus(win.id);
     const startX = e.clientX, startY = e.clientY, startWX = win.x, startWY = win.y;
-    const move = (ev) => onMove(win.id, startWX + ev.clientX - startX, Math.max(28, startWY + ev.clientY - startY));
+    const move = (ev) => {
+      const nx = Math.min(Math.max(startWX + ev.clientX - startX, -(win.w - 160)), window.innerWidth - 120);
+      const ny = Math.min(Math.max(startWY + ev.clientY - startY, 28), window.innerHeight - 110);
+      onMove(win.id, nx, ny);
+    };
     const up = () => { document.removeEventListener('mousemove', move); document.removeEventListener('mouseup', up); };
     document.addEventListener('mousemove', move); document.addEventListener('mouseup', up);
   };
@@ -46,7 +50,7 @@ function Win({ win, onFocus, onClose, onMinimize, onMove, onResize }) {
   };
   const meta = APP_META[win.app];
   const AppComp = (window.LUMIO_APPS || {})[win.app];
-  const style = win.maximized ? { left: 0, top: 28, width: '100%', height: 'calc(100% - 28px - 76px)' } : { left: win.x, top: win.y, width: win.w, height: win.h };
+  const style = win.maximized ? { left: 0, top: 84, width: '100%', height: 'calc(100% - 84px - 76px)' } : { left: win.x, top: win.y, width: win.w, height: win.h };
 
   return (
     <div onMouseDown={() => onFocus(win.id)}
@@ -56,9 +60,9 @@ function Win({ win, onFocus, onClose, onMinimize, onMove, onResize }) {
       <div onMouseDown={onDragStart} onDoubleClick={() => onFocus(win.id, 'toggleMax')}
         style={{ height: 32, background: win.focused ? 'linear-gradient(180deg, #f4f2ee, #e8e6e0)' : '#f0eee8', borderBottom: '1px solid rgba(20,24,36,0.12)', display: 'flex', alignItems: 'center', padding: '0 10px', flexShrink: 0, cursor: 'grab', userSelect: 'none' }}>
         <div style={{ display: 'flex', gap: 7 }}>
-          <button onClick={(e) => { e.stopPropagation(); onClose(win.id); }} style={trafficLight('#fc615d')} />
-          <button onClick={(e) => { e.stopPropagation(); onMinimize(win.id); }} style={trafficLight('#fdbc40')} />
-          <button onClick={(e) => { e.stopPropagation(); onFocus(win.id, 'toggleMax'); }} style={trafficLight('#34c84a')} />
+          <button onMouseDown={(e) => e.stopPropagation()} onClick={(e) => { e.stopPropagation(); onClose(win.id); }} style={trafficLight('#fc615d')} />
+          <button onMouseDown={(e) => e.stopPropagation()} onClick={(e) => { e.stopPropagation(); onMinimize(win.id); }} style={trafficLight('#fdbc40')} />
+          <button onMouseDown={(e) => e.stopPropagation()} onClick={(e) => { e.stopPropagation(); onFocus(win.id, 'toggleMax'); }} style={trafficLight('#34c84a')} />
         </div>
         <div style={{ flex: 1, textAlign: 'center', fontSize: 12, fontWeight: 600, color: win.focused ? 'var(--ink)' : 'var(--ink-mute)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', padding: '0 8px' }}>{winTitle(win)}</div>
         <div style={{ width: 60 }} />
@@ -396,6 +400,78 @@ function Desktop({ onLogout }) {
     return () => timers.forEach(clearTimeout);
   }, []);
 
+  // ── Garde-fou sortie : évite la perte de la session par retour navigateur / fermeture d'onglet ──
+  // (la session Redis restaure l'état, mais la confirmation évite la sortie accidentelle)
+  useWmEffect(() => {
+    const guard = (e) => { e.preventDefault(); e.returnValue = ''; return ''; };
+    window.addEventListener('beforeunload', guard);
+    return () => window.removeEventListener('beforeunload', guard);
+  }, []);
+
+  // ── Les fenêtres restent dans le viewport quand le navigateur est redimensionné ──
+  useWmEffect(() => {
+    let raf = null;
+    const onWinResize = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = null;
+        const vw = window.innerWidth, vh = window.innerHeight;
+        setWindows(ws => ws.map(w => {
+          const cw = Math.min(w.w, vw - 32);
+          const ch = Math.min(w.h, vh - 86 - 92);
+          const cx = Math.max(8, Math.min(w.x, vw - cw - 16));
+          const cy = Math.max(86, Math.min(w.y, vh - 92 - ch));
+          return (cw !== w.w || ch !== w.h || cx !== w.x || cy !== w.y) ? { ...w, w: cw, h: ch, x: cx, y: cy } : w;
+        }));
+      });
+    };
+    window.addEventListener('resize', onWinResize);
+    return () => { window.removeEventListener('resize', onWinResize); if (raf) cancelAnimationFrame(raf); };
+  }, []);
+
+  // ── Alertes temps diégétiques : le commanditaire relance aux moments clés ──
+  // Personnalisable par bloc via D.events.timeAlerts : [{ atPct | atRemainingMin, title?, body }]
+  // Placeholders : {{PRENOM}} (étudiant·e), {{RESTANT}} (minutes réelles restantes).
+  useWmEffect(() => {
+    const cfg = window.PAC_CONFIG || window.PASS_CONFIG || {};
+    const ACTES = cfg.temps || [];
+    const TOTAL = ACTES.length ? (ACTES[ACTES.length - 1].fin || 210) : 210;
+    const who = cfg.commanditaire || 'Commanditaire';
+    const firstName = ((D.student && D.student.name) || '').split(' ')[0] || '';
+    const slug = (s) => (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    const defaults = [
+      { atPct: 50, body: '{{PRENOM}}, mi-parcours. Fais-moi un point rapide sur Slack : où en es-tu ?' },
+      { atPct: 75, body: '{{PRENOM}}, le rendu approche — il te reste environ {{RESTANT}} min. Priorité absolue au livrable maintenant.' },
+      { atRemainingMin: 10, body: 'Dernière ligne droite : 10 minutes. Envoie-moi ce que tu as. Un rendu incomplet se discute — une absence de rendu, non.' }
+    ];
+    const alerts = (EV.timeAlerts && EV.timeAlerts.length) ? EV.timeAlerts : defaults;
+    const atMin = (a) => a.atRemainingMin != null ? Math.max(0, TOTAL - a.atRemainingMin) : Math.round(TOTAL * (a.atPct || 50) / 100);
+    const fired = new Set();
+    if (window.LUMIO_TIMER_START) {
+      // Après un reload, seule la relance la plus récente déjà franchie est ré-émise (rappel), pas tout l'historique.
+      const el = (Date.now() - window.LUMIO_TIMER_START) / 60000;
+      const crossed = alerts.filter(a => el >= atMin(a)).sort((x, y) => atMin(x) - atMin(y));
+      crossed.slice(0, -1).forEach(a => fired.add(atMin(a)));
+    }
+    const tick = () => {
+      if (!window.LUMIO_TIMER_START) return;
+      const el = (Date.now() - window.LUMIO_TIMER_START) / 60000;
+      alerts.forEach(a => {
+        const m = atMin(a);
+        if (el < m || fired.has(m)) return;
+        fired.add(m);
+        const remaining = Math.max(0, Math.round(TOTAL - el));
+        const body = String(a.body || '').replace(/\{\{PRENOM\}\}/g, firstName).replace(/\{\{RESTANT\}\}/g, String(remaining));
+        window.LUMIO_DATA._timeAlerts = [...(window.LUMIO_DATA._timeAlerts || []), { from: who, text: body, at: Date.now() }];
+        try { window.dispatchEvent(new CustomEvent('pac:time-alert', { detail: { from: who, text: body } })); } catch (err) {}
+        pushNotif({ app: 'Slack', icon: '\uD83D\uDCAC', color: '#3f0e40', title: a.title || ('Message de ' + who), body, click: { app: 'slack', props: { openChannel: slug(who) } } }, 22000);
+      });
+    };
+    tick();
+    const id = setInterval(tick, 20000);
+    return () => clearInterval(id);
+  }, []);
+
   // Signature d'une cible : deux ouvertures avec la même cible = même fenêtre.
   // Cibles distinctes (autre doc, autre portrait, autre dossier) = nouvelles fenêtres.
   // Exception : le navigateur reste une fenêtre unique et accumule les onglets
@@ -424,7 +500,12 @@ function Desktop({ onLogout }) {
       // Même cible déjà ouverte → focus + remontée, pas de doublon.
       if (existing) return ws.map(w => w.sig === sig ? { ...w, minimized: false, focused: true, z: nz, props: { ...w.props, ...props } } : { ...w, focused: false });
       const offset = (ws.length % 8) * 28;
-      return [...ws.map(w => ({ ...w, focused: false })), { id: app + '-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6), sig, app, props, x: 120 + offset, y: 70 + offset, w: meta.w, h: meta.h, z: nz, focused: true, minimized: false, maximized: false }];
+      const vw = window.innerWidth, vh = window.innerHeight;
+      const cw = Math.min(meta.w, vw - 32);
+      const ch = Math.min(meta.h, vh - 86 - 92);
+      const cx = Math.max(8, Math.min(120 + offset, vw - cw - 16));
+      const cy = Math.max(86, Math.min(70 + offset, vh - 92 - ch));
+      return [...ws.map(w => ({ ...w, focused: false })), { id: app + '-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6), sig, app, props, x: cx, y: cy, w: cw, h: ch, z: nz, focused: true, minimized: false, maximized: false }];
     });
   };
   const focusWin = (id, action) => setWindows(ws => { const nz = zCounter + 1; setZCounter(nz); return ws.map(w => w.id === id ? { ...w, focused: true, z: nz, maximized: action === 'toggleMax' ? !w.maximized : w.maximized, minimized: false } : { ...w, focused: false }); });
