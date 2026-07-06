@@ -1,26 +1,60 @@
 // ══════════════════════════════════════════════════════════════
-//  JEFFERSON · PAC bc2
-//  Composant générique — guide par acte + chat. Lit window.PAC_CONFIG.
+//  JEFFERSON · PAC — guide contextuel générique
+//  · Actes lus dynamiquement depuis PAC_CONFIG.temps (plus de seuils figés)
+//  · État réel de la session injecté dans le prompt (apps ouvertes,
+//    échanges Slack, statut livrable) — lu depuis LUMIO_DATA._* (desktop.jsx)
+//  · Historique de conversation transmis à l'API → plus de réponses en boucle
 // ══════════════════════════════════════════════════════════════
 
 const { useState: useJefState } = React;
 
-function buildJeffersonPrompt(name, elapsed) {
-  const cfg = window.PAC_CONFIG || {};
-  const prenom = (name || "").split(" ")[0] || "vous";
+// Conseils génériques par numéro d'acte — les durées viennent de cfg.temps
+const JEF_ACTES = {
+  1: { obj: "Observer, lire le brief.", action: (cmd) => "Ouvrir Mail. Lire le brief de " + cmd + "." },
+  2: { obj: "Lire tous les documents du dossier.", action: () => "PDF, Mail, Navigateur, Mémos vocaux, Finder." },
+  3: { obj: "Tester une hypothèse.", action: (cmd) => "Slack → " + cmd + ". Sa réaction débloque le Livrable." },
+  4: { obj: "Rédiger le livrable.", action: () => "Ouvrir le Livrable. Traiter chaque compétence dans l'ordre." },
+  5: { obj: "Relire puis soumettre.", action: () => "Soumettre au jury." }
+};
+
+function jefSnapshot() {
+  const cfg = window.PAC_CONFIG || window.PASS_CONFIG || {};
+  const D = window.LUMIO_DATA || {};
+  const EV = D.events || {};
+  const ACTES = cfg.temps || [];
+  const TOTAL = ACTES.length ? (ACTES[ACTES.length - 1].fin || 210) : 210;
+  const elapsed = window.LUMIO_TIMER_START ? Math.floor((Date.now() - window.LUMIO_TIMER_START) / 60000) : 0;
+  const left = Math.max(0, TOTAL - elapsed);
+  const acte = ACTES.find(a => elapsed >= a.debut && elapsed < a.fin) || ACTES[ACTES.length - 1] || { n: 1, label: "" };
   const cmd = cfg.commanditaire || "le commanditaire";
-  const left = Math.max(0, 210 - elapsed);
-  let phase, obj, action;
-  if      (elapsed < 20)  { phase = "Acte 1 · Ancrage";      obj = "Observer, lire le brief."; action = "Ouvrir Mail. Lire le brief de " + cmd + "."; }
-  else if (elapsed < 50)  { phase = "Acte 2 · Affaire";      obj = "Lire tous les documents."; action = "PDF, Mail, Navigateur, Mémos."; }
-  else if (elapsed < 95)  { phase = "Acte 3 · Diagnostic";   obj = "Tester une hypothèse.";    action = "Slack → " + cmd + ". Sa réaction débloque le Livrable."; }
-  else if (elapsed < 175) { phase = "Acte 4 · Production";   obj = "Rédiger le livrable " + cfg.bloc + "."; action = "Ouvrir le Livrable. Traiter chaque compétence dans l'ordre."; }
-  else                    { phase = "Acte 5 · Réflexion";    obj = (cfg.note_reflexive ? "Note réflexive puis soumettre." : "Relire puis soumettre."); action = (cfg.note_reflexive ? "Onglet réflexif, puis Soumettre." : "Soumettre au jury."); }
-  return "Tu es Jefferson, le guide du PAC " + cfg.bloc + ". Tu dis QUOI FAIRE, jamais QUOI PENSER. " +
-    "Étudiant·e : " + prenom + ". Temps écoulé : " + elapsed + " min, " + left + " min restantes. " +
-    "Phase : " + phase + ". Objectif : " + obj + " Action immédiate : " + action + " " +
-    "Réponds en 2 phrases maximum, concret, sans donner la réponse au livrable. " +
-    "Texte simple uniquement : aucun markdown, pas de #, pas de ** gras **, pas de listes à puces, pas de titres. Juste des phrases.";
+  const opened = D._openedApps || [];
+  const exch = D._slackExchanges || 0;
+  const unlockAt = EV.unlockLivrableAfter != null ? EV.unlockLivrableAfter : 1;
+  const livrable = D._livrableSubmitted
+    ? "soumis — débrief final reçu"
+    : (exch >= unlockAt ? "débloqué, en cours de rédaction" : "pas encore débloqué (il faut d'abord envoyer une hypothèse sur Slack à " + cmd + ")");
+  const fictif = window.__getFictifTime ? window.__getFictifTime().label : "";
+  const g = JEF_ACTES[acte.n] || JEF_ACTES[1];
+  return { cfg, cmd, elapsed, left, TOTAL, acte, opened, exch, livrable, fictif, obj: g.obj, action: g.action(cmd) };
+}
+
+function buildJeffersonPrompt(name) {
+  const s = jefSnapshot();
+  const prenom = (name || "").split(" ")[0] || "vous";
+  return "Tu es Jefferson, le guide du PAC " + (s.cfg.bloc || "") + ". Tu dis QUOI FAIRE, jamais QUOI PENSER.\n\n" +
+    "ÉTAT RÉEL DE LA SESSION — appuie-toi uniquement là-dessus, ne suppose rien d'autre :\n" +
+    "- Étudiant·e : " + prenom + "\n" +
+    "- Acte " + s.acte.n + (s.acte.label ? " · " + s.acte.label : "") + " — " + s.elapsed + " min écoulées sur " + s.TOTAL + ", " + s.left + " min restantes" + (s.fictif ? " (temps fictif : " + s.fictif + ")" : "") + "\n" +
+    "- Objectif de l'acte : " + s.obj + " Action type : " + s.action + "\n" +
+    "- Applications déjà ouvertes : " + (s.opened.length ? s.opened.join(", ") : "aucune") + "\n" +
+    "- Échanges Slack avec " + s.cmd + " : " + s.exch + "\n" +
+    "- Livrable : " + s.livrable + "\n\n" +
+    "RÈGLES :\n" +
+    "- Ne conseille jamais une action déjà faite (application déjà ouverte, échange Slack déjà réalisé, livrable déjà débloqué).\n" +
+    "- Ne répète jamais un conseil déjà donné dans l'historique de cette conversation : reformule ou passe à l'étape suivante.\n" +
+    "- Si l'étudiant·e est en retard sur la phase (ex. Acte 4 mais livrable pas débloqué), dis-le clairement et donne la priorité.\n" +
+    "- Réponds en 2 phrases maximum, concret, sans donner la réponse au livrable.\n" +
+    "- Texte simple uniquement : aucun markdown, pas de #, pas de ** gras **, pas de listes à puces, pas de titres. Juste des phrases.";
 }
 
 function JeffersonApp() {
@@ -32,11 +66,12 @@ function JeffersonApp() {
     const q = draft.trim(); if (!q || sending) return;
     setDraft(""); setMsgs(m => [...m, { role: "user", text: q }]); setSending(true);
     try {
-      const elapsed = window.LUMIO_TIMER_START ? Math.floor((Date.now() - window.LUMIO_TIMER_START) / 60000) : 0;
       const name = (window.LUMIO_DATA && window.LUMIO_DATA.student && window.LUMIO_DATA.student.name) || "";
+      // Historique complet (sans le message d'accueil), tronqué aux 20 derniers tours
+      const history = msgs.slice(1).slice(-20).map(m => ({ role: m.role === "user" ? "user" : "assistant", content: m.text }));
       const resp = await fetch("/api/chat", {
         method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ model: "claude-haiku-4-5-20251001", max_tokens: 300, system: buildJeffersonPrompt(name, elapsed), messages: [{ role: "user", content: q }] })
+        body: JSON.stringify({ model: "claude-haiku-4-5-20251001", max_tokens: 300, system: buildJeffersonPrompt(name), messages: [...history, { role: "user", content: q }] })
       });
       const data = await resp.json();
       const txt = (data.content || []).filter(b => b.type === "text").map(b => b.text).join("") || "…";

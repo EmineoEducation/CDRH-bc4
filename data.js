@@ -332,6 +332,7 @@ window.PAC_CONFIG = {
     {
       "code": "4.3",
       "label": "Contribuer à la construction du plan de développement des compétences",
+      "tableauModele": "| Action de formation | Public visé | Objectif / compétence visée | Modalité | Période | Coût estimé & financement | Indicateur de suivi |\n|---|---|---|---|---|---|---|\n| Formation réglementaire MDR | Équipe qualité & production | Conformité certification MDR | Présentiel intra | T1 2027 | À chiffrer — accès OPCO limité (hors Qualiopi) | Taux de certification |\n|  |  |  |  |  |  |  |\n|  |  |  |  |  |  |  |",
       "libelle": "Contribuer à",
       "rncp": "Contribuer à la construction du plan de développement des compétences, en tenant compte du budget de formation, des accords collectifs sur l'égalité professionnelle entre les hommes et les femmes, sur la qualité de vie et les conditions de travail, et en mobilisant les dispositifs réglementaires de la formation continue, pour répondre aux besoins en compétences présents et à venir des collaborateurs et de l'entreprise, et satisfaire aux obligations de formation de l'employeur",
       "placeholder": "Construisez le plan de développement des compétences de Lumio Health pour les 12 prochains mois. Priorisez les actions (RGPD santé, ISO 13485, IA, management B2B, QVCT), indiquez les dispositifs de financement mobilisables (OPCO Atlas, CPF, Pro-A) et intégrez une dimension diversité-inclusion. Justifiez chaque arbitrage budgétaire.",

@@ -154,6 +154,35 @@ function SlackApp({ openChannel }) {
     if (openChannel) { setActive(openChannel); setUnreads(u => ({ ...u, [openChannel]: 0 })); }
   }, [openChannel]);
 
+  // ── Alertes temps (émises par le bureau) → messages du commanditaire dans le fil ──
+  useSlackEffect(() => {
+    const info = castOf(primaryName);
+    const nowT = () => { const t = new Date(); return `${t.getHours().toString().padStart(2, '0')}:${t.getMinutes().toString().padStart(2, '0')}`; };
+    const toMsg = (text) => ({ from: primaryName, avatar: info.avatar, color: info.color, time: nowT(), text });
+    // Rattrapage : alertes émises pendant que la fenêtre Slack était fermée
+    setChatHistory(h => {
+      const alerts = (window.LUMIO_DATA._timeAlerts || []).map(a => a.text);
+      if (!alerts.length) return h;
+      const cur = h[primaryId] || [];
+      const known = {}; cur.forEach(m => { known[m.text] = true; });
+      const add = alerts.filter(t => !known[t]).map(toMsg);
+      return add.length ? { ...h, [primaryId]: [...cur, ...add] } : h;
+    });
+    const onAlert = (e) => {
+      const text = (e.detail && e.detail.text) || '';
+      if (!text) return;
+      setChatHistory(h => {
+        const cur = h[primaryId] || [];
+        if (cur.some(m => m.text === text)) return h;
+        return { ...h, [primaryId]: [...cur, toMsg(text)] };
+      });
+      if (activeIdRef.current !== primaryId) setUnreads(u => ({ ...u, [primaryId]: (u[primaryId] || 0) + 1 }));
+    };
+    window.addEventListener('pac:time-alert', onAlert);
+    return () => window.removeEventListener('pac:time-alert', onAlert);
+  }, []);
+
+
   useSlackEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
   }, [chatHistory, activeId, sending]);
@@ -230,7 +259,7 @@ function SlackApp({ openChannel }) {
           body: JSON.stringify({
             model: 'claude-sonnet-4-6',
             max_tokens: 500,
-            system: buildSlackEvalPrompt(primaryName, primaryRole, cfg, D),
+            system: buildSlackEvalPrompt(primaryName, primaryRole, cfg, D) + (window.__pacSessionBrief ? window.__pacSessionBrief() : ''),
             messages: [{ role: 'user', content: userPrompt }]
           })
         });

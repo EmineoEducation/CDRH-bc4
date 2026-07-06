@@ -7,6 +7,129 @@
 const { useState: useLivState } = React;
 const _wc = (t) => (t || "").trim() ? (t || "").trim().split(/\s+/).length : 0;
 
+// ── Markdown-lite : rendu sécurisé (échappement HTML systématique) ──
+// Supporte : **gras**, *italique*, listes (- / 1.), tableaux (| a | b |).
+const _mdEsc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const _mdInline = (s) => s
+  .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+  .replace(/\*([^*]+)\*/g, "<em>$1</em>");
+
+function _mdToHtml(raw) {
+  const lines = _mdEsc(raw || "").split(/\r?\n/);
+  const out = [];
+  let i = 0;
+  const isTableLine = (l) => /^\s*\|.*\|\s*$/.test(l);
+  const isSep = (l) => /^\s*\|[\s:|-]+\|\s*$/.test(l);
+  while (i < lines.length) {
+    const l = lines[i];
+    if (isTableLine(l)) {
+      const block = [];
+      while (i < lines.length && isTableLine(lines[i])) { block.push(lines[i]); i++; }
+      const hasSep = block.length > 1 && isSep(block[1]);
+      const rows = block.filter(r => !isSep(r)).map(r => r.replace(/^\s*\|/, "").replace(/\|\s*$/, "").split("|").map(c => _mdInline(c.trim())));
+      let html = "<table style=\"border-collapse:collapse;width:100%;margin:8px 0;font-size:12.5px\">";
+      rows.forEach((cells, ri) => {
+        const tag = (hasSep && ri === 0) ? "th" : "td";
+        html += "<tr>" + cells.map(c => "<" + tag + " style=\"border:1px solid #d8d4cc;padding:5px 8px;text-align:left;vertical-align:top;" + (tag === "th" ? "background:#f0ede7;font-weight:700" : "") + "\">" + (c || "&nbsp;") + "</" + tag + ">").join("") + "</tr>";
+      });
+      html += "</table>";
+      out.push(html);
+      continue;
+    }
+    if (/^\s*[-*]\s+/.test(l)) {
+      const items = [];
+      while (i < lines.length && /^\s*[-*]\s+/.test(lines[i])) { items.push(_mdInline(lines[i].replace(/^\s*[-*]\s+/, ""))); i++; }
+      out.push("<ul style=\"margin:6px 0;padding-left:20px\">" + items.map(x => "<li>" + x + "</li>").join("") + "</ul>");
+      continue;
+    }
+    if (/^\s*\d+[.)]\s+/.test(l)) {
+      const items = [];
+      while (i < lines.length && /^\s*\d+[.)]\s+/.test(lines[i])) { items.push(_mdInline(lines[i].replace(/^\s*\d+[.)]\s+/, ""))); i++; }
+      out.push("<ol style=\"margin:6px 0;padding-left:20px\">" + items.map(x => "<li>" + x + "</li>").join("") + "</ol>");
+      continue;
+    }
+    out.push(_mdInline(l) + "<br>");
+    i++;
+  }
+  return out.join("");
+}
+
+// Comptage de mots : la syntaxe markdown (pipes, puces, séparateurs, astérisques) ne compte pas
+const _stripMd = (t) => String(t || "")
+  .replace(/^\s*\|[\s:|-]+\|\s*$/gm, "")
+  .replace(/\|/g, " ")
+  .replace(/^\s*[-*]\s+/gm, "")
+  .replace(/^\s*\d+[.)]\s+/gm, "")
+  .replace(/\*/g, "");
+const _wcMd = (t) => _wc(_stripMd(t));
+
+// ── Champ de saisie avec mise en forme (toolbar + aperçu) ──
+function LivField({ title, count, min, placeholder, conseil, value, onChange, locked, rows, tableauModele }) {
+  const [preview, setPreview] = useLivState(false);
+  const taRef = React.useRef(null);
+  const apply = (before, after, blockPrefix) => {
+    const ta = taRef.current; if (!ta || locked) return;
+    const v = value || "";
+    const s = ta.selectionStart, e = ta.selectionEnd;
+    let nv, ns, ne;
+    if (blockPrefix) {
+      const sel = v.slice(s, e) || "élément";
+      const block = sel.split("\n").map(x => blockPrefix + x).join("\n");
+      nv = v.slice(0, s) + block + v.slice(e);
+      ns = s; ne = s + block.length;
+    } else {
+      const sel = v.slice(s, e) || "texte";
+      nv = v.slice(0, s) + before + sel + after + v.slice(e);
+      ns = s + before.length; ne = ns + sel.length;
+    }
+    onChange(nv);
+    requestAnimationFrame(() => { ta.focus(); ta.setSelectionRange(ns, ne); });
+  };
+  const insertBlock = (block) => {
+    const ta = taRef.current; if (locked) return;
+    const v = value || "";
+    const s = (ta && ta.selectionStart != null) ? ta.selectionStart : v.length;
+    const pre = v.slice(0, s), post = v.slice(s);
+    onChange(pre + (pre && !pre.endsWith("\n") ? "\n\n" : "") + block + "\n" + post);
+    if (ta) requestAnimationFrame(() => ta.focus());
+  };
+  const TBL = "| Colonne 1 | Colonne 2 | Colonne 3 |\n|---|---|---|\n|  |  |  |\n|  |  |  |";
+  const btn = { border: "1px solid var(--rule)", background: "white", borderRadius: 5, padding: "3px 8px", fontSize: 11, cursor: "pointer", color: "var(--ink-soft)", fontFamily: "inherit" };
+  return (
+    <div style={{ background: "white", borderRadius: 10, padding: "16px 18px", marginBottom: 14, border: "1px solid var(--rule)", opacity: locked ? 0.7 : 1 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 4 }}>
+        <span style={{ fontWeight: 700, fontSize: 14 }}>{title}</span>
+        <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: count >= min ? "#1a6641" : "var(--ink-faint)" }}>{count}/{min} mots</span>
+      </div>
+      {placeholder ? <div style={{ fontSize: 12, color: "var(--ink-mute)", marginBottom: 8, lineHeight: 1.5 }}>{placeholder}</div> : null}
+      {!locked ? (
+        <div style={{ display: "flex", gap: 6, marginBottom: 6, flexWrap: "wrap", alignItems: "center" }}>
+          <button style={{ ...btn, fontWeight: 700 }} title="Gras (**texte**)" onClick={() => apply("**", "**")}>B</button>
+          <button style={{ ...btn, fontStyle: "italic" }} title="Italique (*texte*)" onClick={() => apply("*", "*")}>I</button>
+          <button style={btn} title="Liste à puces" onClick={() => apply(null, null, "- ")}>• Liste</button>
+          <button style={btn} title="Insérer un tableau vide" onClick={() => insertBlock(TBL)}>⊞ Tableau</button>
+          {tableauModele ? (
+            <button style={{ ...btn, borderColor: "#1a6641", color: "#1a6641", fontWeight: 600 }} title="Insérer la structure de tableau attendue pour cette compétence"
+              onClick={() => insertBlock(tableauModele)}>⊞ Insérer le modèle attendu</button>
+          ) : null}
+          <span style={{ flex: 1 }} />
+          <button style={{ ...btn, background: preview ? "#134547" : "white", color: preview ? "white" : "var(--ink-soft)", borderColor: preview ? "#134547" : "var(--rule)" }}
+            onClick={() => setPreview(p => !p)}>{preview ? "✎ Éditer" : "👁 Aperçu"}</button>
+        </div>
+      ) : null}
+      {preview && !locked ? (
+        <div style={{ border: "1px dashed var(--rule)", borderRadius: 7, padding: "10px 12px", fontSize: 13, lineHeight: 1.55, minHeight: 90, background: "#fbfaf7" }}
+          dangerouslySetInnerHTML={{ __html: _mdToHtml(value || "") || "<span style=\"color:#a8a294\">(vide)</span>" }} />
+      ) : (
+        <textarea ref={taRef} value={value || ""} onChange={e => onChange(e.target.value)} rows={rows || 5} disabled={locked}
+          style={{ width: "100%", border: "1px solid var(--rule)", borderRadius: 7, padding: "9px 11px", fontSize: 13, fontFamily: "inherit", lineHeight: 1.55, resize: "vertical", outline: "none", background: locked ? "#f0f0f0" : "white" }} />
+      )}
+      {conseil ? <div style={{ fontSize: 11, color: "var(--ink-faint)", marginTop: 6, fontStyle: "italic" }}>💡 {conseil}</div> : null}
+    </div>
+  );
+}
+
+
 function LivrableApp() {
   const cfg = window.PAC_CONFIG || window.PASS_CONFIG || {};
   const comps = cfg.competences || [];
@@ -20,9 +143,9 @@ function LivrableApp() {
   const [sent, setSent] = useLivState("");
 
   const set = (code, v) => setAnswers(a => ({ ...a, [code]: v }));
-  const totalMots = comps.reduce((n, c) => n + _wc(answers[c.code]), 0) + _wc(reflexive);
-  const allMin = comps.every(c => _wc(answers[c.code]) >= (c.min || 0));
-  const reflexiveOk = !cfg.note_reflexive || _wc(reflexive) >= (cfg.noteReflexiveMinMots || 0);
+  const totalMots = comps.reduce((n, c) => n + _wcMd(answers[c.code]), 0) + _wcMd(reflexive);
+  const allMin = comps.every(c => _wcMd(answers[c.code]) >= (c.min || 0));
+  const reflexiveOk = !cfg.note_reflexive || _wcMd(reflexive) >= (cfg.noteReflexiveMinMots || 0);
   const canSubmit = allMin && reflexiveOk && totalMots >= (cfg.livrableMinMots || 0) && !sending;
 
   // ── Construire le texte de production ──
@@ -38,7 +161,8 @@ function LivrableApp() {
     try {
       const prod = buildProd();
       const systemPrompt = (cfg.juryPrompt || "Tu évalues la production sur les compétences listées.")
-        + "\n\nIMPORTANT : Ceci est une évaluation formative. L'étudiant pourra reprendre sa copie. Sois précis sur les points à améliorer.";
+        + "\n\nIMPORTANT : Ceci est une évaluation formative. L'étudiant pourra reprendre sa copie. Sois précis sur les points à améliorer."
+        + "\n\nNOTE FORMAT : les réponses peuvent contenir une mise en forme markdown légère (**gras**, *italique*, listes, tableaux délimités par |). Évalue le fond ; un tableau structuré et complet est un signe de professionnalisme, pas du remplissage.";
       const resp = await fetch("/api/chat", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ model: "claude-sonnet-4-6", max_tokens: 1600,
@@ -61,7 +185,8 @@ function LivrableApp() {
     try {
       const prod = buildProd();
       const systemPrompt = (cfg.juryPrompt || "Tu évalues la production sur les compétences listées.")
-        + "\n\nCeci est le débrief FINAL. L'étudiant a déjà reçu un retour formatif et a pu reprendre sa copie. Sois exigeant et conclusif. Donne un niveau global.";
+        + "\n\nCeci est le débrief FINAL. L'étudiant a déjà reçu un retour formatif et a pu reprendre sa copie. Sois exigeant et conclusif. Donne un niveau global."
+        + "\n\nNOTE FORMAT : les réponses peuvent contenir une mise en forme markdown légère (**gras**, *italique*, listes, tableaux délimités par |). Évalue le fond ; un tableau structuré et complet est un signe de professionnalisme, pas du remplissage.";
       const resp = await fetch("/api/chat", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ model: "claude-sonnet-4-6", max_tokens: 1800,
@@ -87,9 +212,9 @@ function LivrableApp() {
     if (!stu.email) { setSent("Aucun email étudiant détecté."); return; }
     setSent("envoi…");
     try {
-      const rows = comps.map(c => "<h3 style=\"color:#134547;margin:18px 0 6px;font-family:'IBM Plex Sans',sans-serif\">" + c.code + " — " + c.label + "</h3><p style=\"white-space:pre-wrap;color:#0B2B2D;line-height:1.55;font-family:'IBM Plex Sans',sans-serif\">" + ((answers[c.code] || "(vide)")) + "</p>").join("");
+      const rows = comps.map(c => "<h3 style=\"color:#134547;margin:18px 0 6px;font-family:'IBM Plex Sans',sans-serif\">" + c.code + " — " + c.label + "</h3><div style=\"color:#0B2B2D;line-height:1.55;font-family:'IBM Plex Sans',sans-serif\">" + _mdToHtml(answers[c.code] || "(vide)") + "</div>").join("");
       const refl = cfg.note_reflexive
-        ? "<h3 style=\"color:#134547;margin:18px 0 6px;font-family:'IBM Plex Sans',sans-serif\">Note réflexive</h3><p style=\"white-space:pre-wrap;color:#0B2B2D;line-height:1.55;font-family:'IBM Plex Sans',sans-serif\">" + (reflexive || "(vide)") + "</p>"
+        ? "<h3 style=\"color:#134547;margin:18px 0 6px;font-family:'IBM Plex Sans',sans-serif\">Note réflexive</h3><div style=\"color:#0B2B2D;line-height:1.55;font-family:'IBM Plex Sans',sans-serif\">" + _mdToHtml(reflexive || "(vide)") + "</div>"
         : "";
       const html = "<div style=\"font-family:'IBM Plex Sans',sans-serif;max-width:680px;margin:auto;color:#0B2B2D\">" +
         "<div style=\"background:#0B2B2D;padding:24px 28px;border-radius:10px 10px 0 0\">" +
@@ -135,36 +260,23 @@ function LivrableApp() {
           {cfg.deadline ? "Échéance : " + cfg.deadline : null}
         </div>
 
-        {/* ── Champs par compétence ── */}
-        {comps.map(c => {
-          const n = _wc(answers[c.code]); const ok = n >= (c.min || 0);
-          const locked = step === "debrief";
-          return (
-            <div key={c.code} style={{ background: "white", borderRadius: 10, padding: "16px 18px", marginBottom: 14, border: "1px solid var(--rule)", opacity: locked ? 0.7 : 1 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 4 }}>
-                <span style={{ fontWeight: 700, fontSize: 14 }}>{c.code} — {c.label}</span>
-                <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: ok ? "#1a6641" : "var(--ink-faint)" }}>{n}/{c.min || 0} mots</span>
-              </div>
-              {c.placeholder ? <div style={{ fontSize: 12, color: "var(--ink-mute)", marginBottom: 8, lineHeight: 1.5 }}>{c.placeholder}</div> : null}
-              <textarea value={answers[c.code] || ""} onChange={e => set(c.code, e.target.value)} rows={5} disabled={locked}
-                style={{ width: "100%", border: "1px solid var(--rule)", borderRadius: 7, padding: "9px 11px", fontSize: 13, fontFamily: "inherit", lineHeight: 1.55, resize: "vertical", outline: "none", background: locked ? "#f0f0f0" : "white" }} />
-              {c.conseil ? <div style={{ fontSize: 11, color: "var(--ink-faint)", marginTop: 6, fontStyle: "italic" }}>💡 {c.conseil}</div> : null}
-            </div>
-          );
-        })}
+        {/* ── Champs par compétence (saisie markdown-lite : toolbar + aperçu) ── */}
+        {comps.map(c => (
+          <LivField key={c.code}
+            title={c.code + " — " + c.label}
+            count={_wcMd(answers[c.code])} min={c.min || 0}
+            placeholder={c.placeholder} conseil={c.conseil}
+            value={answers[c.code]} onChange={v => set(c.code, v)}
+            locked={step === "debrief"} rows={5}
+            tableauModele={c.tableauModele} />
+        ))}
 
         {/* ── Note réflexive ── */}
         {cfg.note_reflexive ? (
-          <div style={{ background: "white", borderRadius: 10, padding: "16px 18px", marginBottom: 14, border: "1px solid var(--rule)", opacity: step === "debrief" ? 0.7 : 1 }}>
-            <div style={{ fontWeight: 700, fontSize: 14, marginBottom: 6 }}>
-              Note réflexive
-              <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--ink-faint)", marginLeft: 8 }}>
-                ({_wc(reflexive)}/{cfg.noteReflexiveMinMots || 0} mots)
-              </span>
-            </div>
-            <textarea value={reflexive} onChange={e => setReflexive(e.target.value)} rows={6} disabled={step === "debrief"}
-              style={{ width: "100%", border: "1px solid var(--rule)", borderRadius: 7, padding: "9px 11px", fontSize: 13, fontFamily: "inherit", lineHeight: 1.55, resize: "vertical", outline: "none", background: step === "debrief" ? "#f0f0f0" : "white" }} />
-          </div>
+          <LivField title="Note réflexive"
+            count={_wcMd(reflexive)} min={cfg.noteReflexiveMinMots || 0}
+            value={reflexive} onChange={setReflexive}
+            locked={step === "debrief"} rows={6} />
         ) : null}
 
         {err ? <div style={{ color: "#c4420f", fontSize: 12, marginBottom: 10 }}>{err}</div> : null}

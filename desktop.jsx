@@ -124,6 +124,27 @@ function getFictifTime() {
 }
 window.__getFictifTime = getFictifTime;
 
+// ═════ Synthèse d'état de session — consommée par les personnages IA ═════
+// (Slack commanditaire, Mail, Jefferson…) Le ton des personnages devient
+// une conséquence des actions réelles de l'étudiant·e.
+window.__pacSessionBrief = () => {
+  const cfg = window.PAC_CONFIG || window.PASS_CONFIG || {};
+  const Db = window.LUMIO_DATA || {};
+  const EVb = Db.events || {};
+  const ACTESb = cfg.temps || [];
+  const TOTALb = ACTESb.length ? (ACTESb[ACTESb.length - 1].fin || 210) : 210;
+  const el = window.LUMIO_TIMER_START ? Math.floor((Date.now() - window.LUMIO_TIMER_START) / 60000) : 0;
+  const acte = ACTESb.find(a => el >= a.debut && el < a.fin) || ACTESb[ACTESb.length - 1] || { n: 1, label: '' };
+  const exch = Db._slackExchanges || 0;
+  const unlockAt = EVb.unlockLivrableAfter != null ? EVb.unlockLivrableAfter : 1;
+  const livrable = Db._livrableSubmitted ? 'déjà soumis' : (exch >= unlockAt ? 'en cours de rédaction' : 'pas encore commencé');
+  return "\n\nÉTAT RÉEL DE LA MISSION — sert uniquement à calibrer ton ton. Ne mentionne JAMAIS ces termes techniques (ni « acte », ni « minutes réelles », ni « timer ») : dans la fiction, parle en jours.\n" +
+    "- Progression : phase " + acte.n + "/" + (ACTESb.length || 5) + (acte.label ? " (" + acte.label + ")" : "") + " · " + Math.round(el / TOTALb * 100) + " % du temps consommé · nous sommes le " + getFictifTime().label + "\n" +
+    "- Échanges déjà eus avec le/la consultant·e sur Slack : " + exch + "\n" +
+    "- Livrable : " + livrable + "\n" +
+    "- Attitude : si l'échéance approche et que peu t'est parvenu, montre l'impatience mesurée d'un commanditaire réel ; si le travail avance, sois plus détendu et précis.";
+};
+
 // ═════ Menu bar ═════════════════════════════════════════════
 function MenuBar({ activeApp, openLogout }) {
   const [timeLabel, setTimeLabel] = useWmState('');
@@ -314,6 +335,57 @@ function PacTimeline() {
   );
 }
 
+
+// ═════ Lumio Pulse — mini tableau de bord (data-driven, D.kpis) ═════
+// D.kpis = [{ label, unit?, values: [v_acte1..v_acteN], goodUp? }] — masqué si absent.
+function LumioPulse() {
+  const D = window.LUMIO_DATA || {};
+  const kpis = D.kpis || [];
+  const cfg = window.PAC_CONFIG || window.PASS_CONFIG || {};
+  const ACTES = cfg.temps || [];
+  const [acteN, setActeN] = useWmState(1);
+  const [open, setOpen] = useWmState(false);
+  useWmEffect(() => {
+    const t = () => {
+      if (!window.LUMIO_TIMER_START) return;
+      const el = (Date.now() - window.LUMIO_TIMER_START) / 60000;
+      const a = ACTES.find(x => el >= x.debut && el < x.fin) || ACTES[ACTES.length - 1] || { n: 1 };
+      setActeN(a.n);
+    };
+    t(); const id = setInterval(t, 20000);
+    return () => clearInterval(id);
+  }, []);
+  if (!kpis.length) return null;
+  const valAt = (k, n) => { const v = k.values || []; if (!v.length) return ''; const i = Math.min(Math.max(n - 1, 0), v.length - 1); return v[i]; };
+  return (
+    <div style={{ position: 'fixed', top: 34, left: 10, zIndex: 9989 }}>
+      <div onClick={() => setOpen(o => !o)}
+        style={{ background: 'rgba(11,43,45,0.88)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', border: '1px solid rgba(93,226,152,0.25)', borderRadius: 8, padding: '5px 10px', fontSize: 10.5, fontWeight: 700, color: '#5DE298', cursor: 'pointer', letterSpacing: '0.04em', boxShadow: '0 4px 14px rgba(11,43,45,0.25)', userSelect: 'none' }}>
+        ⌁ Lumio Pulse {open ? '▴' : '▾'}
+      </div>
+      {open ? (
+        <div style={{ marginTop: 6, background: 'rgba(11,43,45,0.92)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', border: '1px solid rgba(93,226,152,0.2)', borderRadius: 10, padding: '10px 12px', minWidth: 190, boxShadow: '0 10px 28px rgba(11,43,45,0.35)' }}>
+          {kpis.map((k, i) => {
+            const cur = valAt(k, acteN);
+            const prev = acteN > 1 ? valAt(k, acteN - 1) : cur;
+            const up = typeof cur === 'number' && typeof prev === 'number' && cur > prev;
+            const down = typeof cur === 'number' && typeof prev === 'number' && cur < prev;
+            const good = k.goodUp === false ? down : up;
+            const bad = k.goodUp === false ? up : down;
+            return (
+              <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 14, padding: '4px 0', borderBottom: i < kpis.length - 1 ? '1px solid rgba(255,255,255,0.07)' : 'none' }}>
+                <span style={{ fontSize: 10.5, color: 'rgba(255,255,255,0.6)' }}>{k.label}</span>
+                <span style={{ fontSize: 12.5, fontWeight: 700, color: good ? '#5DE298' : bad ? '#E89B77' : 'white', fontFamily: 'var(--font-mono, monospace)' }}>{cur}{k.unit || ''}{up ? ' ↑' : down ? ' ↓' : ''}</span>
+              </div>
+            );
+          })}
+          <div style={{ fontSize: 9, color: 'rgba(255,255,255,0.35)', marginTop: 6 }}>Données internes Lumio · temps réel</div>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 // ═════ Desktop ══════════════════════════════════════════════
 function Desktop({ onLogout }) {
   const D = window.LUMIO_DATA || {};
@@ -336,6 +408,7 @@ function Desktop({ onLogout }) {
     const firstName = ((D.student && D.student.name) || '').split(' ')[0] || '';
 
     window.__onSlackExchange = (count) => {
+      window.LUMIO_DATA._slackExchanges = count;
       // Débloquer le livrable après N échanges (défaut 1)
       const unlockAt = EV.unlockLivrableAfter != null ? EV.unlockLivrableAfter : 1;
       if (count >= unlockAt) setLivrableUnlocked(true);
@@ -379,7 +452,7 @@ function Desktop({ onLogout }) {
   useWmEffect(() => {
     const openedApps = new Set();
     const slackSent = { v: false };
-    window.__onAppOpened = (app) => openedApps.add(app);
+    window.__onAppOpened = (app) => { openedApps.add(app); window.LUMIO_DATA._openedApps = Array.from(openedApps); };
     window.__onSlackSent = () => { slackSent.v = true; };
     const ctx = { openedApps, slackSent: () => slackSent.v, livrableUnlocked };
     const timers = (EV.contextTips || []).map(c => setTimeout(() => {
@@ -472,6 +545,47 @@ function Desktop({ onLogout }) {
     return () => clearInterval(id);
   }, []);
 
+  // ── Canal de notification générique pour les apps (Mail, modules futurs) ──
+  useWmEffect(() => {
+    const onNotify = (e) => { const d = e.detail || {}; if (d.title || d.body) pushNotif(d, d.ttl); };
+    window.addEventListener('pac:notify', onNotify);
+    return () => window.removeEventListener('pac:notify', onNotify);
+  }, []);
+
+  // ── Transitions d'acte scriptées (data-driven) — D.events.actTransitions ──
+  // [{ atActe, minSlackExchanges?, maxSlackExchanges?, delay?, ttl?, notif?, injectBonusEmail?, unlockNote? }]
+  // La condition est évaluée UNE SEULE FOIS, au moment où l'acte est atteint.
+  useWmEffect(() => {
+    const cfgT = window.PAC_CONFIG || window.PASS_CONFIG || {};
+    const ACTES_T = cfgT.temps || [];
+    const firstNameT = ((D.student && D.student.name) || '').split(' ')[0] || '';
+    const doneT = new Set();
+    const check = setInterval(() => {
+      if (!window.LUMIO_TIMER_START) return;
+      const el = (Date.now() - window.LUMIO_TIMER_START) / 60000;
+      const acte = ACTES_T.find(a => el >= a.debut && el < a.fin) || ACTES_T[ACTES_T.length - 1] || { n: 1 };
+      (EV.actTransitions || []).forEach((t, i) => {
+        if (doneT.has(i) || acte.n < (t.atActe || 99)) return;
+        doneT.add(i);
+        const ex = window.LUMIO_DATA._slackExchanges || 0;
+        if (t.minSlackExchanges != null && ex < t.minSlackExchanges) return;
+        if (t.maxSlackExchanges != null && ex > t.maxSlackExchanges) return;
+        setTimeout(() => {
+          if (t.notif) pushNotif(t.notif, t.ttl);
+          if (t.injectBonusEmail && !window.LUMIO_DATA._bonusEmailAdded) {
+            window.LUMIO_DATA._bonusEmailAdded = true;
+            const be = { ...t.injectBonusEmail };
+            if (typeof be.body === 'string') be.body = be.body.replace(/\{\{PRENOM\}\}/g, firstNameT);
+            window.LUMIO_DATA._bonusEmail = be;
+          }
+          if (t.unlockNote) window.LUMIO_DATA['_note_' + t.unlockNote] = true;
+        }, t.delay || 1500);
+      });
+    }, 15000);
+    return () => clearInterval(check);
+  }, []);
+
+
   // Signature d'une cible : deux ouvertures avec la même cible = même fenêtre.
   // Cibles distinctes (autre doc, autre portrait, autre dossier) = nouvelles fenêtres.
   // Exception : le navigateur reste une fenêtre unique et accumule les onglets
@@ -528,6 +642,7 @@ function Desktop({ onLogout }) {
         {windows.map(w => <Win key={w.id} win={w} onFocus={focusWin} onClose={closeWin} onMinimize={minimizeWin} onMove={moveWin} onResize={resizeWin} />)}
         <Dock openApp={openApp} openWindows={windows} livrableUnlocked={livrableUnlocked} />
         <PacTimeline />
+        <LumioPulse />
         <NotificationStack notifications={notifications} onDismiss={dismissNotif} onClick={clickNotif} />
         <JeffersonFab openApp={openApp} isOpen={windows.some(w => w.app === 'jefferson')} />
         <button onClick={() => openApp('finder', { openFolder: 'guide' })} title="Guide de mission"
