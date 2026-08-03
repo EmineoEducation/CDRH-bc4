@@ -216,9 +216,46 @@ function LivrableApp() {
       const refl = cfg.note_reflexive
         ? "<h3 style=\"color:#134547;margin:18px 0 6px;font-family:'IBM Plex Sans',sans-serif\">Note réflexive</h3><div style=\"color:#0B2B2D;line-height:1.55;font-family:'IBM Plex Sans',sans-serif\">" + _mdToHtml(reflexive || "(vide)") + "</div>"
         : "";
+
+      // ── Portfolio visuel (carte enrichie 3 pages) — best-effort, jamais bloquant.
+      let visualHtml = "";
+      let attachments = [];
+      const pf = cfg.portfolio;
+      const cardAttempted = !!(pf && window.PACPortfolio && window.PACPortfolio.renderAndCapture);
+      if (cardAttempted) {
+        try {
+          const nameParts = String(stu.name || "").trim().split(/\s+/).filter(Boolean);
+          const shots = await window.PACPortfolio.renderAndCapture({
+            blocCode: cfg.bloc || "",
+            prenom: nameParts[0] || "",
+            nom: nameParts.slice(1).join(" "),
+            missionTitre: pf.missionTitre,
+            miseEnSituation: pf.miseEnSituation,
+            choix: pf.choix,
+            justification: pf.justification,
+            imageSrc: pf.imageSrc,
+            competences: comps.map(c => c.code)
+          });
+          const order = [["cover", "1"], ["situation", "2"], ["choix", "3"]];
+          attachments = order
+            .map(([key, n]) => ({ filename: "portfolio-" + n + "-" + key + ".png", content: shots[key], content_id: "pac-" + key }))
+            .filter(a => a.content);
+          if (attachments.length) {
+            visualHtml = "<div style=\"text-align:center;margin:0 0 28px\">" +
+              attachments.map(a => "<img src=\"cid:" + a.content_id + "\" alt=\"\" width=\"340\" style=\"width:100%;max-width:340px;border-radius:16px;margin:0 0 16px;display:inline-block\" />").join("") +
+              "</div>";
+          }
+        } catch (e) {
+          console.warn("Portfolio visuel indisponible, envoi fonctionnel uniquement :", e.message);
+        }
+      }
+
       const html = "<div style=\"font-family:'IBM Plex Sans',sans-serif;max-width:680px;margin:auto;color:#0B2B2D\">" +
+        visualHtml +
         "<div style=\"background:#0B2B2D;padding:24px 28px;border-radius:10px 10px 0 0\">" +
-        "<img src=\"https://emineo-pac.vercel.app/logo-emineo-white.png\" alt=\"Éminéo\" style=\"height:28px;margin-bottom:12px\" />" +
+        // Logo retiré le 03/08/2026 : le fichier n'existe pas sur emineo-pac.vercel.app
+        // (Vercel renvoie la page du portail), ce qui affichait un carré vide dans tous
+        // les emails. Le bandeau serveur porte déjà l'identité « Éminéo Education · PAC ».
         "<h1 style=\"color:#5DE298;font-size:20px;margin:0 0 4px\">Portfolio de compétences</h1>" +
         "<p style=\"color:#E3FFF0;font-size:13px;margin:0\">" + (stu.name || "") + " · " + (cfg.dispositif || "PAC") + " " + (cfg.bloc || "") + " · " + (cfg.titre || cfg.epreuve || "") + "</p>" +
         "</div>" +
@@ -232,14 +269,16 @@ function LivrableApp() {
         "</div></div>";
       const resp = await fetch("/api/send-portfolio", {
         method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ to: stu.email, studentName: stu.name, bloc: cfg.bloc, html,
-          campus: stu.campus || "" })
+        body: JSON.stringify({ email: stu.email, studentName: stu.name, portfolioHTML: html,
+          bloc: cfg.bloc, campus: stu.campus || "", attachments, cardAttempted })
       });
       const result = await resp.json().catch(() => ({}));
       if (!resp.ok && !result.completed) throw new Error("erreur " + resp.status);
       setSent(result.sent === false
         ? "✓ Production validée. (Email temporairement indisponible)"
-        : "✓ Portfolio envoyé à " + stu.email);
+        : result.campusResolved === false
+          ? "✓ Portfolio bien transmis à " + stu.email + ". Un rattachement à votre référent pédagogique sera effectué manuellement."
+          : "✓ Portfolio envoyé à " + stu.email);
     } catch (e) { setSent("Échec de l'envoi (" + e.message + ")."); }
   };
 
