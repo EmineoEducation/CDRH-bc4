@@ -1156,3 +1156,19 @@ window.PASS_CONFIG = window.PAC_CONFIG;
   }
 })();
 // === [Portrait Isabelle Kwan] fin ===
+
+// === [Carte portfolio] — 05/08/2026 · contenu propre au bloc, ajout non destructif ===
+(function () {
+  var c = window.PAC_CONFIG || window.PASS_CONFIG;
+  if (!c) return;
+  c.portfolio = {
+    missionTitre: "Enrayer un décrochage de compétences",
+    miseEnSituation: "Les métiers évoluent plus vite que les compétences des équipes : les entretiens professionnels obligatoires n'ont pas été tenus, aucune cartographie des métiers n'existe, et le plan de développement des compétences doit être présenté au comité social et économique avec un budget contraint.",
+    choix: "Une démarche de GEPP partant d'une cartographie des métiers reliée aux orientations stratégiques, dont découle un plan de développement des compétences priorisé et adossé aux dispositifs de financement mobilisables plutôt qu'au seul budget interne.",
+    justification: "Relier la formation aux besoins stratégiques réels transforme une dépense subie en investissement défendable devant les instances, et mobiliser les financements réglementaires permet de tenir le plan malgré la contrainte tout en régularisant l'obligation d'entretiens.",
+    imageSrc: ""
+  };
+  window.PAC_CONFIG = c;
+  window.PASS_CONFIG = c;
+})();
+// === [Carte portfolio] fin ===
