@@ -265,7 +265,7 @@ function LivrableApp() {
         "<h2 style=\"color:#0B2B2D;font-size:16px;margin-bottom:8px\">Débrief de compétences</h2>" +
         "<div style=\"white-space:pre-wrap;color:#0B2B2D;line-height:1.55;font-size:13px\">" + debrief + "</div>" +
         "<hr style=\"border:none;border-top:1px solid #E3FFF0;margin:24px 0\">" +
-        "<p style=\"font-size:11px;color:#999;text-align:center\">Ce document a été généré automatiquement par le dispositif PAC · Éminéo Education<br>Ne pas répondre à cet email.</p>" +
+        "<p style=\"font-size:11px;color:#999;text-align:center\">Ce document a été généré automatiquement par le dispositif PAC · Éminéo Education</p>" +
         "</div></div>";
       const resp = await fetch("/api/send-portfolio", {
         method: "POST", headers: { "Content-Type": "application/json" },
@@ -335,16 +335,25 @@ function LivrableApp() {
               <div style={{ fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: "0.15em", color: "#1a6641", textTransform: "uppercase", marginBottom: 10 }}>Retour d'évaluation</div>
               {feedback}
             </div>
-            <div style={{ marginTop: 14, display: "flex", gap: 12 }}>
-              <button onClick={revise}
-                style={{ background: "#134547", color: "white", border: "none", borderRadius: 7, padding: "11px 24px", fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>
+            {/* Correctif 05/08/2026 — le débrief final prend 10 à 20 s : sans état
+                d'attente ni verrouillage, le clic sur « Valider tel quel » restait
+                sans effet visible et autorisait des appels concurrents. */}
+            <div style={{ marginTop: 14, display: "flex", gap: 12, alignItems: "center" }}>
+              <button onClick={sending ? undefined : revise} disabled={sending}
+                style={{ background: "#134547", color: "white", border: "none", borderRadius: 7, padding: "11px 24px", fontSize: 13, fontWeight: 600, cursor: sending ? "not-allowed" : "pointer", opacity: sending ? 0.45 : 1, fontFamily: "inherit" }}>
                 ✏️ Reprendre ma copie
               </button>
-              <button onClick={submitFinal}
-                style={{ background: "#1a6641", color: "white", border: "none", borderRadius: 7, padding: "11px 24px", fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>
-                Valider tel quel → débrief final
+              <button onClick={sending ? undefined : submitFinal} disabled={sending}
+                style={{ background: "#1a6641", color: "white", border: "none", borderRadius: 7, padding: "11px 24px", fontSize: 13, fontWeight: 600, cursor: sending ? "progress" : "pointer", opacity: sending ? 0.65 : 1, fontFamily: "inherit" }}>
+                {sending ? "Débrief en cours…" : "Valider tel quel → débrief final"}
               </button>
             </div>
+            {sending ? (
+              <div style={{ marginTop: 10, fontSize: 12, color: "var(--ink-mute)" }}>
+                Le jury relit votre copie complète. Cela prend une quinzaine de secondes — ne quittez pas la fenêtre.
+              </div>
+            ) : null}
+            {err ? <div style={{ marginTop: 10, color: "#c4420f", fontSize: 12 }}>{err}</div> : null}
           </div>
         ) : null}
 
